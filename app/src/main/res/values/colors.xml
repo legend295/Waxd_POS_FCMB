@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="teal">#42BC9E</color>
+    <color name="brightGray">#ECE6F0</color>
+    <color name="pear">#CFD332</color>
+    <color name="forestGreen">#24781F</color>
+    <color name="lightSilver">#D9D9D9</color>
+    <color name="whiteCoffee">#E5DADA</color>
+    <color name="chineseSilver">#D1CBCB</color>
+    <color name="northTexasGreen">#05A134</color>
+</resources>

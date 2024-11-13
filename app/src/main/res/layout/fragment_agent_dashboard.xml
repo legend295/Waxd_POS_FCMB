@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.fragments.dashboard.AgentDashboardFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvWelcomeAgent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="Welcome, Agent"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/viewBgSearch"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_round_white"
+            android:backgroundTint="@color/brightGray"
+            app:layout_constraintBottom_toBottomOf="@id/etSearch"
+            app:layout_constraintEnd_toEndOf="@id/ivSearch"
+            app:layout_constraintStart_toStartOf="@id/ivMore"
+            app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="0dp"
+            android:src="@drawable/ic_more"
+            app:layout_constraintBottom_toBottomOf="@id/etSearch"
+            app:layout_constraintEnd_toStartOf="@id/etSearch"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@android:color/transparent"
+            android:hint="@string/search_by_bvn_or_name"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintEnd_toStartOf="@id/ivSearch"
+            app:layout_constraintStart_toEndOf="@id/ivMore"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcomeAgent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/etSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/etSearch"
+            app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+        <View
+            android:id="@+id/viewBgSearchUser"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toStartOf="@id/viewBgListOfFarmers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewBgSearch" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSearchUser"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_search_user"
+            app:layout_constraintEnd_toEndOf="@id/viewBgSearchUser"
+            app:layout_constraintStart_toStartOf="@id/viewBgSearchUser"
+            app:layout_constraintTop_toTopOf="@id/viewBgSearchUser" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/search_user"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivSearchUser"
+            app:layout_constraintStart_toStartOf="@id/ivSearchUser"
+            app:layout_constraintTop_toBottomOf="@id/ivSearchUser" />
+
+        <View
+            android:id="@+id/viewBgListOfFarmers"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewBgSearchUser"
+            app:layout_constraintTop_toTopOf="@id/viewBgSearchUser" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivListOfFarmer"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_list_of_farmer"
+            app:layout_constraintEnd_toEndOf="@id/viewBgListOfFarmers"
+            app:layout_constraintStart_toStartOf="@id/viewBgListOfFarmers"
+            app:layout_constraintTop_toTopOf="@id/viewBgListOfFarmers" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/list_of_farmers"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivListOfFarmer"
+            app:layout_constraintStart_toStartOf="@id/ivListOfFarmer"
+            app:layout_constraintTop_toBottomOf="@id/ivListOfFarmer" />
+
+        <View
+            android:id="@+id/viewBgAddFarmer"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toStartOf="@id/viewBgCreateLoan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewBgSearchUser" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAddFarmer"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_add_farmer"
+            app:layout_constraintEnd_toEndOf="@id/viewBgAddFarmer"
+            app:layout_constraintStart_toStartOf="@id/viewBgAddFarmer"
+            app:layout_constraintTop_toTopOf="@id/viewBgAddFarmer" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/add_farmer"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivAddFarmer"
+            app:layout_constraintStart_toStartOf="@id/ivAddFarmer"
+            app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />
+
+
+        <View
+            android:id="@+id/viewBgCreateLoan"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewBgAddFarmer"
+            app:layout_constraintTop_toTopOf="@id/viewBgAddFarmer" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCreateLoan"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_create_loan"
+            app:layout_constraintEnd_toEndOf="@id/viewBgCreateLoan"
+            app:layout_constraintStart_toStartOf="@id/viewBgCreateLoan"
+            app:layout_constraintTop_toTopOf="@id/viewBgCreateLoan" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/create_a_loan"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivCreateLoan"
+            app:layout_constraintStart_toStartOf="@id/ivCreateLoan"
+            app:layout_constraintTop_toBottomOf="@id/ivCreateLoan" />
+
+        <View
+            android:id="@+id/viewBgRecentActivity"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_square_stroke_grey"
+            app:layout_constraintBottom_toBottomOf="@id/rvRecentActivity"
+            app:layout_constraintEnd_toEndOf="@id/viewBgListOfFarmers"
+            app:layout_constraintStart_toStartOf="@id/viewBgSearchUser"
+            app:layout_constraintTop_toBottomOf="@id/viewBgAddFarmer" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRecentActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/recent_activity"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/viewBgRecentActivity"
+            app:layout_constraintTop_toTopOf="@id/viewBgRecentActivity" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecentActivity"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_10sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/viewBgRecentActivity"
+            app:layout_constraintStart_toStartOf="@id/viewBgRecentActivity"
+            app:layout_constraintTop_toBottomOf="@id/tvRecentActivity" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

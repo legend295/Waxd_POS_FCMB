@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/initial_navigation"
+    app:startDestination="@id/getStartedFragment">
+
+    <fragment
+        android:id="@+id/getStartedFragment"
+        android:name="com.waxd.pos.fcmb.ui.initial.fragments.getstarted.GetStartedFragment"
+        tools:layout="@layout/fragment_get_started"
+        android:label="GetStartedFragment">
+        <action
+            android:id="@+id/action_getStartedFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.waxd.pos.fcmb.ui.initial.fragments.login.LoginFragment"
+        android:label="LoginFragment" />
+</navigation>

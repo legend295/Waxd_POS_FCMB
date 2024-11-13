@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/agentDashboardFragment"
+        android:icon="@drawable/ic_home_bottom_nav"
+        android:title="" />
+
+    <item
+        android:icon="@drawable/ic_heart_bottom_nav"
+        android:title="" />
+
+    <item
+        android:icon="@drawable/ic_user_bottom_nav"
+        android:title="" />
+
+    <item
+        android:icon="@drawable/ic_search_bottom_nav"
+        android:title="" />
+</menu>
