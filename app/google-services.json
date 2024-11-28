@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "849336232772",
+    "project_id": "waxdfcmb",
+    "storage_bucket": "waxdfcmb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849336232772:android:be1ff40d1be2a5596e0511",
+        "android_client_info": {
+          "package_name": "com.waxd.pos.fcmb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2DpDxflwFO0LY4i6MxL83iuk_N92aJGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,14 @@
-package com.waxd.pos.fcmb.ui.main.fragments.dashboard.adapter
+package com.waxd.pos.fcmb.ui.main.fragments.farmer.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.waxd.pos.fcmb.databinding.LayoutListOfFarmerItemBinding
 import com.waxd.pos.fcmb.databinding.LayoutRecentFarmerActivityItemBinding
 
-class RecentFarmerActivityAdapter : RecyclerView.Adapter<RecentFarmerActivityAdapter.ViewHolder>() {
+class FarmerListAdapter : RecyclerView.Adapter<FarmerListAdapter.ViewHolder>() {
 
-    inner class ViewHolder(private val binding: LayoutRecentFarmerActivityItemBinding) :
+    inner class ViewHolder(private val binding: LayoutListOfFarmerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
 
@@ -15,7 +16,7 @@ class RecentFarmerActivityAdapter : RecyclerView.Adapter<RecentFarmerActivityAda
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = LayoutRecentFarmerActivityItemBinding.inflate(
+        val binding = LayoutListOfFarmerItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_10sdp"
+            tools:context=".ui.main.fragments.add.farmer.AddFarmerFragment">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivAddFarmer"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_create_loan"
+                android:tint="@color/northTexasGreen"
+                app:layout_constraintEnd_toStartOf="@id/tvCreateLoanApplication"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCreateLoanApplication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/create_loan_application"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintBottom_toBottomOf="@id/ivAddFarmer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivAddFarmer"
+                app:layout_constraintTop_toTopOf="@id/ivAddFarmer" />
+
+            <View
+                android:id="@+id/viewLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="-10dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="-10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/tvCreateLoanApplication"
+                app:layout_constraintStart_toStartOf="@id/ivAddFarmer"
+                app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFarmerInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="@string/farmer_information"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewLine" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEnterBvnNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/bvn_number"
+                android:padding="@dimen/_10sdp"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvFarmerInformation" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etFarmerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:maxLength="30"
+                android:inputType="text"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/farmers_name"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/etEnterBvnNumber" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLoanDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/loan_details"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/etFarmerName" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSelectLoanType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/select_loan_type"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvLoanDetails" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDropDownSelectLoanType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_drop_down"
+                app:layout_constraintBottom_toBottomOf="@id/tvSelectLoanType"
+                app:layout_constraintEnd_toEndOf="@id/tvSelectLoanType"
+                app:layout_constraintTop_toTopOf="@id/tvSelectLoanType" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etLoanAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/loan_amount"
+                android:maxLength="30"
+                android:padding="@dimen/_10sdp"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvSelectLoanType" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLoanTerms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/loan_terms"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/etLoanAmount" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDropDownLoanTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_drop_down"
+                app:layout_constraintBottom_toBottomOf="@id/tvLoanTerms"
+                app:layout_constraintEnd_toEndOf="@id/tvLoanTerms"
+                app:layout_constraintTop_toTopOf="@id/tvLoanTerms" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etAnnualIncome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/annual_income"
+                android:padding="@dimen/_10sdp"
+                android:maxLines="1"
+                android:maxLength="30"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvLoanTerms" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFarmDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/farm_details"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/etAnnualIncome" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCaptureFarmCoordinates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_farm_coordinates"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvFarmDetails" />
+
+            <View
+                android:id="@+id/viewMap"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="#F5F5F5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvCaptureFarmCoordinates" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/map_view"
+                app:layout_constraintBottom_toBottomOf="@id/viewMap"
+                app:layout_constraintEnd_toEndOf="@id/viewMap"
+                app:layout_constraintStart_toStartOf="@id/viewMap"
+                app:layout_constraintTop_toTopOf="@id/viewMap" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTotalArea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/total_area"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/viewMap"
+                app:layout_constraintTop_toBottomOf="@id/viewMap" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSqFt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0sq ft"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/viewMap"
+                app:layout_constraintStart_toStartOf="@id/viewMap"
+                app:layout_constraintTop_toTopOf="@id/tvTotalArea" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSupportingDocuments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/supporting_documents"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalArea" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvUploadLandDocuments"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/upload_land_documents"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvSupportingDocuments" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvUploadIdProof"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/upload_id_proof"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvUploadLandDocuments" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#C5C4C4"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/cancel"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/tvSubmitApplication"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvUploadIdProof" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSubmitApplication"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#42BC9E"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/submit_application"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCancel"
+                app:layout_constraintTop_toBottomOf="@id/tvUploadIdProof" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

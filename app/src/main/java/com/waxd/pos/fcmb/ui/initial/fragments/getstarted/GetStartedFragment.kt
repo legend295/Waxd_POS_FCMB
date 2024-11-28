@@ -15,10 +15,14 @@ class GetStartedFragment : BaseFragment<FragmentGetStartedBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         if (isAdded) {
-            binding.btnGetStarted.setOnClickListener {
-                this.view?.findNavController()
-                    ?.navigate(R.id.action_getStartedFragment_to_loginFragment)
-            }
+           init()
+        }
+    }
+
+    override fun init() {
+        binding.btnGetStarted.setOnClickListener {
+            this.view?.findNavController()
+                ?.navigate(R.id.action_getStartedFragment_to_loginFragment)
         }
     }
 }

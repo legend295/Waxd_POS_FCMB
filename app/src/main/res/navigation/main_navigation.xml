@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/agentDashboardFragment">
 
@@ -9,4 +10,25 @@
         android:id="@+id/agentDashboardFragment"
         android:name="com.waxd.pos.fcmb.ui.main.fragments.dashboard.AgentDashboardFragment"
         android:label="AgentDashboardFragment" />
+
+    <fragment
+        android:id="@+id/addFarmerFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.add.farmer.AddFarmerFragment"
+        android:label="AddFarmerFragment" />
+    <fragment
+        android:id="@+id/createLoanApplicationFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.add.loan.CreateLoanApplicationFragment"
+        android:label="CreateLoanApplicationFragment" />
+    <fragment
+        android:id="@+id/farmersListFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.farmer.list.FarmersListFragment"
+        android:label="FarmersListFragment" />
+    <fragment
+        android:id="@+id/recentActivityFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.recentactivity.RecentActivityFragment"
+        android:label="RecentActivityFragment" />
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.success.SuccessFragment"
+        android:label="SuccessFragment" />
 </navigation>

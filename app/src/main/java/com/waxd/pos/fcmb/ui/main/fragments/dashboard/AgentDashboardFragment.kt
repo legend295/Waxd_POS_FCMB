@@ -2,6 +2,7 @@ package com.waxd.pos.fcmb.ui.main.fragments.dashboard
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.base.BaseFragment
 import com.waxd.pos.fcmb.databinding.FragmentAgentDashboardBinding
@@ -16,7 +17,32 @@ class AgentDashboardFragment : BaseFragment<FragmentAgentDashboardBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvRecentActivity.adapter = recentAdapter
+        if (isAdded) {
+            init()
+        }
     }
 
+    override fun init() {
+        binding.rvRecentActivity.adapter = recentAdapter
+
+        binding.viewBgAddFarmer.setOnClickListener {
+            this.view?.findNavController()?.navigate(R.id.addFarmerFragment)
+        }
+
+        binding.viewBgCreateLoan.setOnClickListener {
+            this.view?.findNavController()?.navigate(R.id.createLoanApplicationFragment)
+        }
+
+        binding.viewBgListOfFarmers.setOnClickListener {
+            this.view?.findNavController()?.navigate(R.id.farmersListFragment)
+        }
+
+        binding.viewBgSearchUser.setOnClickListener {
+            this.view?.findNavController()?.navigate(R.id.farmersListFragment)
+        }
+
+        binding.tvRecentActivity.setOnClickListener {
+            this.view?.findNavController()?.navigate(R.id.recentActivityFragment)
+        }
+    }
 }

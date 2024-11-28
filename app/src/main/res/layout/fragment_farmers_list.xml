@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.fragments.farmer.list.FarmersListFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAddFarmer"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/ic_list_of_farmer"
+            android:tint="@color/northTexasGreen"
+            app:layout_constraintEnd_toStartOf="@id/tvListOfFarmers"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvListOfFarmers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@string/list_of_farmers"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAddFarmer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivAddFarmer"
+            app:layout_constraintTop_toTopOf="@id/ivAddFarmer" />
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="-10dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/tvListOfFarmers"
+            app:layout_constraintStart_toStartOf="@id/ivAddFarmer"
+            app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />
+
+        <View
+            android:id="@+id/viewBgSearch"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_round_white"
+            android:backgroundTint="@color/brightGray"
+            app:layout_constraintBottom_toBottomOf="@id/etSearch"
+            app:layout_constraintEnd_toEndOf="@id/ivSearch"
+            app:layout_constraintStart_toStartOf="@id/ivMore"
+            app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="0dp"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/etSearch"
+            app:layout_constraintEnd_toStartOf="@id/etSearch"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@android:color/transparent"
+            android:hint="@string/search_by_bvn_or_name"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintEnd_toStartOf="@id/ivSearch"
+            app:layout_constraintStart_toEndOf="@id/ivMore"
+            app:layout_constraintTop_toBottomOf="@id/viewLine" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="@id/etSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/etSearch"
+            app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+        <View
+            android:id="@+id/viewBgRecentActivity"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_square_stroke_grey"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/rvFarmerList"
+            app:layout_constraintEnd_toEndOf="@id/viewBgSearch"
+            app:layout_constraintStart_toStartOf="@id/viewBgSearch"
+            app:layout_constraintTop_toBottomOf="@id/etSearch" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFarmerList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_10sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/viewBgSearch"
+            app:layout_constraintStart_toStartOf="@id/viewBgSearch"
+            app:layout_constraintTop_toBottomOf="@id/etSearch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -11,9 +11,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_login
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (isAdded) init()
+    }
+
+    override fun init() {
         binding.btnLogin.setOnClickListener {
             (activity as InitialActivity?)?.startMainActivity()
         }

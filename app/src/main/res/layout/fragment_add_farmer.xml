@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_10sdp"
+            tools:context=".ui.main.fragments.add.farmer.AddFarmerFragment">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivAddFarmer"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_add_farmer"
+                android:tint="@color/northTexasGreen"
+                app:layout_constraintEnd_toStartOf="@id/tvAddNewFarmer"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAddNewFarmer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/add_new_farmer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintBottom_toBottomOf="@id/ivAddFarmer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivAddFarmer"
+                app:layout_constraintTop_toTopOf="@id/ivAddFarmer" />
+
+            <View
+                android:id="@+id/viewLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="-10dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="-10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/tvAddNewFarmer"
+                app:layout_constraintStart_toStartOf="@id/ivAddFarmer"
+                app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFarmerBvnTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="@string/does_the_farmer_have_bvn"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewLine" />
+
+            <RadioGroup
+                android:id="@+id/rgFarmerBvn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/tvFarmerBvnTxt">
+
+                <RadioButton
+                    android:id="@+id/rbYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_25sdp"
+                    android:checked="true"
+                    android:text="@string/yes" />
+
+                <RadioButton
+                    android:id="@+id/rbNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_25sdp"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBvnNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/bvn_number"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/rgFarmerBvn"
+                app:layout_constraintTop_toBottomOf="@id/rgFarmerBvn" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEnterBvnNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/enter_bvn_number"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/tvBvnNumber" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPersonalInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/personal_information"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/rgFarmerBvn"
+                app:layout_constraintTop_toBottomOf="@id/etEnterBvnNumber" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etFirstName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/first_name"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/tvPersonalInformation" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/last_name"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/etFirstName" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/phone_number"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="13"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/etLastName" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmailAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/email_address"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/etPhoneNumber" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDob"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/dd_mm_yyyy"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLength="10"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/etEmailAddress" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:hint="@string/address"
+                android:imeOptions="actionNext"
+                android:inputType="textMultiLine"
+                android:maxLength="100"
+                android:maxLines="3"
+                android:minLines="1"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintTop_toBottomOf="@id/tvDob" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBiometricCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/biometric_capture"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/rgFarmerBvn"
+                app:layout_constraintTop_toBottomOf="@id/etAddress" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCaptureFingerprint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="@color/pear"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_fingerprint"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvBiometricCapture" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCapturePhoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_photo"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvCaptureFingerprint" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFarmLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/farm_location"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/rgFarmerBvn"
+                app:layout_constraintTop_toBottomOf="@id/tvCapturePhoto" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCaptureFarmLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_farm_location"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvFarmLocation" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#C5C4C4"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/cancel"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/tvCreateFarmerProfile"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvCaptureFarmLocation" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCreateFarmerProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#42BC9E"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/create_farmer_profile"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCancel"
+                app:layout_constraintTop_toBottomOf="@id/tvCaptureFarmLocation" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
