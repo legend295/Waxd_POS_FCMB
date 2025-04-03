@@ -3,7 +3,12 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
     id 'com.google.gms.google-services'
+    alias(libs.plugins.dagger.hilt)
 }
+
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 
 android {
     namespace 'com.waxd.pos.fcmb'
@@ -23,6 +28,21 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue 'string', 'api_key', localProperties['API_KEY']
+            buildConfigField 'String', 'BASE_URL', localProperties['BASE_URL']
+            buildConfigField 'String', 'FARMER_STORAGE_URL', localProperties['FARMER_STORAGE_URL']
+            buildConfigField 'String', 'FARM_STORAGE_URL', localProperties['FARM_STORAGE_URL']
+            buildConfigField 'String', 'ENCRYPTION_KEY', localProperties['ENCRYPTION_KEY']
+            buildConfigField 'String', 'NEW_RELIC_TOKEN', localProperties['NEW_RELIC_TOKEN']
+        }
+
+        debug {
+            resValue 'string', 'api_key', localProperties['API_KEY']
+            buildConfigField 'String', 'BASE_URL', localProperties['BASE_URL']
+            buildConfigField 'String', 'FARMER_STORAGE_URL', localProperties['FARMER_STORAGE_URL']
+            buildConfigField 'String', 'FARM_STORAGE_URL', localProperties['FARM_STORAGE_URL']
+            buildConfigField 'String', 'ENCRYPTION_KEY', localProperties['ENCRYPTION_KEY']
+            buildConfigField 'String', 'NEW_RELIC_TOKEN', localProperties['NEW_RELIC_TOKEN']
         }
     }
     compileOptions {
@@ -33,6 +53,7 @@ android {
         jvmTarget = '1.8'
     }
     android.buildFeatures.dataBinding = true
+    android.buildFeatures.buildConfig true
 }
 
 dependencies {
@@ -49,6 +70,7 @@ dependencies {
     implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation libs.androidx.fragment.ktx
     implementation libs.firebase.common.ktx
+    implementation libs.firebase.storage.ktx
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -56,8 +78,33 @@ dependencies {
     //sdp
     implementation libs.sdp.android
 
-    implementation(libs.github.fingerprintscannersdk)
+    implementation(libs.github.fingerprintscannersdk){ changing = true }
 
+    //Firebase
+    implementation libs.firebase.auth.ktx // Use the latest version
+    implementation 'com.google.firebase:firebase-firestore-ktx:25.1.2' // Use the latest version
     implementation platform('com.google.firebase:firebase-bom:33.6.0')
     implementation 'com.google.firebase:firebase-analytics'
+
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+    // DataStore
+    implementation(libs.androidx.datastore.preferences)
+
+    // Retrofit
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Glide
+    implementation(libs.glide)
+
+    //compressor
+    implementation ("id.zelory:compressor:3.0.1")
+
 }

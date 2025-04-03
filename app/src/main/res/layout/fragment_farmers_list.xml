@@ -7,42 +7,42 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.fragments.farmer.list.FarmersListFragment">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivAddFarmer"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/ic_list_of_farmer"
-            android:tint="@color/northTexasGreen"
-            app:layout_constraintEnd_toStartOf="@id/tvListOfFarmers"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--        <androidx.appcompat.widget.AppCompatImageView-->
+        <!--            android:id="@+id/ivAddFarmer"-->
+        <!--            android:layout_width="@dimen/_25sdp"-->
+        <!--            android:layout_height="@dimen/_25sdp"-->
+        <!--            android:layout_marginTop="@dimen/_10sdp"-->
+        <!--            android:src="@drawable/ic_list_of_farmer"-->
+        <!--            android:tint="@color/northTexasGreen"-->
+        <!--            app:layout_constraintEnd_toStartOf="@id/tvListOfFarmers"-->
+        <!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvListOfFarmers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:text="@string/list_of_farmers"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13sdp"
-            app:layout_constraintBottom_toBottomOf="@id/ivAddFarmer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ivAddFarmer"
-            app:layout_constraintTop_toTopOf="@id/ivAddFarmer" />
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/tvListOfFarmers"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/_5sdp"-->
+        <!--            android:text="@string/list_of_farmers"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="@dimen/_13sdp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/ivAddFarmer"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/ivAddFarmer"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/ivAddFarmer" />-->
 
-        <View
-            android:id="@+id/viewLine"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="-10dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="-10dp"
-            android:background="@color/black"
-            app:layout_constraintEnd_toEndOf="@id/tvListOfFarmers"
-            app:layout_constraintStart_toStartOf="@id/ivAddFarmer"
-            app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />
+        <!--        <View-->
+        <!--            android:id="@+id/viewLine"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:layout_marginStart="-10dp"-->
+        <!--            android:layout_marginTop="@dimen/_5sdp"-->
+        <!--            android:layout_marginEnd="-10dp"-->
+        <!--            android:background="@color/black"-->
+        <!--            app:layout_constraintEnd_toEndOf="@id/tvListOfFarmers"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/ivAddFarmer"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />-->
 
         <View
             android:id="@+id/viewBgSearch"
@@ -83,7 +83,7 @@
             android:padding="@dimen/_10sdp"
             app:layout_constraintEnd_toStartOf="@id/ivSearch"
             app:layout_constraintStart_toEndOf="@id/ivMore"
-            app:layout_constraintTop_toBottomOf="@id/viewLine" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSearch"
@@ -115,12 +115,36 @@
             android:id="@+id/rvFarmerList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/_10sdp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/viewBgSearch"
             app:layout_constraintStart_toStartOf="@id/viewBgSearch"
             app:layout_constraintTop_toBottomOf="@id/etSearch" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEmptyMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:gravity="center"
+            android:text="No farmers have been added yet. Please check back later or add new farmers to get started."
+            android:textColor="@color/forestGreen"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

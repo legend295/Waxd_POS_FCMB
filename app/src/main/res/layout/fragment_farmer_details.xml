@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+
+        <variable
+            name="data"
+            type="com.waxd.pos.fcmb.rest.FarmerData" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context=".ui.main.fragments.profile.ProfileFragment">
+
+            <!--            <androidx.appcompat.widget.AppCompatImageView-->
+            <!--                android:id="@+id/ivAddFarmer"-->
+            <!--                android:layout_width="@dimen/_25sdp"-->
+            <!--                android:layout_height="@dimen/_25sdp"-->
+            <!--                android:layout_marginTop="@dimen/_10sdp"-->
+            <!--                android:src="@drawable/ic_list_of_farmer"-->
+            <!--                android:tint="@color/northTexasGreen"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/tvAddNewFarmer"-->
+            <!--                app:layout_constraintHorizontal_chainStyle="packed"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvAddNewFarmer"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/_5sdp"-->
+            <!--                android:text="@string/farm_details"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="@dimen/_13sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/ivAddFarmer"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/ivAddFarmer"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/ivAddFarmer" />-->
+
+            <!--            <View-->
+            <!--                android:id="@+id/viewLine"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="1dp"-->
+            <!--                android:layout_marginStart="-10dp"-->
+            <!--                android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                android:layout_marginEnd="-10dp"-->
+            <!--                android:background="@color/black"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/tvAddNewFarmer"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/ivAddFarmer"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />-->
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivUser"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivUploadBlur"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:alpha=".4"
+                android:background="@color/black"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivUser"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/ivUploadBlur"
+                app:layout_constraintEnd_toEndOf="@id/ivUploadBlur"
+                app:layout_constraintStart_toStartOf="@id/ivUploadBlur"
+                app:layout_constraintTop_toTopOf="@id/ivUploadBlur" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toTopOf="@id/ivUser"
+                app:layout_constraintEnd_toEndOf="@id/ivUser"
+                app:layout_constraintStart_toEndOf="@id/ivUser"
+                app:layout_constraintTop_toTopOf="@id/ivUser" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPersonalInformation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center|start"
+                android:text="@string/personal_information"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.haveBvnNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivUser"
+                tools:visibility="visible" />
+
+
+            <!--  BVN Number  -->
+
+            <View
+                android:id="@+id/viewBgBvn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvBvnNumber"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvBvnNumber" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBvnNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/bvn_number"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.haveBvnNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:layout_constraintBottom_toBottomOf="@id/tvBvnNumberValue"
+                app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvBvnNumberValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBvnNumberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:text="@{data.bvnNumber}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.haveBvnNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:layout_constraintEnd_toEndOf="@id/viewBgBvn"
+                app:layout_constraintStart_toEndOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvPersonalInformation"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+            <!--  NIN Number  -->
+
+            <View
+                android:id="@+id/viewBgNin"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNinNumberValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvNinNumberValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNinNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/nin_number"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.haveNinNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:layout_constraintBottom_toBottomOf="@id/tvNinNumberValue"
+                app:layout_constraintEnd_toStartOf="@id/tvNinNumberValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgNin"
+                app:layout_constraintTop_toTopOf="@id/tvNinNumberValue"
+
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNinNumberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{data.ninNumber}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.haveNinNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvNinNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvBvnNumberValue"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+            <!--  Name  -->
+
+            <View
+                android:id="@+id/viewBgName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvNameValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/name"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+                app:layout_constraintEnd_toStartOf="@id/tvNameValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgName"
+                app:layout_constraintTop_toTopOf="@id/tvNameValue"
+
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNameValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{data.firstName + ` ` + data.lastName}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvName"
+                app:layout_constraintTop_toBottomOf="@id/tvNinNumberValue"
+                tools:text="Test"
+                tools:visibility="visible" />
+
+            <!--  Phone Number  -->
+
+            <View
+                android:id="@+id/viewBgPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvPhoneNumberValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvPhoneNumberValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/phone_number"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvPhoneNumberValue"
+                app:layout_constraintEnd_toStartOf="@id/tvPhoneNumberValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgPhoneNumber"
+                app:layout_constraintTop_toTopOf="@id/tvPhoneNumberValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhoneNumberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{data.phoneNumber}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvNameValue"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+            <!--  Email Address  -->
+
+            <View
+                android:id="@+id/viewBgEmail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvEmailValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvEmailValue" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/email"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvEmailValue"
+                app:layout_constraintEnd_toStartOf="@id/tvEmailValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgEmail"
+                app:layout_constraintTop_toTopOf="@id/tvEmailValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmailValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                app:autoSizeTextType="uniform"
+                android:text="@{data.email}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvEmail"
+                app:layout_constraintTop_toBottomOf="@id/tvPhoneNumberValue"
+                tools:text="kasjfhaklsjfasjfhlkaldsjfhlakjdf"
+                tools:visibility="visible" />
+
+            <!--  Address  -->
+            <View
+                android:id="@+id/viewBgAddress"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvAddressValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvAddressValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/address"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvAddressValue"
+                app:layout_constraintEnd_toStartOf="@id/tvAddressValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgAddress"
+                app:layout_constraintTop_toTopOf="@id/tvAddressValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAddressValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{data.address}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvAddress"
+                app:layout_constraintTop_toBottomOf="@id/tvEmailValue"
+                tools:text="938495834asdfafasfasdfasdfasdfasdfadfasdfasfasdfasdfaf958"
+                tools:visibility="visible" />
+
+            <!-- City -->
+
+            <View
+                android:id="@+id/viewBgCity"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvCityValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvCityValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/city"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvCityValue"
+                app:layout_constraintEnd_toStartOf="@id/tvCityValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgCity"
+                app:layout_constraintTop_toTopOf="@id/tvCityValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCityValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{(data.city == null || data.city.isEmpty())? `--` : data.city}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCity"
+                app:layout_constraintTop_toBottomOf="@id/tvAddressValue"
+                tools:text="938495834asdfafasfasdfasdfasdfasdfadfasdfasfasdfasdfaf958"
+                tools:visibility="visible" />
+
+            <!-- State -->
+
+            <View
+                android:id="@+id/viewBgState"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvStateValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvStateValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvState"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:gravity="center|start"
+                android:text="@string/state"
+                android:elevation="@dimen/_1sdp"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvStateValue"
+                app:layout_constraintEnd_toStartOf="@id/tvStateValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgState"
+                app:layout_constraintTop_toTopOf="@id/tvStateValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvStateValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:gravity="end"
+                android:text="@{(data.state == null || data.state.isEmpty())? `--` : data.state}"
+                android:textColor="@color/black"
+                android:elevation="@dimen/_1sdp"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvState"
+                app:layout_constraintTop_toBottomOf="@id/tvCityValue"
+                tools:text="938495834asdfafasfasdfasdfasdfasdfadfasdfasfasdfasdfaf958"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEditFarmer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="@color/pear"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/edit_farmer"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvStateValue" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBiometricCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/biometric_capture"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/tvPersonalInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvEditFarmer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCaptureFingerprint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="@color/pear"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_fingerprint"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvBiometricCapture" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFarmLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/farm_location"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="@id/tvPersonalInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvCaptureFingerprint" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCaptureFarmLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_farm_location"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvFarmLocation" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCapturePhoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_photo"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvCaptureFarmLocation"
+                app:layout_constraintVertical_bias="0" />
+
+
+            <ProgressBar
+                android:id="@+id/progressBarApi"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="tvCityValue,tvCity,tvState,tvStateValue,tvFarmLocation,tvCaptureFarmLocation,tvCapturePhoto,ivUser,ivEdit,tvPersonalInformation,tvBvnNumber,tvBvnNumberValue,tvNinNumber,tvNinNumberValue,tvName,tvNameValue,tvPhoneNumber,tvPhoneNumberValue,tvEmail,tvEmailValue,tvAddress,tvAddressValue,tvEditFarmer,tvBiometricCapture,tvCaptureFingerprint"
+                tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

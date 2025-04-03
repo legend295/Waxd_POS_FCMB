@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+
+        <variable
+            name="user"
+            type="com.waxd.pos.fcmb.rest.AgentProfileResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.fragments.profile.ProfileFragment">
+
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/tvSettings"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/_10sdp"-->
+        <!--            android:visibility="gone"-->
+        <!--            android:layout_marginEnd="@dimen/_10sdp"-->
+        <!--            android:text="@string/profile"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="@dimen/_13sdp"-->
+        <!--            app:fontFamily="sans-serif-medium"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivUser"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivUploadBlur"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:alpha=".4"
+            android:background="@color/black"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivUser"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/ivUploadBlur"
+            app:layout_constraintEnd_toEndOf="@id/ivUploadBlur"
+            app:layout_constraintStart_toStartOf="@id/ivUploadBlur"
+            app:layout_constraintTop_toTopOf="@id/ivUploadBlur" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewClickHandler::onClick}"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toTopOf="@id/ivUser"
+            app:layout_constraintEnd_toEndOf="@id/ivUser"
+            app:layout_constraintStart_toEndOf="@id/ivUser"
+            app:layout_constraintTop_toTopOf="@id/ivUser" />
+
+        <View
+            android:id="@+id/viewBgName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_6"
+            android:backgroundTint="#FBFBFB"
+            android:elevation="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvNameValue" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+
+            android:elevation="@dimen/_1sdp"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+            app:layout_constraintStart_toStartOf="@id/viewBgName"
+            app:layout_constraintTop_toTopOf="@id/tvNameValue"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNameValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Test"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:elevation="@dimen/_1sdp"
+            android:padding="@dimen/_10sdp"
+            android:text="@{user.name}"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivUser"/>
+
+        <!--User name-->
+
+        <View
+            android:id="@+id/viewBgUserName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_6"
+            android:backgroundTint="#FBFBFB"
+            android:elevation="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tvUserNameValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvUserNameValue" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="User Name"
+            android:elevation="@dimen/_1sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toTopOf="@id/tvUserNameValue"
+            app:layout_constraintBottom_toBottomOf="@id/tvUserNameValue"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvUserNameValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:text="@{user.userName}"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:elevation="@dimen/_1sdp"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@id/tvNameValue"
+            app:layout_constraintTop_toBottomOf="@id/tvNameValue"
+             />
+
+        <!-- Email-->
+        <View
+            android:id="@+id/viewBgEmail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_6"
+            android:backgroundTint="#FBFBFB"
+            android:elevation="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tvEmailValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvEmailValue" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            android:elevation="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tvEmailValue"
+            app:layout_constraintTop_toTopOf="@id/tvEmailValue" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEmailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.email}"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            android:elevation="@dimen/_1sdp"
+            app:layout_constraintEnd_toEndOf="@id/tvNameValue"
+            app:layout_constraintTop_toBottomOf="@id/tvUserNameValue" />
+
+        <!--BVN Number-->
+        <View
+            android:id="@+id/viewBgBvn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_6"
+            android:backgroundTint="#FBFBFB"
+            android:elevation="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tvBvnNumberValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvBvnNumberValue" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBvnNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BVN Number"
+            android:textColor="@color/black"
+            android:elevation="@dimen/_1sdp"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toTopOf="@id/tvBvnNumberValue"
+            app:layout_constraintBottom_toBottomOf="@id/tvBvnNumberValue"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBvnNumberValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.bvnNumber}"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:elevation="@dimen/_1sdp"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@id/tvNameValue"
+            app:layout_constraintTop_toBottomOf="@id/tvEmailValue"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEditProfile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="Edit Profile"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvLogout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/viewBgName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="Log Out"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/viewBgName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

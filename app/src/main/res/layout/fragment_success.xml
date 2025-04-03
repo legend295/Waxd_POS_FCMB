@@ -33,5 +33,22 @@
             app:layout_constraintTop_toBottomOf="@id/ivSuccess"
             tools:text="Loan application is submitted successfully. Loan Application No - FCMB121" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvOkay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:background="@drawable/bg_edit_text"
+            android:backgroundTint="@color/pear"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/okay"
+            android:textColor="#24781F"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMessage" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

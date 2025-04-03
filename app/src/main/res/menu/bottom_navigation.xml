@@ -6,15 +6,18 @@
         android:icon="@drawable/ic_home_bottom_nav"
         android:title="" />
 
-    <item
-        android:icon="@drawable/ic_heart_bottom_nav"
-        android:title="" />
+<!--    <item-->
+<!--        android:id="@id/favouriteFragment"-->
+<!--        android:icon="@drawable/ic_heart_bottom_nav"-->
+<!--        android:title="" />-->
 
     <item
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_user_bottom_nav"
         android:title="" />
 
     <item
+        android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search_bottom_nav"
         android:title="" />
 </menu>

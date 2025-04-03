@@ -9,7 +9,11 @@
     <fragment
         android:id="@+id/agentDashboardFragment"
         android:name="com.waxd.pos.fcmb.ui.main.fragments.dashboard.AgentDashboardFragment"
-        android:label="AgentDashboardFragment" />
+        android:label="AgentDashboardFragment">
+        <action
+            android:id="@+id/action_agentDashboardFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/addFarmerFragment"
@@ -31,4 +35,38 @@
         android:id="@+id/successFragment"
         android:name="com.waxd.pos.fcmb.ui.main.fragments.success.SuccessFragment"
         android:label="SuccessFragment" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.notification.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.search.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/captureLocationFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.capture_location.CaptureLocationFragment"
+        android:label="CaptureLocationFragment" />
+    <fragment
+        android:id="@+id/updateProfileFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.profile.update.UpdateProfileFragment"
+        android:label="UpdateProfileFragment" />
+    <fragment
+        android:id="@+id/farmerDetailsFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.farmer_detail.FarmerDetailsFragment"
+        android:label="FarmerDetailsFragment" />
+    <fragment
+        android:id="@+id/updateFarmDetailsFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.add.farm_location.UpdateFarmDetailsFragment"
+        android:label="UpdateFarmDetailsFragment" />
+    <fragment
+        android:id="@+id/updateFarmerFingerprintFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.add.farmer_fingerprint.UpdateFarmerFingerprintFragment"
+        android:label="UpdateFarmerFingerprintFragment" />
+
+
 </navigation>

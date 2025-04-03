@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="whiteLight">#FBFBFBFB</color>
     <color name="teal">#42BC9E</color>
     <color name="brightGray">#ECE6F0</color>
     <color name="pear">#CFD332</color>
@@ -10,4 +11,7 @@
     <color name="whiteCoffee">#E5DADA</color>
     <color name="chineseSilver">#D1CBCB</color>
     <color name="northTexasGreen">#05A134</color>
+    <color name="northTexasGreen20">#3305A134</color>
+    <color name="oliveDrab">#5E9212</color>
+    <color name="textLight">#800B0734</color>
 </resources>

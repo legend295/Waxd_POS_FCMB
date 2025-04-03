@@ -17,6 +17,7 @@
     <string name="enter_bvn_number">Enter BVN Number</string>
     <string name="bvn_number">BVN Number</string>
     <string name="add_new_farmer">Add New Farmer</string>
+    <string name="update_farmer">Update Farmer</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="phone_number">Phone Number</string>
@@ -47,7 +48,32 @@
     <string name="upload_id_proof">Upload ID Proof</string>
     <string name="submit_application">Submit Application</string>
     <string name="filter">Filter</string>
-    <string name="capture_photo">Capture Photo</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="capture_photo">Capture Farm Photo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="fcmb_agent_registration">FCMB Agent Registration</string>
+    <string name="submit">Submit</string>
+    <string name="name">Name</string>
+    <string name="profile">Profile</string>
+    <string name="username">Username</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="nin_number">NIN Number</string>
+    <string name="finish_capture">Finish Capture</string>
+    <string name="re_capture">Re-Capture</string>
+    <string name="fcmb_update_agent">FCMB Update Agent</string>
+    <string name="does_the_farmer_have_nin_number">Does the Farmer have NIN Number?</string>
+    <string name="enter_nin_number">Enter NIN Number</string>
+    <string name="farmer_details">Farmer Details</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="edit_farmer">Edit Farmer</string>
+    <string name="okay">Okay</string>
+    <string name="farm_photos">Farm Photos</string>
+    <string name="done">Done</string>
+    <string name="update_farm_location">Update Farm Location</string>
+    <string name="welcome_agent">Welcome, Agent</string>
+    <string name="update_fingerprint">Update Fingerprint</string>
+    <string name="farmer_biometrics">Farmer Biometrics</string>
 </resources>

@@ -8,16 +8,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.fragments.dashboard.AgentDashboardFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvWelcomeAgent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:text="Welcome, Agent"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/tvWelcomeAgent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/_10sdp"-->
+<!--            android:text="Welcome, Agent"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="@dimen/_13sdp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <View
             android:id="@+id/viewBgSearch"
@@ -58,7 +58,7 @@
             android:padding="@dimen/_10sdp"
             app:layout_constraintEnd_toStartOf="@id/ivSearch"
             app:layout_constraintStart_toEndOf="@id/ivMore"
-            app:layout_constraintTop_toBottomOf="@id/tvWelcomeAgent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSearch"

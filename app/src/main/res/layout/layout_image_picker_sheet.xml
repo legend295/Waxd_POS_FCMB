@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="clickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:onClick="@{clickHandler::onClick}"
+            android:src="@drawable/ic_close_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="-15dp"
+            android:background="@drawable/bg_top_round_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="Select the options"
+            android:textSize="@dimen/_14sdp"
+            app:fontFamily="@font/poppins_medium"
+            app:layout_constraintTop_toBottomOf="@id/ivClose" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFromCamera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_round_corner_8"
+            android:elevation="@dimen/_1sdp"
+            android:drawableStart="@drawable/ic_camera_blue_bg"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="center|start"
+            android:onClick="@{clickHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="From Camera"
+            android:textSize="@dimen/_13sdp"
+            app:fontFamily="@font/poppins_medium"
+            app:layout_constraintEnd_toEndOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFromGallery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/bg_round_corner_8"
+            android:elevation="@dimen/_1sdp"
+            android:drawableStart="@drawable/ic_album"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="center|start"
+            android:onClick="@{clickHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="From Gallery"
+            android:textSize="@dimen/_13sdp"
+            app:fontFamily="@font/poppins_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tvTitle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvFromCamera" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,39 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.waxd.pos.fcmb.rest.FarmerData" />
+
+        <import type="android.view.View" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:elevation="@dimen/_2sdp"
+        android:background="@drawable/bg_white_round_6">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivFarmer"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_margin="@dimen/_10sdp"
-            android:background="@color/lightSilver"
-            app:layout_constraintBottom_toBottomOf="@id/tvBvnNumber"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_margin="@dimen/_3sdp"
+            android:src="@drawable/placeholder"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvTitle"
-            app:shapeAppearanceOverlay="@style/Shape50" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="Farmer Added"
+            android:text="@{data.firstName + ` ` + data.lastName}"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@id/ivFarmer"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/ivFarmer"
+            tools:text="Test user" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
+            android:text="@{data.phoneNumber}"
             android:textColor="#9F9898"
-            android:text="9934556700"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@id/ivFarmer"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
@@ -41,16 +55,31 @@
             android:id="@+id/tvBvnNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{`BVN -` + data.bvnNumber}"
             android:textColor="#9F9898"
-            android:text="BVN - 123YB123"
-            app:layout_constraintStart_toStartOf="@id/tvPhoneNumber"
-            app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />
+            android:visibility="@{data.haveBvnNumber ? View.VISIBLE : View.GONE,default=gone}"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber"
+            app:layout_constraintBottom_toBottomOf="@id/ivFarmer"
+            tools:text="Test user"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:rotation="-90"
+            android:src="@drawable/ic_drop_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_margin="@dimen/_10sdp"
             android:background="@color/whiteCoffee"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvBvnNumber" />

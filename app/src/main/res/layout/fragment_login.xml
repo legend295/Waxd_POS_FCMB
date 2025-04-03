@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.waxd.pos.fcmb.ui.initial.fragments.login.LoginViewModel" />
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -13,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_195sdp"
             android:scaleType="fitXY"
+            android:layout_marginTop="@dimen/_minus2sdp"
             android:src="@drawable/ic_top_green_bg"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,7 +95,11 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:background="@drawable/bg_grey_round_stroke"
             android:drawableEnd="@drawable/ic_user_black"
-            android:hint="Username"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:maxLength="50"
+            android:text="@={viewModel.request.email}"
+            android:maxLines="1"
             android:padding="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@id/viewBg"
             app:layout_constraintStart_toStartOf="@id/viewBg"
@@ -97,7 +114,10 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:background="@drawable/bg_grey_round_stroke"
             android:drawableEnd="@drawable/ic_lock"
-            android:hint="Password"
+            android:hint="@string/password"
+            android:text="@={viewModel.request.password}"
+            android:inputType="textPassword"
+            android:maxLines="1"
             android:padding="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@id/viewBg"
             app:layout_constraintStart_toStartOf="@id/viewBg"
@@ -110,6 +130,7 @@
             android:layout_margin="@dimen/_30sdp"
             android:background="@drawable/bg_white_round_6"
             android:backgroundTint="@color/teal"
+            android:onClick="@{viewClickHandler::onClick}"
             android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -118,17 +139,31 @@
             app:layout_constraintStart_toStartOf="@id/etPassword"
             app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:elevation="@dimen/_3sdp"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/btnLogin"
+            app:layout_constraintStart_toStartOf="@id/btnLogin"
+            app:layout_constraintTop_toTopOf="@id/btnLogin" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
+            android:onClick="@{viewClickHandler::onClick}"
             android:gravity="center"
+            android:id="@+id/tvRegister"
             android:text="Don’t have an account yet?\nCreate an account"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="@id/btnLogin"
             app:layout_constraintStart_toStartOf="@id/btnLogin"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin"/>
+            app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

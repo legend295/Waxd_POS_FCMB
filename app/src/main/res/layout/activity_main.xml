@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,61 +20,111 @@
             android:id="@+id/ivBg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_195sdp"
+            android:layout_marginTop="@dimen/_minus1sdp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_top_green_bg"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <View
+            android:id="@+id/toolbarView"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/oliveDrab"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivUser"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:src="@drawable/ic_user_profile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/ic_user"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+            app:layout_constraintStart_toStartOf="@id/toolbarView"
+            app:layout_constraintTop_toTopOf="@id/toolbarView"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="@string/welcome_agent"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:fontFamily="@font/poppins_medium"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+            app:layout_constraintStart_toEndOf="@id/ivUser"
+            app:layout_constraintTop_toTopOf="@id/toolbarView" />
+
+
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="0dp"
+            android:onClick="@{viewClickHandler::onClick}"
+            android:padding="@dimen/_12sdp"
+            android:src="@drawable/ic_back"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+            app:layout_constraintStart_toStartOf="@id/toolbarView"
+            app:layout_constraintTop_toTopOf="@id/toolbarView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            app:fontFamily="@font/poppins_medium"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+            app:layout_constraintEnd_toEndOf="@id/toolbarView"
+            app:layout_constraintStart_toStartOf="@id/toolbarView"
+            app:layout_constraintTop_toTopOf="@id/toolbarView" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivNotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
+            android:onClick="@{viewClickHandler::onClick}"
             android:src="@drawable/ic_notification"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/ivUser"
-            app:layout_constraintTop_toTopOf="@id/ivUser" />
+            app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+            app:layout_constraintEnd_toEndOf="@id/toolbarView"
+            app:layout_constraintTop_toTopOf="@id/toolbarView" />
 
-        <View
-            android:id="@+id/viewBg"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/bg_top_round_main"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivUser" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container_initial"
+            android:id="@+id/fragmentContainer"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_14sdp"
+            android:background="@color/white"
+            android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-            app:layout_constraintTop_toTopOf="@id/viewBg"
+            app:layout_constraintTop_toBottomOf="@id/toolbarView"
             app:navGraph="@navigation/main_navigation" />
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/oliveDrab"
+            android:visibility="gone"
             app:itemIconSize="@dimen/_18sdp"
             app:itemIconTint="@color/nav_item_color"
             app:labelVisibilityMode="unlabeled"
-            android:background="@color/northTexasGreen"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_navigation" />
 
 

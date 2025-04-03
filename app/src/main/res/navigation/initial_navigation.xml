@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/initial_navigation"
-    app:startDestination="@id/getStartedFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/getStartedFragment"
         android:name="com.waxd.pos.fcmb.ui.initial.fragments.getstarted.GetStartedFragment"
-        tools:layout="@layout/fragment_get_started"
-        android:label="GetStartedFragment">
+        android:label="GetStartedFragment"
+        tools:layout="@layout/fragment_get_started">
         <action
             android:id="@+id/action_getStartedFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -17,5 +17,17 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.waxd.pos.fcmb.ui.initial.fragments.login.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.waxd.pos.fcmb.ui.initial.fragments.SplashFragment"
+        android:label="SplashFragment" />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.waxd.pos.fcmb.ui.initial.fragments.register.RegistrationFragment"
+        android:label="RegistrationFragment" />
 </navigation>

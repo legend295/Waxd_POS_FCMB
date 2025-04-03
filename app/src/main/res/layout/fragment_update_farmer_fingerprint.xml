@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+
+        <variable
+            name="data"
+            type="com.waxd.pos.fcmb.rest.FarmerData" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp">
+
+            <!--            <androidx.appcompat.widget.AppCompatImageView-->
+            <!--                android:id="@+id/ivAddFarmer"-->
+            <!--                android:layout_width="@dimen/_25sdp"-->
+            <!--                android:layout_height="@dimen/_25sdp"-->
+            <!--                android:layout_marginTop="@dimen/_10sdp"-->
+            <!--                android:src="@drawable/ic_list_of_farmer"-->
+            <!--                android:tint="@color/northTexasGreen"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/tvAddNewFarmer"-->
+            <!--                app:layout_constraintHorizontal_chainStyle="packed"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvAddNewFarmer"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/_5sdp"-->
+            <!--                android:text="@string/farm_details"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="@dimen/_13sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/ivAddFarmer"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/ivAddFarmer"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/ivAddFarmer" />-->
+
+            <!--            <View-->
+            <!--                android:id="@+id/viewLine"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="1dp"-->
+            <!--                android:layout_marginStart="-10dp"-->
+            <!--                android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                android:layout_marginEnd="-10dp"-->
+            <!--                android:background="@color/black"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/tvAddNewFarmer"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/ivAddFarmer"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />-->
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPersonalInformation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center|start"
+                android:text="@string/farmer_information"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.haveBvnNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+
+            <!--  BVN Number  -->
+
+            <View
+                android:id="@+id/viewBgBvn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/_1sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvBvnNumberValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvBvnNumberValue" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBvnNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:text="@string/bvn_number"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                android:elevation="@dimen/_1sdp"
+                android:visibility="@{data.haveBvnNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:layout_constraintBottom_toBottomOf="@id/tvBvnNumberValue"
+                app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgBvn"
+                app:layout_constraintTop_toTopOf="@id/tvBvnNumberValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBvnNumberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="end"
+                android:elevation="@dimen/_1sdp"
+                android:padding="@dimen/_10sdp"
+                android:text="@{data.bvnNumber}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.haveBvnNumber? View.VISIBLE : View.GONE,default=gone}"
+                app:layout_constraintEnd_toEndOf="@id/viewBgBvn"
+                app:layout_constraintStart_toEndOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvPersonalInformation"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+
+            <!--  Name  -->
+
+            <View
+                android:id="@+id/viewBgName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/_1sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvNameValue" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:text="@string/name"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+                app:layout_constraintEnd_toStartOf="@id/tvNameValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgName"
+                app:layout_constraintTop_toTopOf="@id/tvNameValue"
+
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNameValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="end"
+                android:text="@{(data.firstName == null? `` : data.firstName) + ` ` + (data.lastName == null? `` : data.lastName)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:elevation="@dimen/_1sdp"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="@id/viewBgName"
+                app:layout_constraintStart_toEndOf="@id/tvName"
+                app:layout_constraintTop_toBottomOf="@id/tvBvnNumberValue"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBiometricCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/farmer_biometrics"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintStart_toStartOf="@id/tvPersonalInformation"
+                app:layout_constraintTop_toBottomOf="@id/tvNameValue" />
+
+            <com.waxd.pos.fcmb.utils.custom_views.SquareImageView
+                android:id="@+id/ivScannerLeft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/ic_fingerprint_placeholder"
+                app:layout_constraintEnd_toStartOf="@id/ivScannerRight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBiometricCapture" />
+
+            <com.waxd.pos.fcmb.utils.custom_views.SquareImageView
+                android:id="@+id/ivScannerRight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:src="@drawable/ic_fingerprint_placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivScannerLeft"
+                app:layout_constraintTop_toTopOf="@id/ivScannerLeft" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCaptureFingerprint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/capture_fingerprint"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivScannerLeft" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvUpdateFingerprint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/update_fingerprint"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/ivScannerLeft"
+                app:layout_constraintTop_toBottomOf="@id/tvCaptureFingerprint" />
+
+            <ProgressBar
+                android:id="@+id/progressBarApi"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tvUpdateFingerprint"
+                app:layout_constraintEnd_toEndOf="@id/tvUpdateFingerprint"
+                app:layout_constraintTop_toTopOf="@id/tvUpdateFingerprint" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

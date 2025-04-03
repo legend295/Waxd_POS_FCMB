@@ -2,8 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.WaxdFCMB" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
-    <style name="Theme.WaxdFCMB" parent="Base.Theme.WaxdFCMB" />
+    <style name="Theme.WaxdFCMB" parent="Base.Theme.WaxdFCMB" >
+        <item name="colorPrimary">@color/oliveDrab</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

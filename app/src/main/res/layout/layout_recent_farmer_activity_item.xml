@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -10,7 +11,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_margin="@dimen/_10sdp"
-            android:background="@color/lightSilver"
+            android:src="@drawable/placeholder"
             app:layout_constraintBottom_toBottomOf="@id/tvTime"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvTitle"
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Farmer Added"
+            tools:text="Farmer Added"
             app:layout_constraintStart_toEndOf="@id/ivFarmer"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:text="4 hours ago"
+            tools:text="4 hours ago"
             app:layout_constraintStart_toEndOf="@id/ivFarmer"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
