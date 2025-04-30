@@ -24,11 +24,17 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>() {
     }
 
     override fun init() {
+        handleToolbarUI(isVisible = false)
         val message = arguments?.getString(Constants.MESSAGE_INTENT) ?: "Success"
 
         binding.tvMessage.text = message
 
         binding.tvOkay.setOnClickListener { this.view?.findNavController()?.popBackStack() }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        handleToolbarUI(isVisible = true)
     }
 
 }

@@ -9,13 +9,15 @@ import com.waxd.pos.fcmb.base.BaseFragment
 import com.waxd.pos.fcmb.base.DataResult
 import com.waxd.pos.fcmb.databinding.FragmentRecentActivityBinding
 import com.waxd.pos.fcmb.ui.main.fragments.dashboard.adapter.RecentFarmerActivityAdapter
+import com.waxd.pos.fcmb.utils.Util.isInternetAvailable
+import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.constants.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecentActivityFragment : BaseFragment<FragmentRecentActivityBinding>() {
 
-    private val viewModel : RecentActivityViewModel by viewModels()
+    private val viewModel: RecentActivityViewModel by viewModels()
     private val recentAdapter by lazy { RecentFarmerActivityAdapter() }
 
     override fun getLayoutRes(): Int = R.layout.fragment_recent_activity
@@ -25,7 +27,7 @@ class RecentActivityFragment : BaseFragment<FragmentRecentActivityBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (isAdded) {
-           init()
+            init()
         }
     }
 
@@ -39,18 +41,27 @@ class RecentActivityFragment : BaseFragment<FragmentRecentActivityBinding>() {
         }
 
         setObserver()
-        viewModel.getRecentFarmers()
+        if (context?.isInternetAvailable(showMessage = true) == true) {
+            viewModel.getRecentFarmers()
+        }
     }
 
     private fun setObserver() {
         viewModel.response.observe(viewLifecycleOwner) {
+            binding.progressBar.visible(isVisible = it == DataResult.Loading)
             when (it) {
-                is DataResult.Failure -> {}
+                is DataResult.Failure -> {
+                    binding.tvEmpty.visible(recentAdapter.itemCount == 0)
+                }
+
                 DataResult.Loading -> {}
+
                 is DataResult.Success -> {
                     recentAdapter.setList(it.data)
+                    binding.tvEmpty.visible(recentAdapter.itemCount == 0)
                 }
             }
+
         }
     }
 }

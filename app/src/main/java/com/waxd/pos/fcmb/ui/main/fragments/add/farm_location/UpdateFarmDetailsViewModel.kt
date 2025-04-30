@@ -28,6 +28,7 @@ class UpdateFarmDetailsViewModel @Inject constructor(private val firebaseWrapper
     var coordinates: ArrayList<LatLng>? = ArrayList()
     val farmImageUpdateResponse: MutableLiveData<DataResult<FarmerData>> = MutableLiveData()
     val farmImageDeleteResponse: MutableLiveData<DataResult<FarmerData>> = MutableLiveData()
+    var compressedUri: Uri? = null
 
     fun updateFarmer() {
         val map = ArrayList<FarmCoordinates>()
@@ -52,15 +53,17 @@ class UpdateFarmDetailsViewModel @Inject constructor(private val firebaseWrapper
             val compressedFile = Compressor.compress(context, file) {
                 this.size(1048576)
             }
-            val compressedUri = FileProvider.getUriForFile(
+            compressedUri = FileProvider.getUriForFile(
                 context,
                 "${context.packageName}.provider",
                 compressedFile
             )
             farmerData.value?.let {
                 it.id?.let { it1 ->
-                    firebaseWrapper.uploadFarmImage(it1, compressedUri, it) { response ->
-                        farmImageUpdateResponse.value = response
+                    compressedUri?.let { uri ->
+                        firebaseWrapper.uploadFarmImage(it1, uri, it) { response, _ ->
+                            farmImageUpdateResponse.value = response
+                        }
                     }
                 } ?: run {
                     farmImageUpdateResponse.value =
@@ -77,6 +80,20 @@ class UpdateFarmDetailsViewModel @Inject constructor(private val firebaseWrapper
                     farmImageDeleteResponse.value = response
                 }
             }
+        }
+    }
+
+    fun getFarmerById(callback: (DataResult<FarmerData>) -> Unit) {
+        farmerData.value?.let {
+            it.id?.let { it1 ->
+                firebaseWrapper.getFarmerById(it1) { farmerData ->
+                    callback(farmerData)
+                }
+            } ?: run {
+                farmImageUpdateResponse.value =
+                    DataResult.Failure(status = "400", message = "Farmer id not found.")
+            }
+
         }
     }
 

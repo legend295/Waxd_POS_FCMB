@@ -37,7 +37,6 @@
         android:theme="@style/Theme.WaxdFCMB"
         tools:replace="android:name"
         tools:targetApi="tiramisu">
-<!--        AIzaSyA2DpDxflwFO0LY4i6MxL83iuk_N92aJGA-->
         <activity
             android:name=".ui.initial.InitialActivity"
             android:windowSoftInputMode="adjustPan"
@@ -50,6 +49,7 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <meta-data

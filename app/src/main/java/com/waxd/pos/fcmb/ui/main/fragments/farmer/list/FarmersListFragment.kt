@@ -28,6 +28,7 @@ import javax.inject.Inject
 class FarmersListFragment : BaseFragment<FragmentFarmersListBinding>() {
 
     private val viewModel: FarmersListViewModel by viewModels()
+    private var searchQuery = ""
 
     @Inject
     lateinit var firebaseWrapper: FirebaseWrapper
@@ -46,23 +47,27 @@ class FarmersListFragment : BaseFragment<FragmentFarmersListBinding>() {
     }
 
     override fun init() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            if (context?.isInternetAvailable(true) == true) {
+                viewModel.getFarmers("", null)
+            }
+        }
         setAdapter()
 
         setObserver()
-
-        if (context?.isInternetAvailable(showMessage = true) == true) {
-            binding.progressBar.visible(isVisible = true)
-            // Set up the debounced search
-            binding.etSearch.debouncedTextChanges(
-                debounceDuration = 500, // 500ms debounce
-                coroutineScope = lifecycleScope,
-                onTextChanged = { query ->
+        // Set up the debounced search
+        binding.etSearch.debouncedTextChanges(
+            debounceDuration = 500, // 500ms debounce
+            coroutineScope = lifecycleScope,
+            onTextChanged = { query ->
+                if (context?.isInternetAvailable(showMessage = true) == true) {
+                    searchQuery = query
                     viewModel.getFarmers(query, null)
+                } else {
+                    binding.progressBar.visible(isVisible = false)
                 }
-            )
-        } else {
-            binding.progressBar.visible(isVisible = false)
-        }
+            }
+        )
 
     }
 
@@ -101,7 +106,7 @@ class FarmersListFragment : BaseFragment<FragmentFarmersListBinding>() {
 
     fun loadNextPage() {
         viewModel.getFarmers(
-            query = "",
+            query = searchQuery,
             lastVisibleDocument = adapter.getList()
                 .lastOrNull()?.document, // Start after the last visible document
 
@@ -110,6 +115,7 @@ class FarmersListFragment : BaseFragment<FragmentFarmersListBinding>() {
 
     private fun setObserver() {
         viewModel.farmersData.observe(viewLifecycleOwner) {
+            binding.swipeRefreshLayout.isRefreshing = false
             updateFarmers(it)
         }
     }

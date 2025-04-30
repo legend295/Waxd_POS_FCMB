@@ -125,6 +125,8 @@ data class FarmerCreateRequest(
             haveNinNumber == true && ninNumber?.trim().isNullOrEmpty() -> throw NotValidException("NIN number is required.")
             haveNinNumber == true && (ninNumber?.length ?: 0) < 11 -> throw NotValidException("NIN number should be valid.")
 
+            haveBvnNumber == false && haveNinNumber == false -> throw NotValidException("Either BVN or NIN is required.")
+
             firstName?.trim().isNullOrEmpty() -> throw NotValidException("First name is required.")
             lastName?.trim().isNullOrEmpty() -> throw NotValidException("Last name is required.")
             phoneNumber == null || phoneNumber?.trim()

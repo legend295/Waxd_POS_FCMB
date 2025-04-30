@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,6 +17,8 @@ import com.scanner.activity.FingerprintScanner
 import com.scanner.utils.builder.ThemeOptions
 import com.scanner.utils.constants.ScannerConstants
 import com.scanner.utils.enums.ScanningType
+import com.waxd.fcmb.models.NigerianState
+import com.waxd.fcmb.utils.Utils.loadJsonArrayFromRaw
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.base.BaseFragment
 import com.waxd.pos.fcmb.base.DataResult
@@ -22,6 +26,8 @@ import com.waxd.pos.fcmb.databinding.FragmentAddFarmerBinding
 import com.waxd.pos.fcmb.rest.FarmerData
 import com.waxd.pos.fcmb.rest.NotValidException
 import com.waxd.pos.fcmb.ui.main.MainActivity
+import com.waxd.pos.fcmb.utils.Util.hideKeyboard
+import com.waxd.pos.fcmb.utils.Util.isInternetAvailable
 import com.waxd.pos.fcmb.utils.constants.Constants
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
 import com.waxd.pos.fcmb.utils.serializable
@@ -38,6 +44,8 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
     private val viewModel: AddFarmerViewModel by viewModels()
     private var from: Int? = null
     private var isUpdating = false
+    private var nigerianState: NigerianState? = null
+    private var stateMap: MutableMap<String, ArrayList<String?>?>? = null
 
     private val themeOptions = ThemeOptions().apply {
         buttonColor = R.color.pear
@@ -62,6 +70,8 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
     override fun init() {
         binding.viewClickHandler = this
         binding.viewModel = viewModel
+        nigerianState = context?.loadJsonArrayFromRaw(com.waxd.fcmb.R.raw.nigerian_states)
+        stateMap = nigerianState?.let { viewModel.getNigerianStateMap(it) }
 
         from = arguments?.getInt(Constants.FromScreen.FROM)
 
@@ -76,9 +86,11 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
                 viewModel.request.value?.setFarmerData(it)
                 viewModel.request.value = viewModel.request.value
             }
-        }else{
+        } else {
             (activity as MainActivity?)?.setTitle("Add New Farmer")
         }
+
+        binding.spinnerState.onItemSelectedListener = onItemSelectedListener
 
         setObserver()
     }
@@ -163,6 +175,46 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
             }
         }
 
+    private val onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val context = context ?: return
+            val selectedState = p0?.getItemAtPosition(p2) as String
+
+            viewModel.request.value?.state = selectedState
+            viewModel.request.value = viewModel.request.value
+
+            val cities = stateMap?.get(selectedState)
+            cities?.let {
+                val adapter = ArrayAdapter(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    it
+                )
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spinnerCity.adapter = adapter
+                if (binding.spinnerCity.onItemSelectedListener == null)
+                    binding.spinnerCity.onItemSelectedListener = onCityItemSelectedListener
+            }
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
+    }
+
+    private val onCityItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val selectedCity = p0?.getItemAtPosition(p2) as String
+
+            viewModel.request.value?.city = selectedCity
+            viewModel.request.value = viewModel.request.value
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
+    }
+
     private fun handleResponse(list: ArrayList<File>?, isVerified: Boolean?) {
         if (list.isNullOrEmpty()) {
 //                StringBuilder().append("Fingerprint verification :- ").append(isVerified)
@@ -185,37 +237,40 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
             }
 
             R.id.tvDob -> {
+                v.hideKeyboard()
                 openDatePicker()
             }
 
             R.id.tvCreateFarmerProfile -> {
-                AlertDialog.Builder(requireContext())
-                    .setMessage("Are you sure you want to submit the details.")
-                    .setPositiveButton("Confirm") { _, _ ->
-                        try {
-                            viewModel.request.value?.isValid()
-                            if (isUpdating) {
-                                // Update farmer data
-                                viewModel.updateFarmer()
-                            } else {
-                                // register new farmer
-                                viewModel.registerFarmer()
-                            }
-                        } catch (e: NotValidException) {
-                            e.message?.let { showToast(it) }
-                        }
-                    }.setNegativeButton("Cancel", null).show()
+                try {
+                    viewModel.request.value?.isValid()
+                    if (context?.isInternetAvailable(showMessage = true) == true)
+                        AlertDialog.Builder(requireContext())
+                            .setMessage("Are you sure you want to submit the details.")
+                            .setPositiveButton("Confirm") { _, _ ->
+                                if (isUpdating) {
+                                    // Update farmer data
+                                    viewModel.updateFarmer()
+                                } else {
+                                    // register new farmer
+                                    viewModel.registerFarmer()
+                                }
+                            }.setNegativeButton("Cancel", null).show()
 
+                } catch (e: NotValidException) {
+                    e.message?.let { showToast(it) }
+                }
             }
 
             R.id.tvCaptureFingerprint -> {
-                FingerprintScanner.Builder(requireContext())
-                    .setUniqueId("12345678907")
-                    .setPhoneNumber("12345678907")
-                    .setScanningType(ScanningType.REGISTRATION)
-                    .setKey(encryptionKey)
-                    .setThemeOptions(themeOptions)
-                    .start(this, scanningLauncher)
+                if (context?.isInternetAvailable(showMessage = true) == true)
+                    FingerprintScanner.Builder(requireContext())
+                        .setUniqueId("12345678907")
+                        .setPhoneNumber("12345678907")
+                        .setScanningType(ScanningType.REGISTRATION)
+                        .setKey(encryptionKey)
+                        .setThemeOptions(themeOptions)
+                        .start(this, scanningLauncher)
 
             }
 

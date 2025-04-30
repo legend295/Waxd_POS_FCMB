@@ -11,6 +11,7 @@ import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -34,13 +35,15 @@ import com.waxd.pos.fcmb.utils.Util.showToast
 import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.constants.Constants
 import com.waxd.pos.fcmb.utils.handlers.LocationPermissionHandler
+import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 import kotlin.math.abs
 import kotlin.math.sin
 
 @AndroidEntryPoint
-class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), OnMapReadyCallback {
+class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), OnMapReadyCallback,
+    ViewClickHandler {
 
     private var googleMap: GoogleMap? = null
     private val capturedCoordinates = mutableListOf<LatLng>()
@@ -57,6 +60,7 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
         super.onViewCreated(view, savedInstanceState)
 
         if (isAdded) {
+            binding.viewClickHandler = this
             init()
 
             // Initialize Google Maps
@@ -69,36 +73,13 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
                 fusedLocationClient = LocationServices.getFusedLocationProviderClient(it)
             }
 
+            handleTextMessage()
+
         }
     }
 
     override fun init() {
-        binding.tvCaptureFarmCoordinates.setOnClickListener {
-            captureLatLng()
-        }
 
-        binding.tvFinishCapture.setOnClickListener {
-            finishCapture()
-            binding.tvRecapture.visible(true)
-            binding.tvDone.visible(true)
-            binding.tvFinishCapture.visible(isVisible = false)
-            binding.tvCaptureFarmCoordinates.visible(isVisible = false)
-        }
-
-        binding.tvRecapture.setOnClickListener {
-            recapture()
-        }
-
-        binding.tvDone.setOnClickListener {
-            // Prepare the data to send back
-            val result = Bundle().apply {
-                putParcelableArrayList(Constants.IntentKeys.CO_ORDINATES_DATA, ArrayList(capturedCoordinates))
-            }
-
-            // Set the result
-            setFragmentResult(Constants.IntentKeys.CO_ORDINATES, result)
-            this.view?.findNavController()?.navigateUp()
-        }
     }
 
 
@@ -143,7 +124,7 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
                             MarkerOptions().position(latLng)
                                 .title("Corner ${capturedCoordinates.size}")
                         )
-
+                        handleTextMessage()
                         // Optionally, move the camera to the new marker
                         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19f))
                     } else {
@@ -151,6 +132,20 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
                     }
                 }
             }
+    }
+
+    private fun handleTextMessage() {
+        val message =
+            "${capturedCoordinates.size} out of ${if (capturedCoordinates.size < 5) "4" else capturedCoordinates.size} ${if (capturedCoordinates.size < 2) "corner" else "corners"} captured. (Max 6 allowed)"
+        if (capturedCoordinates.size < 4) {
+            binding.tvMessage.setTextColor(Color.RED)
+        } else binding.tvMessage.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.forestGreen
+            )
+        )
+        binding.tvMessage.text = message
     }
 
     private fun recapture() {
@@ -194,8 +189,6 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
             ).show()
         }
     }
-
-
 
 
     private fun getLastLocation(isSuccess: (Boolean) -> Unit) {
@@ -266,6 +259,46 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
                 },
                 it
             )
+        }
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.ivInfo -> {}
+
+            R.id.tvCaptureFarmCoordinates -> {
+                if (capturedCoordinates.size < 6)
+                    captureLatLng()
+                else {
+                    context?.showToast("Maximum of 6 corners allowed")
+                }
+            }
+
+            R.id.tvFinishCapture -> {
+                finishCapture()
+                binding.tvRecapture.visible(true)
+                binding.tvDone.visible(true)
+                binding.tvFinishCapture.visible(isVisible = false)
+                binding.tvCaptureFarmCoordinates.visible(isVisible = false)
+            }
+
+            R.id.tvRecapture -> {
+                recapture()
+            }
+
+            R.id.tvDone -> {
+                // Prepare the data to send back
+                val result = Bundle().apply {
+                    putParcelableArrayList(
+                        Constants.IntentKeys.CO_ORDINATES_DATA,
+                        ArrayList(capturedCoordinates)
+                    )
+                }
+
+                // Set the result
+                setFragmentResult(Constants.IntentKeys.CO_ORDINATES, result)
+                this.view?.findNavController()?.navigateUp()
+            }
         }
     }
 

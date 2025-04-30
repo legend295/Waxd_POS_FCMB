@@ -46,6 +46,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -54,10 +55,15 @@ android {
     }
     android.buildFeatures.dataBinding = true
     android.buildFeatures.buildConfig true
+
+
 }
+
 
 dependencies {
 
+//    implementation fileTree(dir: 'libs', includes: ['*.jar', '*.aar'])
+    coreLibraryDesugaring libs.desugar.jdk.libs
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
@@ -71,6 +77,8 @@ dependencies {
     implementation libs.androidx.fragment.ktx
     implementation libs.firebase.common.ktx
     implementation libs.firebase.storage.ktx
+    implementation project(':bvn_ten_fingerprint')
+//    implementation project(':nibs')
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -78,7 +86,9 @@ dependencies {
     //sdp
     implementation libs.sdp.android
 
-    implementation(libs.github.fingerprintscannersdk){ changing = true }
+    implementation(libs.github.fingerprintscannersdk) {
+        changing = true
+    }
 
     //Firebase
     implementation libs.firebase.auth.ktx // Use the latest version
@@ -97,14 +107,15 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
 
     // Retrofit
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.logging.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     // Glide
     implementation(libs.glide)
 
     //compressor
-    implementation ("id.zelory:compressor:3.0.1")
+    implementation(libs.compressor)
+
 
 }

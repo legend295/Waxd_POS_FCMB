@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.fragments.notification.NotificationFragment">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"

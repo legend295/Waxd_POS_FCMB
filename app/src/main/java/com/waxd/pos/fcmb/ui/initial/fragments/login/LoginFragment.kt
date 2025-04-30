@@ -21,6 +21,8 @@ import com.waxd.pos.fcmb.datastore.KeyStore
 import com.waxd.pos.fcmb.datastore.KeyStore.encryptData
 import com.waxd.pos.fcmb.rest.NotValidException
 import com.waxd.pos.fcmb.ui.initial.InitialActivity
+import com.waxd.pos.fcmb.utils.Util.hideKeyboard
+import com.waxd.pos.fcmb.utils.Util.isInternetAvailable
 import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +34,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), ViewClickHandler {
     private val TAG = "LoginFragment"
     private val viewModel: LoginViewModel by viewModels()
 
-    override fun getTitle(): String =""
+    override fun getTitle(): String = ""
 
     override fun getLayoutRes(): Int = R.layout.fragment_login
 
@@ -78,7 +80,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), ViewClickHandler {
 
             // Show a message and update the UI
         }
-
 
 
         override fun onCodeSent(
@@ -149,19 +150,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), ViewClickHandler {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btnLogin -> {
-                activity?.let {
-                    try {
-                        viewModel.request.value?.isValid()
-                        viewModel.signInUser(it)
-                    } catch (e: NotValidException) {
-                        e.message?.let { message ->
-                            showToast(message)
+                v.hideKeyboard()
+                if (context?.isInternetAvailable(showMessage = true) == true)
+                    activity?.let {
+                        try {
+                            viewModel.request.value?.isValid()
+                            viewModel.signInUser(it)
+                        } catch (e: NotValidException) {
+                            e.message?.let { message ->
+                                showToast(message)
+                            }
                         }
                     }
-                }
             }
 
             R.id.tvRegister -> {
+                v.hideKeyboard()
                 this.view?.findNavController()
                     ?.navigate(R.id.action_loginFragment_to_registrationFragment)
             }

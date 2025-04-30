@@ -3,25 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.fragments.capture_location.CaptureLocationFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="@string/capture_farm_location"
-            android:textColor="@color/black"
-            android:visibility="gone"
-            android:textSize="@dimen/_13sdp"
-            app:fontFamily="sans-serif-medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/viewMap"
@@ -32,7 +25,36 @@
             app:layout_constraintBottom_toTopOf="@id/barrier3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_1sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_1sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/tvCaptureFarmCoordinates"
+            app:layout_constraintEnd_toStartOf="@id/ivInfo"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivInfo"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:onClick="@{viewClickHandler::onClick}"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_info"
+            app:layout_constraintBottom_toBottomOf="@id/tvMessage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvMessage" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCaptureFarmCoordinates"
@@ -42,9 +64,10 @@
             android:background="@drawable/bg_edit_text"
             android:backgroundTint="#CFD332"
             android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
             android:padding="@dimen/_10sdp"
             android:text="@string/capture_farm_coordinates"
-            android:textColor="#24781F"
+            android:textColor="@color/forestGreen"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/barrier4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +81,7 @@
             android:background="@drawable/bg_edit_text"
             android:backgroundTint="#CFD332"
             android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
             android:padding="@dimen/_10sdp"
             android:text="@string/finish_capture"
             android:textColor="#24781F"
@@ -76,6 +100,7 @@
             android:background="@drawable/bg_edit_text"
             android:backgroundTint="#CFD332"
             android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
             android:padding="@dimen/_10sdp"
             android:text="@string/re_capture"
             android:textColor="#24781F"
@@ -93,6 +118,7 @@
             android:background="@drawable/bg_edit_text"
             android:backgroundTint="#CFD332"
             android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
             android:padding="@dimen/_10sdp"
             android:text="@string/done"
             android:textColor="#24781F"
@@ -107,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="top"
-            app:constraint_referenced_ids="tvCaptureFarmCoordinates,tvFinishCapture,tvRecapture" />
+            app:constraint_referenced_ids="tvCaptureFarmCoordinates,tvFinishCapture,tvRecapture,tvMessage" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier4"

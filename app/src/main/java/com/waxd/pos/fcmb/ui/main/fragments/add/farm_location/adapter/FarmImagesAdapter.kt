@@ -113,4 +113,9 @@ class FarmImagesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         farmerId = id
     }
 
+    fun clear(){
+        list.clear()
+        notifyDataSetChanged()
+    }
+
 }

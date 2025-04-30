@@ -158,7 +158,7 @@
             android:onClick="@{viewClickHandler::onClick}"
             android:gravity="center"
             android:id="@+id/tvRegister"
-            android:text="Don’t have an account yet?\nCreate an account"
+            android:text="@string/don_t_have_an_account_yet_ncreate_an_account"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="@id/btnLogin"

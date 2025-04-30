@@ -20,7 +20,6 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
-import com.google.zxing.common.GlobalHistogramBinarizer
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.base.BaseFragment
 import com.waxd.pos.fcmb.base.DataResult
@@ -46,6 +45,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ViewClickHandler
     private val viewModel: ProfileViewModel by viewModels()
     private var cameraUri: Uri? = null
     private var agentProfile: AgentProfileResponse? = null
+    private var uid: String? = null
 
     override fun getTitle(): String = "Profile"
 
@@ -60,8 +60,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ViewClickHandler
         binding.viewClickHandler = this
         setObserver()
         context?.let {
-            val uid = it.decryptData(KeyStore.USER_UID)
-            viewModel.getAgentById(uid)
+            uid = it.decryptData(KeyStore.USER_UID)
+            uid?.let { id ->
+                viewModel.getAgentById(id)
+            }
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            uid?.let { id ->
+                viewModel.getAgentById(id)
+            }
         }
     }
 
@@ -99,6 +107,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ViewClickHandler
 
                 }
             }
+
+            binding.swipeRefreshLayout.isRefreshing = it == DataResult.Loading
         }
 
         viewModel.uploadImageResponse.observe(viewLifecycleOwner) {

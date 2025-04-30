@@ -83,6 +83,7 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
             R.id.tvCaptureFingerprint -> {
                 startScanning()
             }
+
         }
     }
 

@@ -15,12 +15,13 @@
             android:background="@color/northTexasGreen20"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
+        <com.waxd.pos.fcmb.utils.custom_views.ShapeableSquareImageView
             android:id="@+id/viewBlur"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:alpha=".4"
             android:background="@color/black"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/ivFarm"
             app:layout_constraintEnd_toEndOf="@id/ivFarm"

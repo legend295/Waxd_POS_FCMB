@@ -5,8 +5,10 @@
 
     </style>
 
-    <style name="Theme.WaxdFCMB" parent="Base.Theme.WaxdFCMB" >
+    <style name="Theme.WaxdFCMB" parent="Base.Theme.WaxdFCMB">
         <item name="colorPrimary">@color/oliveDrab</item>
+        <item name="android:navigationBarColor">@color/oliveDrab</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 </resources>

@@ -9,7 +9,11 @@ import com.waxd.pos.fcmb.rest.UserResponse
 
 interface IFirebaseWrapper {
 
-    fun getFarmers(searchQuery: String? = null, lastVisibleDocument: DocumentSnapshot?, callback: (ArrayList<FarmerResponse>) -> Unit)
+    fun getFarmers(
+        searchQuery: String? = null,
+        lastVisibleDocument: DocumentSnapshot?,
+        callback: (ArrayList<FarmerResponse>) -> Unit
+    )
 
     fun getRecentFarmers(callback: (DataResult<ArrayList<FarmerResponse>>) -> Unit)
 
@@ -26,7 +30,7 @@ interface IFirebaseWrapper {
         farmerId: String,
         uri: Uri,
         farmerData: FarmerData,
-        callback: (DataResult<FarmerData>) -> Unit
+        callback: (DataResult<FarmerData>, Uri) -> Unit
     )
 
     fun deleteFarmImage(

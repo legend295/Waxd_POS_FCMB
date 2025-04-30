@@ -79,6 +79,12 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment(), BaseHandler {
         }
     }
 
+    fun handleToolbarUI(isVisible: Boolean) {
+        if (activity is MainActivity) {
+            (activity as MainActivity?)?.handleToolbarUI(isVisible)
+        }
+    }
+
     private fun setTitle(title: String) {
         if (activity is MainActivity) {
             (activity as MainActivity?)?.setTitle(title)

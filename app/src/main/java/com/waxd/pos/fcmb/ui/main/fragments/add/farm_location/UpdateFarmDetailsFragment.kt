@@ -53,6 +53,7 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
     private var googleMap: GoogleMap? = null
     private var uploadingPosition = -1
     private var deletingPosition = -1
+    private var currentlyCapturedCoordinates: ArrayList<LatLng>? = null
 
     override fun getLayoutRes(): Int = R.layout.fragment_update_farm_details
     override fun getTitle(): String = "Update Farm Details"
@@ -72,22 +73,6 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
         val farmerData = arguments?.serializable<FarmerData>(Constants.IntentKeys.DATA)
         farmerData?.let {
             viewModel.farmerData.value = it
-            binding.data = it
-            it.id?.let { it1 -> adapter.setFarmerId(it1) }
-            viewModel.coordinates?.clear()
-            it.farmLocations?.forEach { location ->
-                viewModel.coordinates?.add(LatLng(location.lat, location.lng))
-            }
-
-            it.farmPhotos?.forEach { images ->
-                adapter.add(
-                    FarmImagesData(
-                        images,
-                        if (images is String) images else "",
-                        isUploading = false
-                    )
-                )
-            }
         }
 
         // Initialize Google Maps
@@ -99,23 +84,44 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
         // Set up the result listener
         setFragmentResultListener(Constants.IntentKeys.CO_ORDINATES) { requestKey, bundle ->
             // Retrieve the data from the bundle
-            val coordinates = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                bundle.getParcelableArrayList(
-                    Constants.IntentKeys.CO_ORDINATES_DATA,
-                    LatLng::class.java
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                bundle.getParcelableArrayList(Constants.IntentKeys.CO_ORDINATES_DATA)
-            }
-            if (coordinates != null) {
-                finishCapture(coordinates)
+            currentlyCapturedCoordinates =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    bundle.getParcelableArrayList(
+                        Constants.IntentKeys.CO_ORDINATES_DATA,
+                        LatLng::class.java
+                    )
+                } else {
+                    @Suppress("DEPRECATION")
+                    bundle.getParcelableArrayList(Constants.IntentKeys.CO_ORDINATES_DATA)
+                }
+            if (currentlyCapturedCoordinates != null) {
+                finishCapture(currentlyCapturedCoordinates!!)
             }
         }
 
     }
 
     private fun setObserver() {
+        viewModel.farmerData.observe(viewLifecycleOwner) {
+            binding.data = it
+            it.id?.let { it1 -> adapter.setFarmerId(it1) }
+            if (currentlyCapturedCoordinates == null) {
+                viewModel.coordinates?.clear()
+                it.farmLocations?.forEach { location ->
+                    viewModel.coordinates?.add(LatLng(location.lat, location.lng))
+                }
+            }
+            adapter.clear()
+            it.farmPhotos?.forEach { images ->
+                adapter.add(
+                    FarmImagesData(
+                        images,
+                        if (images is String) images else "",
+                        isUploading = false
+                    )
+                )
+            }
+        }
         viewModel.farmerUpdateResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is DataResult.Failure -> {
@@ -141,38 +147,70 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
         viewModel.farmImageUpdateResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is DataResult.Failure -> {
+                    if (uploadingPosition != -1) {
+                        adapter.getList()[uploadingPosition].isUploading = false
+                        adapter.notifyItemChanged(uploadingPosition)
+                        uploadingPosition = -1
+                    }
                     it.message?.let { it1 -> showToast(it1) }
                 }
 
-                DataResult.Loading -> {}
+                DataResult.Loading -> {
+
+                }
+
                 is DataResult.Success -> {
                     if (uploadingPosition != -1) {
                         adapter.getList()[uploadingPosition].isUploading = false
                         adapter.notifyItemChanged(uploadingPosition)
+                        uploadingPosition = -1
+                        getFarmerData()
                     }
                 }
             }
 
-            handleUpdateButtonUI(isInProgress = it == DataResult.Loading)
+            handleImageUpload(isInProgress = it == DataResult.Loading)
         }
 
         viewModel.farmImageDeleteResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is DataResult.Failure -> {
-                    if (deletingPosition != -1)
+                    if (deletingPosition != -1) {
                         adapter.getList()[deletingPosition].isUploading = false
+                        adapter.notifyItemChanged(deletingPosition)
+                        deletingPosition = -1
+                    }
                     it.message?.let { it1 -> showToast(it1) }
                 }
 
                 DataResult.Loading -> {
-                    if (deletingPosition != -1)
+                    if (deletingPosition != -1) {
                         adapter.getList()[deletingPosition].isUploading = true
+                        adapter.notifyItemChanged(deletingPosition)
+
+                    }
                 }
 
                 is DataResult.Success -> {
                     if (deletingPosition != -1) {
                         adapter.removeAt(deletingPosition)
                         deletingPosition = -1
+                        getFarmerData()
+                    }
+                }
+            }
+            handleImageUpload(isInProgress = it == DataResult.Loading)
+        }
+    }
+
+    private fun getFarmerData() {
+        if (context?.isInternetAvailable(showMessage = true) == true) {
+            viewModel.getFarmerById {
+                when (it) {
+                    is DataResult.Failure -> {}
+                    DataResult.Loading -> {}
+                    is DataResult.Success -> {
+                        viewModel.farmerData.value = it.data
                     }
                 }
             }
@@ -183,6 +221,13 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
         binding.tvUpdateFarmLocation.isEnabled = !isInProgress
         binding.tvUpdateFarmLocation.alpha = if (isInProgress) .5f else 1f
         binding.progressBarApi.visibility = if (isInProgress) View.VISIBLE else View.GONE
+    }
+
+    private fun handleImageUpload(isInProgress: Boolean) {
+        binding.tvUpdateFarmLocation.isEnabled = !isInProgress
+        binding.tvUpdateFarmLocation.alpha = if (isInProgress) .5f else 1f
+        binding.tvCaptureFarmLocation.isEnabled = !isInProgress
+        binding.tvCaptureFarmLocation.alpha = if (isInProgress) .5f else 1f
     }
 
     private fun finishCapture(coordinates: ArrayList<LatLng>) {
@@ -202,7 +247,7 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
             // Calculate the area of the farm
             val area = calculateArea(coordinates)
             binding.tvSqFt.text =
-                StringBuilder().append("Total Area: ${"%.2f".format(area)} sq meters")
+                StringBuilder().append("${"%.2f".format(area)} sq meters")
         }
     }
 
@@ -217,7 +262,12 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
     private fun updateAdapter() {
         binding.rvFarmImages.adapter = adapter
         adapter.emptyClickListener = {
-            imagePicker?.openImagePicker()
+            if (uploadingPosition != -1)
+                showToast("Image upload in progress")
+            else if (deletingPosition != -1)
+                showToast("Image delete in progress")
+            else
+                imagePicker?.openImagePicker()
         }
 
         adapter.itemClickHandler = {
@@ -225,29 +275,34 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
         }
 
         adapter.deleteClickHandler = { data, position ->
-            context?.let { context ->
-                if (context.isInternetAvailable(showMessage = true)) {
-                    if (deletingPosition == -1) {
-                        AlertDialog.Builder(context).apply {
-                            setTitle("Delete Image")
-                            setMessage("Are you sure you want to delete this image?")
-                            setPositiveButton("Yes") { _, _ ->
-                                if (data.url is String) {
-                                    deletingPosition = position
-                                    viewModel.deleteImage(data.url)
-                                } else if (data.path.isNotEmpty()) {
-                                    deletingPosition = position
-                                    viewModel.deleteImage(data.path)
-                                } else showToast("Unable to delete image.")
-                            }
-                            setNegativeButton("No", null)
-                        }.show()
-                    } else {
-                        showToast("Image delete in progress")
+            if (uploadingPosition != -1) {
+                showToast("Image upload in progress")
+            } else if (deletingPosition != -1) {
+                showToast("Image delete in progress")
+            } else {
+                context?.let { context ->
+                    if (context.isInternetAvailable(showMessage = true)) {
+                        if (deletingPosition == -1) {
+                            AlertDialog.Builder(context).apply {
+                                setTitle("Delete Image")
+                                setMessage("Are you sure you want to delete this image?")
+                                setPositiveButton("Yes") { _, _ ->
+                                    if (data.url is String) {
+                                        deletingPosition = position
+                                        viewModel.deleteImage(data.url as String)
+                                    } else if (data.path.isNotEmpty()) {
+                                        deletingPosition = position
+                                        viewModel.deleteImage(data.path)
+                                    } else showToast("Unable to delete image.")
+                                }
+                                setNegativeButton("No", null)
+                            }.show()
+                        } else {
+                            showToast("Image delete in progress")
+                        }
                     }
                 }
             }
-
         }
     }
 

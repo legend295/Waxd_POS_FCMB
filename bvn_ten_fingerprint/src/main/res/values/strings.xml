@@ -1,0 +1,11 @@
+<resources>
+    <string name="bvn_registration">BVN Registration</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="first_name">First Name</string>
+    <string name="surname">Surname</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="capture_fingerprints">Capture Fingerprints</string>
+    <string name="state_of_origin">State Of Origin</string>
+    <string name="lga_of_origin">LGA Of Origin</string>
+</resources>

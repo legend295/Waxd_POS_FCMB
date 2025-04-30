@@ -1,0 +1,72 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
+}
+
+android {
+    namespace 'com.waxd.fcmb'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    android.buildFeatures.dataBinding = true
+    android.buildFeatures.buildConfig true
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+//    implementation fileTree(dir: 'libs', includes: ['*.jar', '*.aar'])
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+    implementation(libs.github.fingerprintscannersdk) {
+        changing = true
+    }
+
+    //sdp
+    implementation libs.sdp.android
+
+    // Glide
+    implementation(libs.glide)
+
+//    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.2'
+//    implementation 'com.google.android.gms:play-services-mlkit-face-detection:17.1.0'
+//    implementation 'com.quickbirdstudios:opencv:3.4.5'
+
+    implementation(libs.converter.gson)
+
+    // Then explicitly add JNA once
+//    implementation libs.jna
+}

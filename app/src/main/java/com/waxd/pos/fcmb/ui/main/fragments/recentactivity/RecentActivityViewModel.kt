@@ -14,6 +14,7 @@ class RecentActivityViewModel @Inject constructor(private val firebaseWrapper: F
     val response: MutableLiveData<DataResult<ArrayList<FarmerResponse>>> = MutableLiveData()
 
     fun getRecentFarmers() {
+        response.value = DataResult.Loading
         firebaseWrapper.getRecentFarmers {
             response.value = it
         }

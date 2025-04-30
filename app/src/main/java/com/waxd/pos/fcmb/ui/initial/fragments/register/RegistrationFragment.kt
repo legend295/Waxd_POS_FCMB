@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.base.BaseFragment
@@ -15,6 +16,7 @@ import com.waxd.pos.fcmb.datastore.KeyStore
 import com.waxd.pos.fcmb.datastore.KeyStore.encryptData
 import com.waxd.pos.fcmb.rest.NotValidException
 import com.waxd.pos.fcmb.ui.initial.InitialActivity
+import com.waxd.pos.fcmb.utils.Util.isInternetAvailable
 import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
 import com.waxd.pos.fcmb.utils.showGenderSelectionSheet
@@ -25,7 +27,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(), ViewCl
 
     private val viewModel: RegistrationViewModel by viewModels()
 
-    override fun getTitle(): String =""
+    override fun getTitle(): String = ""
 
     override fun getLayoutRes(): Int = R.layout.fragment_registration
 
@@ -72,21 +74,27 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(), ViewCl
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btnSubmit -> {
-                if (viewModel.isSecondStep.value == true)
-                    try {
-                        viewModel.request.value?.isSecondScreenValid()
-                        viewModel.createUser()
-                    } catch (e: NotValidException) {
-                        showToast(e.message ?: "All fields is required.")
+                if (context?.isInternetAvailable(showMessage = true) == true)
+                    if (viewModel.isSecondStep.value == true)
+                        try {
+                            viewModel.request.value?.isSecondScreenValid()
+                            AlertDialog.Builder(requireContext())
+                                .setMessage("Are you sure you want to submit the details.")
+                                .setPositiveButton("Confirm") { _, _ ->
+                                    viewModel.createUser()
+                                }.setNegativeButton("Cancel", null).show()
+                        } catch (e: NotValidException) {
+                            showToast(e.message ?: "All fields is required.")
+                        }
+                    else {
+                        try {
+                            viewModel.request.value?.isFirstScreenValid()
+
+                            viewModel.isSecondStep.value = true
+                        } catch (e: NotValidException) {
+                            showToast(e.message ?: "All fields is required.")
+                        }
                     }
-                else {
-                    try {
-                        viewModel.request.value?.isFirstScreenValid()
-                        viewModel.isSecondStep.value = true
-                    } catch (e: NotValidException) {
-                        showToast(e.message ?: "All fields is required.")
-                    }
-                }
             }
 
             R.id.tvGender -> {

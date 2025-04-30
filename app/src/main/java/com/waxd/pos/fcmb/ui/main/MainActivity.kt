@@ -3,19 +3,11 @@ package com.waxd.pos.fcmb.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.app.FcmbApp
@@ -26,7 +18,6 @@ import com.waxd.pos.fcmb.datastore.DataStoreWrapper
 import com.waxd.pos.fcmb.datastore.KeyStore
 import com.waxd.pos.fcmb.datastore.KeyStore.decryptData
 import com.waxd.pos.fcmb.ui.initial.InitialActivity
-import com.waxd.pos.fcmb.ui.main.fragments.profile.ProfileViewModel
 import com.waxd.pos.fcmb.utils.Util.loadImage
 import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper
@@ -68,15 +59,25 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
             when (destination.id) {
 
                 R.id.agentDashboardFragment, R.id.searchFragment, R.id.profileFragment -> {
+                    binding.toolbarView.visible(isVisible = true)
                     binding.tvTitleLeft.visible(isVisible = destination.id == R.id.agentDashboardFragment)
-
+                    binding.ivNotification.visible(isVisible = true)
                     updateMainUIElements(
                         isVisible = true
                     )
                 }
 
+                R.id.successFragment->{
+                    binding.tvTitleLeft.visible(isVisible = false)
+                    binding.ivNotification.visible(isVisible = false)
+                    binding.toolbarView.visible(isVisible = false)
+                    updateMainUIElements(isVisible = false)
+                }
+
                 else -> {
                     binding.tvTitleLeft.visible(isVisible = false)
+                    binding.ivNotification.visible(isVisible = true)
+                    binding.toolbarView.visible(isVisible = true)
                     updateMainUIElements(isVisible = false)
                 }
             }
@@ -146,7 +147,7 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
                 navHostFragment?.navController?.navigate(R.id.notificationFragment)
             }
 
-            R.id.ivBack->{
+            R.id.ivBack -> {
                 navHostFragment?.navController?.popBackStack()
             }
         }
@@ -159,6 +160,10 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
      */
     fun setTitle(title: String) {
         binding.tvTitle.text = title
+    }
+
+    fun handleToolbarUI(isVisible: Boolean){
+//        binding.toolbarGroup.visible(isVisible)
     }
 
     fun logOut() {

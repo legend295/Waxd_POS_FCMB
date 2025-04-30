@@ -227,7 +227,7 @@
                 android:background="@drawable/bg_edit_text"
                 android:hint="@string/first_name"
                 android:imeOptions="actionNext"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:maxLength="50"
                 android:maxLines="1"
                 android:padding="@dimen/_10sdp"
@@ -243,10 +243,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+
                 android:background="@drawable/bg_edit_text"
                 android:hint="@string/last_name"
                 android:imeOptions="actionNext"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:maxLength="50"
                 android:maxLines="1"
                 android:padding="@dimen/_10sdp"
@@ -318,7 +319,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/bg_edit_text"
                 android:hint="@string/address"
-                android:imeOptions="actionNext"
+                android:imeOptions="actionDone"
                 android:inputType="text"
                 android:maxLength="100"
                 android:maxLines="1"
@@ -330,46 +331,100 @@
                 app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
                 app:layout_constraintTop_toBottomOf="@id/tvDob" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etCity"
+<!--            <androidx.appcompat.widget.AppCompatEditText-->
+<!--                android:id="@+id/etCity"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                android:background="@drawable/bg_edit_text"-->
+<!--                android:hint="@string/city"-->
+<!--                android:imeOptions="actionNext"-->
+<!--                android:inputType="text"-->
+<!--                android:maxLength="25"-->
+<!--                android:maxLines="1"-->
+<!--                android:minLines="1"-->
+<!--                android:padding="@dimen/_10sdp"-->
+<!--                android:text="@={viewModel.request.city}"-->
+<!--                android:textSize="@dimen/_12sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/etAddress" />-->
+
+
+<!--            <androidx.appcompat.widget.AppCompatEditText-->
+<!--                android:id="@+id/etState"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                android:background="@drawable/bg_edit_text"-->
+<!--                android:hint="@string/state"-->
+<!--                android:imeOptions="actionDone"-->
+<!--                android:inputType="text"-->
+<!--                android:maxLength="25"-->
+<!--                android:maxLines="1"-->
+<!--                android:minLines="1"-->
+<!--                android:padding="@dimen/_10sdp"-->
+<!--                android:text="@={viewModel.request.state}"-->
+<!--                android:textSize="@dimen/_12sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/etCity" />-->
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerState"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                style="@style/CustomSpinnerStyle"
                 android:background="@drawable/bg_edit_text"
-                android:hint="@string/city"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:minLines="1"
-                android:padding="@dimen/_10sdp"
-                android:text="@={viewModel.request.city}"
-                android:textSize="@dimen/_12sdp"
+                android:entries="@array/nigerian_states"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:prompt="@string/state"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
                 app:layout_constraintTop_toBottomOf="@id/etAddress" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_drop_down"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="@id/spinnerState"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerState"
+                app:layout_constraintEnd_toEndOf="@id/spinnerState"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etState"
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerCity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/bg_edit_text"
-                android:hint="@string/state"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:minLines="1"
-                android:padding="@dimen/_10sdp"
-                android:text="@={viewModel.request.state}"
+                android:prompt="@string/city"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
-                app:layout_constraintTop_toBottomOf="@id/etCity" />
+                app:layout_constraintStart_toStartOf="@id/tvPersonalInformation"
+                app:layout_constraintTop_toBottomOf="@id/spinnerState" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_drop_down"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="@id/spinnerCity"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerCity"
+                app:layout_constraintEnd_toEndOf="@id/spinnerCity"/>
+
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -387,7 +442,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvCreateFarmerProfile"
                 app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
-                app:layout_constraintTop_toBottomOf="@id/etState" />
+                app:layout_constraintTop_toBottomOf="@id/spinnerCity" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCreateFarmerProfile"
@@ -406,7 +461,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvCancel"
-                app:layout_constraintTop_toBottomOf="@id/etState" />
+                app:layout_constraintTop_toBottomOf="@id/spinnerCity" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

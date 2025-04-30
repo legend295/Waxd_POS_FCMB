@@ -29,9 +29,11 @@
                 android:id="@+id/ivBg"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_minus2sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_top_green_bg"
-                app:layout_constraintBottom_toBottomOf="@id/guidelineImage"
+                app:layout_constraintBottom_toBottomOf="@id/viewBg"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -39,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent=".23" />
+                app:layout_constraintGuide_percent=".28" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -64,10 +66,10 @@
                 android:layout_height="@dimen/_100sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintTop_toTopOf="@id/guideline"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:background="@drawable/bg_white_round_10"
-                app:layout_constraintTop_toBottomOf="@id/ivLogoWaxd" />
+                app:layout_constraintTop_toBottomOf="@id/ivLogoWaxd"
+                app:layout_constraintTop_toTopOf="@id/guideline" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivUser"
@@ -109,6 +111,14 @@
                 app:layout_constraintBottom_toBottomOf="@id/ivLogo"
                 app:layout_constraintEnd_toStartOf="@id/ivLogo"
                 app:layout_constraintTop_toTopOf="@id/ivLogo" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/btnSubmit"
+                app:layout_constraintEnd_toEndOf="@id/viewBg"
+                app:layout_constraintStart_toStartOf="@id/viewBg"
+                app:layout_constraintTop_toBottomOf="@id/viewBg" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etName"
@@ -248,7 +258,7 @@
                 android:background="@drawable/bg_grey_round_stroke"
                 android:hint="@{@string/bvn_number+`*`}"
                 android:inputType="number"
-                android:maxLength="13"
+                android:maxLength="11"
                 android:maxLines="1"
                 android:padding="@dimen/_10sdp"
                 android:text="@={viewModel.request.bvnNumber}"
@@ -267,7 +277,7 @@
                 android:background="@drawable/bg_grey_round_stroke"
                 android:hint="@{@string/nin_number+`*`}"
                 android:inputType="number"
-                android:maxLength="13"
+                android:maxLength="11"
                 android:maxLines="1"
                 android:padding="@dimen/_10sdp"
                 android:text="@={viewModel.request.ninNumber}"

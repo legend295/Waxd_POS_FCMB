@@ -4,43 +4,30 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
-import com.github.legend295.fingerprintscanner.BuildConfig
-import com.google.firebase.storage.FirebaseStorage
-import com.scanner.activity.FingerprintScanner
-import com.scanner.utils.enums.ScanningType
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.base.BaseFragment
 import com.waxd.pos.fcmb.base.DataResult
 import com.waxd.pos.fcmb.databinding.FragmentFarmerDetailsBinding
-import com.waxd.pos.fcmb.datastore.KeyStore
-import com.waxd.pos.fcmb.datastore.KeyStore.decryptData
 import com.waxd.pos.fcmb.utils.FileUtil
 import com.waxd.pos.fcmb.utils.Util.isInternetAvailable
 import com.waxd.pos.fcmb.utils.Util.loadFarmerImage
-import com.waxd.pos.fcmb.utils.Util.loadImage
 import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.constants.Constants
-import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
 import com.waxd.pos.fcmb.utils.showImagePickerDialog
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 import java.io.File
 import java.io.IOException
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FarmerDetailsFragment : BaseFragment<FragmentFarmerDetailsBinding>(), ViewClickHandler {
@@ -66,21 +53,31 @@ class FarmerDetailsFragment : BaseFragment<FragmentFarmerDetailsBinding>(), View
         setObserver()
 
         getFarmerData()
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getFarmerData()
+        }
     }
 
     private fun getFarmerData() {
         if (context?.isInternetAvailable(showMessage = true) == true) {
             viewModel.getFarmerById {
                 when (it) {
-                    is DataResult.Failure -> {}
+                    is DataResult.Failure -> {
+                        binding.swipeRefreshLayout.isRefreshing = false
+                    }
+
                     DataResult.Loading -> {}
                     is DataResult.Success -> {
+                        binding.swipeRefreshLayout.isRefreshing = false
                         viewModel.farmerData.value = it.data
                     }
                 }
                 binding.group.visible(isVisible = it != DataResult.Loading && viewModel.farmerData.value != null)
                 binding.progressBarApi.visible(isVisible = it == DataResult.Loading && viewModel.farmerData.value == null)
             }
+        } else {
+            binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 

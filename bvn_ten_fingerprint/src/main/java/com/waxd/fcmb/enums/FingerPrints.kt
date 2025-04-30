@@ -1,0 +1,5 @@
+package com.waxd.fcmb.enums
+
+enum class FingerPrints {
+    THUMB_LEFT, THUMB_RIGHT, INDEX_LEFT, INDEX_RIGHT, MIDDLE_LEFT, MIDDLE_RIGHT, RING_LEFT, RING_RIGHT, LITTLE_LEFT, LITTLE_RIGHT
+}

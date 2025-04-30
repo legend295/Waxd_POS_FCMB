@@ -84,9 +84,11 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
             // Create a query with pagination
             var query = Firebase.firestore.collection(FARMERS)
                 .where(combinedFilter)
-                .orderBy("date_created", Query.Direction.DESCENDING)
                 .limit(10)
 
+            if (searchQuery.isNullOrEmpty()) {
+                query = query.orderBy("date_created", Query.Direction.DESCENDING)
+            }
 
             // Add startAfter if lastVisibleDocument is provided
             if (lastVisibleDocument != null) {
@@ -229,7 +231,7 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
         farmerId: String,
         uri: Uri,
         farmerData: FarmerData,
-        callback: (DataResult<FarmerData>) -> Unit
+        callback: (DataResult<FarmerData>, Uri) -> Unit
     ) {
         if (currentUser != null) {
             val storageRef = Firebase.storage.reference
@@ -248,15 +250,17 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
                     withContext(Dispatchers.Main) {
                         updateFarmer(
                             farmerId,
-                            hashMapOf("farm_photos" to uploadedFileRefs), callback
-                        )
+                            hashMapOf("farm_photos" to uploadedFileRefs)
+                        ) {
+                            callback(it, uri)
+                        }
                     }
                 } catch (e: Exception) {
                     // Handle errors
                     withContext(Dispatchers.Main) {
                         // Notify the user or log the error
                         println("Error uploading files: ${e.message}")
-                        callback(DataResult.Failure(status = "400", message = e.message))
+                        callback(DataResult.Failure(status = "400", message = e.message), uri)
                     }
                 }
             }
@@ -292,6 +296,7 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
             callback(DataResult.Loading)
             val storageRef = Firebase.storage.reference
             val uploadedFileRefs = ArrayList<String>()
+            println("Delete Farm Photos - $path")
             farmerData.farmPhotos?.forEach {
                 if (it is String) {
                     uploadedFileRefs.add(it)
