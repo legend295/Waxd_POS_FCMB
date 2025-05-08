@@ -6,8 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.Spinner
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
@@ -35,7 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.Calendar
 import java.util.Locale
-import javax.annotation.meta.When
+
 
 @AndroidEntryPoint
 class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHandler {
@@ -46,6 +45,7 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
     private var isUpdating = false
     private var nigerianState: NigerianState? = null
     private var stateMap: MutableMap<String, ArrayList<String?>?>? = null
+    private var isCityUpdatedInSpinner = false
 
     private val themeOptions = ThemeOptions().apply {
         buttonColor = R.color.pear
@@ -78,6 +78,7 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
         // Manage Updating and creating Farmer
         isUpdating = from == Constants.FromScreen.FARMER_DETAILS
         binding.isUpdating = isUpdating
+        binding.spinnerState.onItemSelectedListener = onItemSelectedListener
         if (isUpdating) {
             (activity as MainActivity?)?.setTitle("Update Farmer")
             val farmerData = arguments?.serializable<FarmerData>(Constants.IntentKeys.DATA)
@@ -86,11 +87,14 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
                 viewModel.request.value?.setFarmerData(it)
                 viewModel.request.value = viewModel.request.value
             }
+            binding.spinnerState.selectItemSafely(viewModel.request.value?.state)
         } else {
             (activity as MainActivity?)?.setTitle("Add New Farmer")
         }
 
-        binding.spinnerState.onItemSelectedListener = onItemSelectedListener
+
+
+
 
         setObserver()
     }
@@ -194,6 +198,11 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
                 binding.spinnerCity.adapter = adapter
                 if (binding.spinnerCity.onItemSelectedListener == null)
                     binding.spinnerCity.onItemSelectedListener = onCityItemSelectedListener
+
+                if (isUpdating && !isCityUpdatedInSpinner) {
+                    binding.spinnerCity.selectItemSafely(viewModel.request.value?.city)
+                    isCityUpdatedInSpinner = true
+                }
             }
         }
 
@@ -212,6 +221,28 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
 
         override fun onNothingSelected(p0: AdapterView<*>?) {
 
+        }
+    }
+
+    fun Spinner.selectItemSafely(value: String?) {
+        when (val adapter = this.adapter) {
+            is ArrayAdapter<*> -> {
+                // Find the position by matching string values
+                val position = (0 until adapter.count).indexOfFirst {
+                    adapter.getItem(it).toString() == value
+                }
+                if (position >= 0) {
+                    this.setSelection(position)
+                }
+            }
+            // Add other adapter types if needed
+            else -> {
+                // Handle other adapter types or log a warning
+                Log.w(
+                    "SpinnerExtension",
+                    "Unsupported adapter type: ${adapter?.javaClass?.simpleName}"
+                )
+            }
         }
     }
 
