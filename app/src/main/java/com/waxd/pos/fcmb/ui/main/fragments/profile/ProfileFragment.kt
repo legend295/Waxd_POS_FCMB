@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.navigation.findNavController
@@ -161,7 +162,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ViewClickHandler
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tvLogout -> {
-                (activity as MainActivity?)?.logOut()
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Are you sure you want to logout")
+                    .setPositiveButton("Yes") { _, _ ->
+                        (activity as MainActivity?)?.logOut()
+                    }.setNegativeButton("No", null).show()
+
             }
 
             R.id.ivEdit -> {

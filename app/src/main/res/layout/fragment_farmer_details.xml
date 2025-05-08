@@ -241,6 +241,59 @@
                     tools:text="938495834958"
                     tools:visibility="visible" />
 
+                <!--  Wallet Number  -->
+
+                <View
+                    android:id="@+id/viewBgWallet"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_white_round_6"
+                    android:backgroundTint="#FBFBFB"
+                    android:elevation="@dimen/_1sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvWalletNumberValue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvWalletNumberValue" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWalletNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:elevation="@dimen/_1sdp"
+                    android:gravity="center|start"
+                    android:text="@string/wallet_number"
+                    android:textColor="@color/textLight"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="@{data.walletId!=null? View.VISIBLE : View.GONE,default=gone}"
+                    app:layout_constraintBottom_toBottomOf="@id/tvWalletNumberValue"
+                    app:layout_constraintEnd_toStartOf="@id/tvWalletNumberValue"
+                    app:layout_constraintStart_toStartOf="@id/viewBgWallet"
+                    app:layout_constraintTop_toTopOf="@id/tvWalletNumberValue"
+
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWalletNumberValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:elevation="@dimen/_1sdp"
+                    android:gravity="end"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@{data.walletId}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="@{data.walletId!=null? View.VISIBLE : View.GONE,default=gone}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvWalletNumber"
+                    app:layout_constraintTop_toBottomOf="@id/tvNinNumberValue"
+                    tools:text="938495834958"
+                    tools:visibility="visible" />
+
                 <!--  Name  -->
 
                 <View
@@ -288,7 +341,7 @@
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvName"
-                    app:layout_constraintTop_toBottomOf="@id/tvNinNumberValue"
+                    app:layout_constraintTop_toBottomOf="@id/tvWalletNumberValue"
                     tools:text="Test"
                     tools:visibility="visible" />
 

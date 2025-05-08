@@ -80,4 +80,5 @@
     <string name="don_t_have_an_account_yet_ncreate_an_account">Don’t have an account yet?\n<u>Create an account</u></string>
     <string name="edit_profile">Edit Profile</string>
     <string name="finger_prints_are_updated_for_this_user">Finger prints are updated for this user.</string>
+    <string name="wallet_number">Wallet Number</string>
 </resources>

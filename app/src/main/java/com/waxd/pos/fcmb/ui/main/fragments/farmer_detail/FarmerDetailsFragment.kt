@@ -35,7 +35,7 @@ class FarmerDetailsFragment : BaseFragment<FragmentFarmerDetailsBinding>(), View
     private val viewModel: FarmerDetailsViewModel by viewModels()
     private var cameraUri: Uri? = null
 
-    override fun getTitle(): String = "Farm Details"
+    override fun getTitle(): String = "Farmer Details"
 
     override fun getLayoutRes(): Int = R.layout.fragment_farmer_details
 
