@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.waxd.pos.fcmb.utils.KeyboardDismissLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
@@ -337,7 +337,7 @@
                 app:barrierDirection="bottom"
                 app:constraint_referenced_ids="etPassword,etNinNumber" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.waxd.pos.fcmb.utils.KeyboardDismissLayout>
     </androidx.core.widget.NestedScrollView>
 
 
