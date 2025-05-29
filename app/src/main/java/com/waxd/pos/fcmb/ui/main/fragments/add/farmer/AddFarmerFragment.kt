@@ -115,7 +115,7 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
                             "Farmer profile is created successfully."
                         )
                     }
-                    this.view?.findNavController()?.navigate(R.id.successFragment, bundle)
+                    this.view?.findNavController()?.navigate(R.id.successFragment, bundle,getNavOptions())
                 }
             }
             handleCreateButtonUI(isInProgress = it == DataResult.Loading)
@@ -136,7 +136,7 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
                             "Farmer profile updated successfully."
                         )
                     }
-                    this.view?.findNavController()?.navigate(R.id.successFragment, bundle)
+                    this.view?.findNavController()?.navigate(R.id.successFragment, bundle,getNavOptions())
                 }
             }
 
@@ -264,7 +264,9 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tvCaptureFarmLocation -> {
-                this.view?.findNavController()?.navigate(R.id.captureLocationFragment)
+                this.view?.findNavController()?.navigate(R.id.captureLocationFragment,
+                    Bundle(),
+                    getNavOptions())
             }
 
             R.id.tvDob -> {

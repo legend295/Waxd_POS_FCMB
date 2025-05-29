@@ -175,7 +175,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ViewClickHandler
             }
 
             R.id.tvEditProfile -> {
-                this.view?.findNavController()?.navigate(R.id.updateProfileFragment)
+                this.view?.findNavController()?.navigate(R.id.updateProfileFragment,
+                    Bundle(),
+                    getNavOptions())
             }
         }
     }

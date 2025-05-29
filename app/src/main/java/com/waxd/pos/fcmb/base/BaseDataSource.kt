@@ -74,8 +74,13 @@ abstract class BaseDataSource(
         val list = ArrayList<Any>()
         return try {
             val jsonObject = JSONObject(responseBody.string())
-//            list.add(jsonObject.getString("status"))
-            list.add(jsonObject.getString("error"))
+            try {
+                if (jsonObject.has("details"))
+                    list.add(jsonObject.getJSONArray("details")[0])
+            } catch (ignore: Exception) {
+            }
+            if (jsonObject.has("error"))
+                list.add(jsonObject.getString("error"))
             list
         } catch (e: Exception) {
             list

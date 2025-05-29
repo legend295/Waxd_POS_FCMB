@@ -81,4 +81,10 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="finger_prints_are_updated_for_this_user">Finger prints are updated for this user.</string>
     <string name="wallet_number">Wallet Number</string>
+    <string name="loan_information">Loan Information</string>
+    <string name="loan_application_number">Loan Application No.</string>
+    <string name="loan_applications">Loan Applications</string>
+    <string name="withdraw_loan_amount">Withdraw Loan Amount</string>
+    <string name="transfer_loan_amount">Transfer Loan Amount</string>
+    <string name="farmer_name">Farmer Name</string>
 </resources>

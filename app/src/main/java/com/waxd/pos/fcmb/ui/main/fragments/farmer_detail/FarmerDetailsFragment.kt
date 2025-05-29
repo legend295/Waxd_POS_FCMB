@@ -134,7 +134,7 @@ class FarmerDetailsFragment : BaseFragment<FragmentFarmerDetailsBinding>(), View
                     putSerializable(Constants.IntentKeys.DATA, viewModel.farmerData.value)
                     putInt(Constants.FromScreen.FROM, Constants.FromScreen.FARMER_DETAILS)
                 }
-                this.view?.findNavController()?.navigate(R.id.addFarmerFragment, bundle)
+                this.view?.findNavController()?.navigate(R.id.addFarmerFragment, bundle,getNavOptions())
             }
 
             R.id.tvCaptureFarmLocation, R.id.tvCapturePhoto -> {
@@ -142,7 +142,7 @@ class FarmerDetailsFragment : BaseFragment<FragmentFarmerDetailsBinding>(), View
                     putString(Constants.IntentKeys.FARMER_ID, viewModel.farmerId)
                     putSerializable(Constants.IntentKeys.DATA, viewModel.farmerData.value)
                 }
-                this.view?.findNavController()?.navigate(R.id.updateFarmDetailsFragment, bundle)
+                this.view?.findNavController()?.navigate(R.id.updateFarmDetailsFragment, bundle,getNavOptions())
             }
 
             R.id.tvCaptureFingerprint -> {

@@ -43,6 +43,8 @@ import kotlinx.coroutines.runBlocking
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -52,6 +54,8 @@ import kotlin.math.abs
 import kotlin.math.sin
 
 object Util {
+
+    private const val NUMBER_FORMAT = "#,##,###"
 
     fun Context.showToast(msg: String?, length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, "$msg", length).show()
@@ -359,5 +363,14 @@ object Util {
             Log.e("ConvTimeE", e.message ?: "")
         }
         return convTime
+    }
+
+    fun formatCurrency(amount:Double?): String {
+        return if (amount != null) {
+            val decimalFormatter = DecimalFormat(NUMBER_FORMAT)
+            return "₦${decimalFormatter.format(amount)}"
+        } else {
+            "₦0.00"
+        }
     }
 }

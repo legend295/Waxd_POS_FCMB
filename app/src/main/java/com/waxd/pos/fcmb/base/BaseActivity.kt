@@ -10,6 +10,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavOptions
+import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.utils.handlers.LocationPermissionHandler
 
 abstract class BaseActivity : AppCompatActivity(), BaseHandler {
@@ -19,6 +21,11 @@ abstract class BaseActivity : AppCompatActivity(), BaseHandler {
     override fun showToast(msg: String, length: Int) {
         Toast.makeText(this, msg, length).show()
     }
+
+    override fun getNavOptions() =
+        NavOptions.Builder().setLaunchSingleTop(true).setEnterAnim(R.anim.fadein)
+            .setExitAnim(R.anim.fadeout).setPopEnterAnim(R.anim.fadein)
+            .setPopExitAnim(R.anim.fadeout).build()
 
     override fun isLocationPermissionGranted(handler: LocationPermissionHandler) {
         this.locationPermissionHandler = handler

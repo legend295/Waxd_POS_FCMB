@@ -2,6 +2,8 @@ package com.waxd.pos.fcmb.ui.main.fragments.capture_location
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
@@ -12,6 +14,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -28,6 +31,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.base.BaseFragment
 import com.waxd.pos.fcmb.databinding.FragmentCaptureLocationBinding
@@ -128,7 +132,7 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
                         // Optionally, move the camera to the new marker
                         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19f))
                     } else {
-                        context?.showToast("Distance should be greater than 30 meter")
+                        context?.showToast("Distance should be greater than 30 meters")
                     }
                 }
             }
@@ -262,9 +266,40 @@ class CaptureLocationFragment : BaseFragment<FragmentCaptureLocationBinding>(), 
         }
     }
 
+    private fun showStyledInstructions(context: Context) {
+//        val instructions = """
+//        • You need to capture **at least 4 location points**.
+//        • You can capture **up to 6 location points**.
+//        • Move **more than 30 meters** from your last point to record the next location.
+//        • Ensure **GPS is enabled** for better accuracy.
+//        • Points are recorded **in order**—follow the sequence.
+//        • You can stop after 4 points or continue up to 6.
+//    """.trimIndent()
+
+        val instructions = """
+        • You need to capture <b>at least 4 location points</b>.<br>
+        • You can capture <b>up to 6 location points</b>.<br>
+        • Move <b>more than 30 meters</b> from your last captured point to record the next location.<br>
+        • Ensure your <b>GPS is enabled</b> and you have a clear view of the sky for better accuracy.<br>
+        • Points will be recorded <b>sequentially</b>—follow the correct order.<br>
+        • You can <b>stop after 4 points</b> or continue up to 6 if needed.
+    """.trimIndent()
+
+        MaterialAlertDialogBuilder(context)
+            .setTitle("How to Capture Locations")
+//            .setMessage(instructions)
+            .setMessage(HtmlCompat.fromHtml(instructions, HtmlCompat.FROM_HTML_MODE_LEGACY))
+            .setPositiveButton("Got it") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ivInfo -> {}
+            R.id.ivInfo -> {
+                v.context?.let {
+                    showStyledInstructions(it)
+                }
+            }
 
             R.id.tvCaptureFarmCoordinates -> {
                 if (capturedCoordinates.size < 6)

@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.waxd.pos.fcmb.ui.main.fragments.loan.details.LoanDetailViewModel" />
+
+        <variable
+            name="data"
+            type="com.waxd.pos.fcmb.rest.FarmerLoanApplicationData" />
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+
+        <import type="android.view.View" />
+
+        <import type="com.waxd.pos.fcmb.utils.Util" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.main.fragments.loan.details.LoanDetailFragment">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLoanInformation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center|start"
+                android:text="@string/loan_information"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+
+            <!--  BVN Number  -->
+
+            <View
+                android:id="@+id/viewBgBvn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvBvnNumber"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvBvnNumber" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBvnNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/bvn_number"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvBvnNumberValue"
+                app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvBvnNumberValue"
+
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBvnNumberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:text="@{data.bvnNumber}"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/viewBgBvn"
+                app:layout_constraintStart_toEndOf="@id/tvBvnNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvWalletNumberValue"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+
+            <!--  Wallet Number  -->
+
+            <View
+                android:id="@+id/viewBgWallet"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvWalletNumberValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvWalletNumberValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWalletNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/loan_application_number"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvWalletNumberValue"
+                app:layout_constraintEnd_toStartOf="@id/tvWalletNumberValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgWallet"
+                app:layout_constraintTop_toTopOf="@id/tvWalletNumberValue"
+
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWalletNumberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{data.loanApplicationNumber}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="@{data.loanApplicationNumber!=null? View.VISIBLE : View.INVISIBLE,default=gone}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvWalletNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvLoanInformation"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+            <!--  Name  -->
+
+            <View
+                android:id="@+id/viewBgName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvNameValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/farmer_name"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNameValue"
+                app:layout_constraintEnd_toStartOf="@id/tvNameValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgName"
+                app:layout_constraintTop_toTopOf="@id/tvNameValue"
+
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNameValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{data.farmerName}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvName"
+                app:layout_constraintTop_toBottomOf="@id/tvBvnNumberValue"
+                tools:text="Test"
+                tools:visibility="visible" />
+
+            <!--  Phone Number  -->
+
+            <View
+                android:id="@+id/viewBgPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvPhoneNumberValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvPhoneNumberValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/annual_income"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvPhoneNumberValue"
+                app:layout_constraintEnd_toStartOf="@id/tvPhoneNumberValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgPhoneNumber"
+                app:layout_constraintTop_toTopOf="@id/tvPhoneNumberValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhoneNumberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="@{Util.INSTANCE.formatCurrency(data.annualIncome)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvNameValue"
+                tools:text="938495834958"
+                tools:visibility="visible" />
+
+            <!--  Email Address  -->
+
+            <View
+                android:id="@+id/viewBgEmail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="#FBFBFB"
+                android:elevation="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvEmailValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvEmailValue" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="center|start"
+                android:text="@string/loan_amount"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvEmailValue"
+                app:layout_constraintEnd_toStartOf="@id/tvEmailValue"
+                app:layout_constraintStart_toStartOf="@id/viewBgEmail"
+                app:layout_constraintTop_toTopOf="@id/tvEmailValue"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmailValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_1sdp"
+                android:gravity="end"
+                android:maxLines="2"
+                android:padding="@dimen/_10sdp"
+                android:text="@{Util.INSTANCE.formatCurrency(data.loanAmount)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvEmail"
+                app:layout_constraintTop_toBottomOf="@id/tvPhoneNumberValue"
+                tools:text="kasjfhaklsjfasjfhlkaldsjfhlakjdf"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTransferLoanAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/transfer_loan_amount"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tvWithDraw"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWithDraw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/bg_edit_text"
+                android:backgroundTint="#CFD332"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/withdraw_loan_amount"
+                android:textColor="#24781F"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <!--            &lt;!&ndash;  Address  &ndash;&gt;-->
+            <!--            <View-->
+            <!--                android:id="@+id/viewBgAddress"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:background="@drawable/bg_white_round_6"-->
+            <!--                android:backgroundTint="#FBFBFB"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvAddressValue"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvAddressValue" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvAddress"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                android:gravity="center|start"-->
+            <!--                android:text="@string/address"-->
+            <!--                android:textColor="@color/textLight"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvAddressValue"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/tvAddressValue"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/viewBgAddress"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvAddressValue"-->
+            <!--                tools:visibility="visible" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvAddressValue"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_10sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                android:gravity="end"-->
+            <!--                android:padding="@dimen/_10sdp"-->
+            <!--                android:text="@{data.address}"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/tvAddress"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvEmailValue"-->
+            <!--                tools:text="938495834asdfafasfasdfasdfasdfasdfadfasdfasfasdfasdfaf958"-->
+            <!--                tools:visibility="visible" />-->
+
+            <!--            &lt;!&ndash; City &ndash;&gt;-->
+
+            <!--            <View-->
+            <!--                android:id="@+id/viewBgCity"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:background="@drawable/bg_white_round_6"-->
+            <!--                android:backgroundTint="#FBFBFB"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvCityValue"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvCityValue" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvCity"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                android:gravity="center|start"-->
+            <!--                android:text="@string/city"-->
+            <!--                android:textColor="@color/textLight"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvCityValue"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/tvCityValue"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/viewBgCity"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvCityValue"-->
+            <!--                tools:visibility="visible" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvCityValue"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_10sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                android:gravity="end"-->
+            <!--                android:padding="@dimen/_10sdp"-->
+            <!--                android:text="@{(data.city == null || data.city.isEmpty())? `&#45;&#45;` : data.city}"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/tvCity"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvAddressValue"-->
+            <!--                tools:text="938495834asdfafasfasdfasdfasdfasdfadfasdfasfasdfasdfaf958"-->
+            <!--                tools:visibility="visible" />-->
+
+            <!--            &lt;!&ndash; State &ndash;&gt;-->
+
+            <!--            <View-->
+            <!--                android:id="@+id/viewBgState"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:background="@drawable/bg_white_round_6"-->
+            <!--                android:backgroundTint="#FBFBFB"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvStateValue"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvStateValue" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvState"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                android:gravity="center|start"-->
+            <!--                android:text="@string/state"-->
+            <!--                android:textColor="@color/textLight"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/tvStateValue"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/tvStateValue"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/viewBgState"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/tvStateValue"-->
+            <!--                tools:visibility="visible" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvStateValue"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_10sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:elevation="@dimen/_1sdp"-->
+            <!--                android:gravity="end"-->
+            <!--                android:padding="@dimen/_10sdp"-->
+            <!--                android:text="@{(data.state == null || data.state.isEmpty())? `&#45;&#45;` : data.state}"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/tvState"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvCityValue"-->
+            <!--                tools:text="938495834asdfafasfasdfasdfasdfasdfadfasdfasfasdfasdfaf958"-->
+            <!--                tools:visibility="visible" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvEditFarmer"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_10sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:background="@drawable/bg_edit_text"-->
+            <!--                android:backgroundTint="@color/pear"-->
+            <!--                android:gravity="center"-->
+            <!--                android:onClick="@{viewClickHandler::onClick}"-->
+            <!--                android:padding="@dimen/_10sdp"-->
+            <!--                android:text="@string/edit_farmer"-->
+            <!--                android:textColor="#24781F"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvStateValue"-->
+            <!--                app:layout_goneMarginStart="@dimen/_10sdp" />-->
+
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvBiometricCapture"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_15sdp"-->
+            <!--                android:text="@string/biometric_capture"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvLoanInformation"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvEditFarmer"-->
+            <!--                app:layout_goneMarginStart="@dimen/_10sdp" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvCaptureFingerprint"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:background="@drawable/bg_edit_text"-->
+            <!--                android:backgroundTint="@color/pear"-->
+            <!--                android:gravity="center"-->
+            <!--                android:onClick="@{viewClickHandler::onClick}"-->
+            <!--                android:padding="@dimen/_10sdp"-->
+            <!--                android:text="@string/capture_fingerprint"-->
+            <!--                android:textColor="#24781F"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvBiometricCapture"-->
+            <!--                app:layout_goneMarginStart="@dimen/_10sdp" />-->
+
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvFarmLocation"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_15sdp"-->
+            <!--                android:text="@string/farm_location"-->
+            <!--                android:textSize="@dimen/_12sdp"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvLoanInformation"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvCaptureFingerprint"-->
+            <!--                app:layout_goneMarginStart="@dimen/_10sdp" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvCaptureFarmLocation"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:background="@drawable/bg_edit_text"-->
+            <!--                android:backgroundTint="#CFD332"-->
+            <!--                android:gravity="center"-->
+            <!--                android:onClick="@{viewClickHandler::onClick}"-->
+            <!--                android:padding="@dimen/_10sdp"-->
+            <!--                android:text="@string/capture_farm_location"-->
+            <!--                android:textColor="#24781F"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvFarmLocation"-->
+            <!--                app:layout_goneMarginStart="@dimen/_10sdp" />-->
+
+            <!--            <androidx.appcompat.widget.AppCompatTextView-->
+            <!--                android:id="@+id/tvCapturePhoto"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:layout_marginBottom="@dimen/_10sdp"-->
+            <!--                android:background="@drawable/bg_edit_text"-->
+            <!--                android:backgroundTint="#CFD332"-->
+            <!--                android:gravity="center"-->
+            <!--                android:onClick="@{viewClickHandler::onClick}"-->
+            <!--                android:padding="@dimen/_10sdp"-->
+            <!--                android:text="@string/capture_photo"-->
+            <!--                android:textColor="#24781F"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvCaptureFarmLocation"-->
+            <!--                app:layout_constraintVertical_bias="0"-->
+            <!--                app:layout_goneMarginStart="@dimen/_10sdp" />-->
+
+
+            <ProgressBar
+                android:id="@+id/progressBarApi"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="tvLoanInformation,viewBgBvn,tvBvnNumber,tvBvnNumberValue,viewBgWallet,tvWalletNumber,tvWalletNumberValue,viewBgName,tvName,tvNameValue,viewBgPhoneNumber,tvPhoneNumber,tvPhoneNumberValue,viewBgEmail,tvEmail,tvEmailValue,tvWithDraw,tvTransferLoanAmount"
+                tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
+

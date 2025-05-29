@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewClickHandler"
+            type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="hint"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_round_white"
+        android:padding="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSlider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_line_bottom_sheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@{message}"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@id/ivSlider"
+            tools:text="Message" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_edit_text"
+            android:hint="@{hint}"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_edit_text"
+            android:backgroundTint="#CFD332"
+            android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/cancel"
+            android:textColor="#24781F"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tvOkay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etField" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvOkay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_edit_text"
+            android:backgroundTint="#CFD332"
+            android:gravity="center"
+            android:onClick="@{viewClickHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/okay"
+            android:textColor="#24781F"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvCancel"
+
+            app:layout_constraintTop_toBottomOf="@id/etField" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

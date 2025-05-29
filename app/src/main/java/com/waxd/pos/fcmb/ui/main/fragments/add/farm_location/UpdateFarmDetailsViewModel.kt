@@ -37,7 +37,7 @@ class UpdateFarmDetailsViewModel @Inject constructor(private val firebaseWrapper
         }
         farmerData.value?.let {
             it.id?.let { it1 ->
-                firebaseWrapper.updateFarmer(it1, hashMapOf(FARM_LOCATIONS to map)) { response ->
+                firebaseWrapper.updateFarmLocations(it1, hashMapOf(FARM_LOCATIONS to map)) { response ->
                     farmerUpdateResponse.value = response
                 }
             } ?: run {

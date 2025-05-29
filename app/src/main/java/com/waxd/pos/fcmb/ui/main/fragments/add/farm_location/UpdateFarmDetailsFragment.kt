@@ -137,7 +137,7 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
                             "Farmer Location Updated successfully."
                         )
                     }
-                    this.view?.findNavController()?.navigate(R.id.successFragment, bundle)
+                    this.view?.findNavController()?.navigate(R.id.successFragment, bundle,getNavOptions())
                 }
             }
 
@@ -317,7 +317,9 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tvCaptureFarmLocation -> {
-                this.view?.findNavController()?.navigate(R.id.captureLocationFragment)
+                this.view?.findNavController()?.navigate(R.id.captureLocationFragment,
+                    Bundle(),
+                    getNavOptions())
             }
 
             R.id.tvUpdateFarmLocation -> {

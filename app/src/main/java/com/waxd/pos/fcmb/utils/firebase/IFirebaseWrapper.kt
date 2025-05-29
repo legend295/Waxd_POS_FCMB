@@ -4,6 +4,8 @@ import android.net.Uri
 import com.google.firebase.firestore.DocumentSnapshot
 import com.waxd.pos.fcmb.base.DataResult
 import com.waxd.pos.fcmb.rest.FarmerData
+import com.waxd.pos.fcmb.rest.FarmerLoanApplicationData
+import com.waxd.pos.fcmb.rest.FarmerLoanApplicationResponse
 import com.waxd.pos.fcmb.rest.FarmerResponse
 import com.waxd.pos.fcmb.rest.UserResponse
 
@@ -38,5 +40,27 @@ interface IFirebaseWrapper {
         path: String,
         farmerData: FarmerData,
         callback: (DataResult<FarmerData>) -> Unit
+    )
+
+    fun updateFarmLocations(
+        farmerId: String,
+        farmerData: Map<String, Any>,
+        callback: (DataResult<FarmerData>) -> Unit
+    )
+
+    fun createFarmerLoanApplication(
+        loanData: Map<String, Any?>,
+        callback: (DataResult<FarmerLoanApplicationData>) -> Unit
+    )
+
+    fun getLoanApplications(
+        searchQuery: String? = null,
+        lastVisibleDocument: DocumentSnapshot?,
+        callback: (ArrayList<FarmerLoanApplicationResponse>) -> Unit
+    )
+
+    fun getLoanApplicationById(
+        loanId: String,
+        callback: (DataResult<FarmerLoanApplicationData>) -> Unit
     )
 }

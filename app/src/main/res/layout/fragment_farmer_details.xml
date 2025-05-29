@@ -18,9 +18,10 @@
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
         android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -436,9 +437,9 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:elevation="@dimen/_1sdp"
                     android:gravity="end"
+                    android:maxLines="2"
                     android:padding="@dimen/_10sdp"
                     android:text="@{data.email}"
-                    android:maxLines="2"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     app:autoSizeTextType="uniform"
@@ -610,11 +611,11 @@
                     android:padding="@dimen/_10sdp"
                     android:text="@string/edit_farmer"
                     android:textColor="#24781F"
-                    app:layout_goneMarginStart="@dimen/_10sdp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
-                    app:layout_constraintTop_toBottomOf="@id/tvStateValue" />
+                    app:layout_constraintTop_toBottomOf="@id/tvStateValue"
+                    app:layout_goneMarginStart="@dimen/_10sdp" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -623,10 +624,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/biometric_capture"
-                    app:layout_goneMarginStart="@dimen/_10sdp"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="@id/tvPersonalInformation"
-                    app:layout_constraintTop_toBottomOf="@id/tvEditFarmer" />
+                    app:layout_constraintTop_toBottomOf="@id/tvEditFarmer"
+                    app:layout_goneMarginStart="@dimen/_10sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvCaptureFingerprint"
@@ -640,12 +641,12 @@
                     android:onClick="@{viewClickHandler::onClick}"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/capture_fingerprint"
-                    app:layout_goneMarginStart="@dimen/_10sdp"
                     android:textColor="#24781F"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
-                    app:layout_constraintTop_toBottomOf="@id/tvBiometricCapture" />
+                    app:layout_constraintTop_toBottomOf="@id/tvBiometricCapture"
+                    app:layout_goneMarginStart="@dimen/_10sdp" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -654,10 +655,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/farm_location"
-                    app:layout_goneMarginStart="@dimen/_10sdp"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="@id/tvPersonalInformation"
-                    app:layout_constraintTop_toBottomOf="@id/tvCaptureFingerprint" />
+                    app:layout_constraintTop_toBottomOf="@id/tvCaptureFingerprint"
+                    app:layout_goneMarginStart="@dimen/_10sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvCaptureFarmLocation"
@@ -670,13 +671,13 @@
                     android:gravity="center"
                     android:onClick="@{viewClickHandler::onClick}"
                     android:padding="@dimen/_10sdp"
-                    app:layout_goneMarginStart="@dimen/_10sdp"
                     android:text="@string/capture_farm_location"
                     android:textColor="#24781F"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
-                    app:layout_constraintTop_toBottomOf="@id/tvFarmLocation" />
+                    app:layout_constraintTop_toBottomOf="@id/tvFarmLocation"
+                    app:layout_goneMarginStart="@dimen/_10sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvCapturePhoto"
@@ -692,13 +693,13 @@
                     android:padding="@dimen/_10sdp"
                     android:text="@string/capture_photo"
                     android:textColor="#24781F"
-                    app:layout_goneMarginStart="@dimen/_10sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                     app:layout_constraintTop_toBottomOf="@id/tvCaptureFarmLocation"
-                    app:layout_constraintVertical_bias="0" />
+                    app:layout_constraintVertical_bias="0"
+                    app:layout_goneMarginStart="@dimen/_10sdp" />
 
 
                 <ProgressBar
@@ -716,14 +717,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="tvCityValue,tvCity,tvState,tvStateValue,tvFarmLocation,tvCaptureFarmLocation,tvCapturePhoto,ivUser,ivEdit,tvPersonalInformation,tvBvnNumber,tvBvnNumberValue,tvNinNumber,tvNinNumberValue,tvName,tvNameValue,tvPhoneNumber,tvPhoneNumberValue,tvEmail,tvEmailValue,tvAddress,tvAddressValue,tvEditFarmer,tvBiometricCapture,tvCaptureFingerprint"
+                    app:constraint_referenced_ids="tvCityValue,tvCity,tvState,tvStateValue,tvFarmLocation,tvCaptureFarmLocation,tvCapturePhoto,ivUser,ivEdit,tvPersonalInformation,tvBvnNumber,tvBvnNumberValue,tvNinNumber,tvNinNumberValue,tvName,tvNameValue,tvPhoneNumber,tvPhoneNumberValue,tvEmail,tvEmailValue,tvAddress,tvAddressValue,tvEditFarmer,tvBiometricCapture,tvCaptureFingerprint, tvWalletNumber, tvWalletNumberValue, viewBgWallet"
                     tools:visibility="visible" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 
 </layout>

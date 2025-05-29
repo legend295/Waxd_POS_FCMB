@@ -2,7 +2,6 @@ package com.waxd.pos.fcmb.utils.firebase
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Filter
@@ -17,11 +16,16 @@ import com.waxd.pos.fcmb.datastore.KeyStore
 import com.waxd.pos.fcmb.datastore.KeyStore.decryptData
 import com.waxd.pos.fcmb.rest.FarmCoordinates
 import com.waxd.pos.fcmb.rest.FarmerData
+import com.waxd.pos.fcmb.rest.FarmerLoanApplicationData
+import com.waxd.pos.fcmb.rest.FarmerLoanApplicationResponse
 import com.waxd.pos.fcmb.rest.FarmerResponse
 import com.waxd.pos.fcmb.rest.UserData
 import com.waxd.pos.fcmb.rest.UserResponse
 import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.BVN_NUMBER
 import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.FARMERS
+import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.FARMER_LOAN
+import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.FARMER_NAME
+import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.FARM_LOCATIONS
 import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.FIRST_NAME
 import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.LAST_NAME
 import com.waxd.pos.fcmb.utils.firebase.FirebaseWrapper.FirebaseKeys.REGISTERED_BY
@@ -37,8 +41,6 @@ import java.util.Locale
 class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
 
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    private val storage = Firebase.storage
-    private val storageRef = storage.reference
 
     private val agentId: String
         get() = context.decryptData(KeyStore.USER_UID)
@@ -47,8 +49,10 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
     object FirebaseKeys {
         const val FARMERS = "farmers"
         const val USERS = "users"
+        const val FARMER_LOAN = "farmer_loan"
         const val REGISTERED_BY = "registered_by"
         const val BVN_NUMBER = "bvn_number"
+        const val FARMER_NAME = "farmer_name"
         const val FIRST_NAME = "first_name"
         const val LAST_NAME = "last_name"
         const val FARM_LOCATIONS = "farm_locations"
@@ -121,12 +125,33 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
             callback(DataResult.Loading)
             Firebase.firestore.collection(FARMERS).document(farmerId).get()
                 .addOnSuccessListener { querySnapshot ->
-                    callback(
-                        DataResult.Success(
-                            200,
-                            documentToFarmerData(querySnapshot)
-                        )
-                    )
+                    Firebase.firestore.collection(FARM_LOCATIONS).document(farmerId).get()
+                        .addOnSuccessListener { farmLocations ->
+                            if (farmLocations.exists()) {
+                                val farmData = documentToFarmerData(querySnapshot)
+                                farmData.farmLocations = farmLocations.getFarmLocations()
+                                callback(
+                                    DataResult.Success(
+                                        200,
+                                        farmData
+                                    )
+                                )
+                            } else {
+                                callback(
+                                    DataResult.Success(
+                                        200,
+                                        documentToFarmerData(querySnapshot)
+                                    )
+                                )
+                            }
+                        }.addOnFailureListener {
+                            callback(
+                                DataResult.Success(
+                                    200,
+                                    documentToFarmerData(querySnapshot)
+                                )
+                            )
+                        }
                 }
                 .addOnFailureListener { exception ->
                     println("Failed to get farmer: ${exception.message}")
@@ -353,6 +378,181 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
         }
     }
 
+    override fun updateFarmLocations(
+        farmerId: String,
+        farmerData: Map<String, Any>,
+        callback: (DataResult<FarmerData>) -> Unit
+    ) {
+        if (currentUser != null) {
+            callback(DataResult.Loading)
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            dateFormat.timeZone = java.util.TimeZone.getTimeZone("UTC")
+            val currentDate = dateFormat.format(System.currentTimeMillis())
+            val updatedFarmerData = farmerData.toMutableMap().apply {
+                put("date_updated", currentDate)
+            }
+            val docRef = Firebase.firestore.collection(FARM_LOCATIONS).document(farmerId)
+
+            docRef.get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    // Document exists - proceed with update
+                    docRef.update(updatedFarmerData)
+                        .addOnSuccessListener {
+                            callback(DataResult.Success(200, FarmerData(id = farmerId)))
+                        }
+                        .addOnFailureListener { exception ->
+                            callback(
+                                DataResult.Failure(
+                                    status = "400",
+                                    message = exception.message
+                                )
+                            )
+                        }
+                } else {
+                    // Document doesn't exist - create it first
+                    docRef.set(updatedFarmerData)
+                        .addOnSuccessListener {
+                            callback(DataResult.Success(200, FarmerData(id = farmerId)))
+                        }
+                        .addOnFailureListener { exception ->
+                            callback(
+                                DataResult.Failure(
+                                    status = "400",
+                                    message = exception.message
+                                )
+                            )
+                        }
+                }
+            }.addOnFailureListener { exception ->
+                callback(DataResult.Failure(status = "400", message = exception.message))
+            }
+//            Firebase.firestore.collection(FARM_LOCATIONS).document(farmerId).update(updatedFarmerData)
+//                .addOnSuccessListener {
+//                    callback(
+//                        DataResult.Success(200, FarmerData(id = farmerId))
+//                    )
+//                }
+//                .addOnFailureListener { exception ->
+//                    println("Failed to get farmer: ${exception.message}")
+//                    callback(DataResult.Failure(status = "400", message = exception.message))
+//                }
+        } else {
+            FcmbApp.instance.logoutHandler()?.logout()
+        }
+    }
+
+    override fun createFarmerLoanApplication(
+        loanData: Map<String, Any?>,
+        callback: (DataResult<FarmerLoanApplicationData>) -> Unit
+    ) {
+        if (currentUser != null) {
+            Firebase.firestore.collection(FARMER_LOAN).add(loanData)
+                .addOnSuccessListener {
+                    val farmerLoanApplicationData = FarmerLoanApplicationData(
+                        id = it.id,
+                        loanAmount = loanData["loan_amount"] as? Double,
+                        annualIncome = loanData["annual_income"] as? Double,
+                        loanApplicationNumber = loanData["loan_application_number"] as? String,
+                        loanType = loanData["loan_type"] as? String,
+                        farmerName = loanData["farmer_name"] as? String,
+                        bvnNumber = loanData["bvn_number"] as? String,
+                        dateCreated = loanData["date_created"] as? String,
+                        dateUpdated = loanData["date_updated"] as? String
+                    )
+                    callback(DataResult.Success(200, farmerLoanApplicationData))
+                }
+                .addOnFailureListener { exception ->
+                    callback(DataResult.Failure(status = "400", message = exception.message))
+                }
+        } else {
+            FcmbApp.instance.logoutHandler()?.logout()
+        }
+    }
+
+    override fun getLoanApplications(
+        searchQuery: String?,
+        lastVisibleDocument: DocumentSnapshot?,
+        callback: (ArrayList<FarmerLoanApplicationResponse>) -> Unit
+    ) {
+        if (currentUser != null) {
+            val filterList = mutableListOf<Filter>()
+            // Apply search filter if searchQuery is provided
+
+            if (!searchQuery.isNullOrEmpty()) {
+                val isNumeric = searchQuery.toLongOrNull() != null
+                if (isNumeric) {
+                    filterList.add(Filter.equalTo(BVN_NUMBER, searchQuery))
+                } else
+                    filterList.add(
+                        Filter.or(
+                            Filter.equalTo(FARMER_NAME, searchQuery),
+                        )
+                    )
+            }
+
+            filterList.add(Filter.equalTo(REGISTERED_BY, agentId))
+            // Combine all filters using Filter.and()
+            val combinedFilter = Filter.and(*filterList.toTypedArray())
+
+            // Create a query with pagination
+            var query = Firebase.firestore.collection(FARMER_LOAN)
+                .where(combinedFilter)
+                .limit(10)
+
+            if (searchQuery.isNullOrEmpty()) {
+                query = query.orderBy("date_created", Query.Direction.DESCENDING)
+            }
+
+            // Add startAfter if lastVisibleDocument is provided
+            if (lastVisibleDocument != null) {
+                query = query.startAfter(lastVisibleDocument)
+            }
+
+            /*Firebase.firestore.collection(FARMERS).where(combinedFilter)
+                .orderBy("date_created", Query.Direction.DESCENDING)
+                .startAfter(lastVisibleDocument)
+                .limit(10)*/
+            query.get()
+                .addOnSuccessListener { querySnapshot ->
+                    val list = ArrayList<FarmerLoanApplicationResponse>()
+                    querySnapshot.documents.forEach { document ->
+                        list.add(FarmerLoanApplicationResponse(documentToFarmerLoanApplication(document), document))
+                    }
+                    callback(list)
+                }
+                .addOnFailureListener { exception ->
+                    println("Failed to get loan applications: ${exception.message}")
+                    callback(ArrayList()) // Return empty list on failure
+                }
+        } else {
+            FcmbApp.instance.logoutHandler()?.logout()
+        }
+    }
+
+    override fun getLoanApplicationById(
+        loanId: String,
+        callback: (DataResult<FarmerLoanApplicationData>) -> Unit
+    ) {
+        if (currentUser != null) {
+            callback(DataResult.Loading)
+            Firebase.firestore.collection(FARMER_LOAN).document(loanId).get()
+                .addOnSuccessListener { querySnapshot ->
+                    callback(
+                        DataResult.Success(
+                            200,
+                            documentToFarmerLoanApplication(querySnapshot)
+                        )
+                    )
+                }
+                .addOnFailureListener { exception ->
+                    println("Failed to get farmer: ${exception.message}")
+                    callback(DataResult.Failure(status = "400", message = exception.message))
+                }
+        } else {
+            FcmbApp.instance.logoutHandler()?.logout()
+        }
+    }
+
     private fun documentToFarmerData(document: DocumentSnapshot): FarmerData {
         return FarmerData(
             id = document.id,
@@ -375,7 +575,7 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
             profileImage = document.getString("profile_image"),
             biometrics = document.get("biometrics") as? ArrayList<String>,
             farmPhotos = document.get("farm_photos") as? ArrayList<*>,
-            farmLocations = document.getFarmLocations(),
+//            farmLocations = document.getFarmLocations(),
         )
     }
 
@@ -400,4 +600,94 @@ class FirebaseWrapper(private val context: Context) : IFirebaseWrapper {
         }
         return list
     }
+
+    private fun documentToFarmerLoanApplication(document: DocumentSnapshot): FarmerLoanApplicationData {
+        return FarmerLoanApplicationData(
+            id = document.id,
+            loanAmount = document.getDouble("loan_amount"),
+            annualIncome = document.getDouble("annual_income"),
+            loanType = document.getString("loan_type"),
+            farmerName = document.getString("farmer_name"),
+            bvnNumber = document.getString("bvn_number"),
+            registeredBy = document.getString("registered_by"),
+            dateCreated = document.getString("date_created"),
+            loanApplicationNumber = document.getString("loan_application_number"),
+            dateUpdated = document.getString("dateUpdated"),
+            farmLocations = document.getFarmLocations()
+        )
+    }
 }
+
+/*override fun createFarmerLoanApplication(
+        farmerData: FarmerData,
+        loanData: Map<String, Any?>,
+        callback: (DataResult<FarmerLoanApplicationData>) -> Unit
+    ) {
+        if (currentUser != null) {
+            farmerData.id?.let {
+                val docRef = Firebase.firestore.collection(FARMER_LOAN).document(it)
+
+                docRef.get().addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        docRef.update(loanData)
+                            .addOnSuccessListener {
+                                val farmerLoanApplicationData = FarmerLoanApplicationData(
+                                    id = docRef.id,
+                                    loanAmount = loanData["loan_amount"] as? Double,
+                                    annualIncome = loanData["annual_income"] as? Double,
+                                    loanApplicationNumber = loanData["loanApplicationNumber"] as? String,
+                                    loanType = loanData["loan_type"] as? String,
+                                    farmerName = loanData["farmer_name"] as? String,
+                                    bvnNumber = loanData["bvn_number"] as? String,
+                                    dateCreated = loanData["date_created"] as? String,
+                                    dateUpdated = loanData["date_updated"] as? String
+                                )
+                                callback(DataResult.Success(200, farmerLoanApplicationData))
+                            }
+                            .addOnFailureListener { exception ->
+                                callback(
+                                    DataResult.Failure(
+                                        status = "400",
+                                        message = exception.message
+                                    )
+                                )
+                            }
+                    } else {
+                        docRef.set(loanData)
+                            .addOnSuccessListener {
+                                val farmerLoanApplicationData = FarmerLoanApplicationData(
+                                    id = docRef.id,
+                                    loanAmount = loanData["loan_amount"] as? Double,
+                                    annualIncome = loanData["annual_income"] as? Double,
+                                    loanApplicationNumber = loanData["loanApplicationNumber"] as? String,
+                                    loanType = loanData["loan_type"] as? String,
+                                    farmerName = loanData["farmer_name"] as? String,
+                                    bvnNumber = loanData["bvn_number"] as? String,
+                                    dateCreated = loanData["date_created"] as? String,
+                                    dateUpdated = loanData["date_updated"] as? String
+                                )
+                                callback(DataResult.Success(200, farmerLoanApplicationData))
+                            }
+                            .addOnFailureListener { exception ->
+                                callback(
+                                    DataResult.Failure(
+                                        status = "400",
+                                        message = exception.message
+                                    )
+                                )
+                            }
+                    }
+
+                }.addOnFailureListener { exception ->
+                    callback(
+                        DataResult.Failure(
+                            status = "400",
+                            message = exception.message
+                        )
+                    )
+                }
+            } ?: callback(DataResult.Failure(status = "400", message = "Farmer ID not found."))
+        } else {
+            FcmbApp.instance.logoutHandler()?.logout()
+        }
+    }*/

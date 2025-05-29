@@ -56,8 +56,8 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
         // Add a listener to handle changes in the navigation destination
         navHostFragment?.navController?.addOnDestinationChangedListener { _, destination, _ ->
             // Show or hide main UI elements based on the destination ID
+            setTitle("")
             when (destination.id) {
-
                 R.id.agentDashboardFragment, R.id.searchFragment, R.id.profileFragment -> {
                     binding.toolbarView.visible(isVisible = true)
                     binding.tvTitleLeft.visible(isVisible = destination.id == R.id.agentDashboardFragment)
@@ -67,7 +67,7 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
                     )
                 }
 
-                R.id.successFragment->{
+                R.id.successFragment -> {
                     binding.tvTitleLeft.visible(isVisible = false)
                     binding.ivNotification.visible(isVisible = false)
                     binding.toolbarView.visible(isVisible = false)
@@ -76,7 +76,7 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
 
                 else -> {
                     binding.tvTitleLeft.visible(isVisible = false)
-                    binding.ivNotification.visible(isVisible = true)
+                    binding.ivNotification.visible(isVisible = false)
                     binding.toolbarView.visible(isVisible = true)
                     updateMainUIElements(isVisible = false)
                 }
@@ -144,7 +144,11 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.ivNotification -> {
-                navHostFragment?.navController?.navigate(R.id.notificationFragment)
+                navHostFragment?.navController?.navigate(
+                    R.id.notificationFragment,
+                    Bundle(),
+                    getNavOptions()
+                )
             }
 
             R.id.ivBack -> {
@@ -162,7 +166,7 @@ class MainActivity : BaseActivity(), ViewClickHandler, ILogoutHandler {
         binding.tvTitle.text = title
     }
 
-    fun handleToolbarUI(isVisible: Boolean){
+    fun handleToolbarUI(isVisible: Boolean) {
 //        binding.toolbarGroup.visible(isVisible)
     }
 

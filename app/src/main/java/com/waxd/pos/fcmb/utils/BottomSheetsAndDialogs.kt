@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,11 @@ import android.view.WindowManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.waxd.pos.fcmb.R
+import com.waxd.pos.fcmb.databinding.LayoutEditFieldSheetBinding
 import com.waxd.pos.fcmb.databinding.LayoutGenderDialogBinding
 import com.waxd.pos.fcmb.databinding.LayoutImagePickerSheetBinding
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
+import kotlinx.coroutines.withContext
 
 
 fun Context.showGenderSelectionSheet(callback: (String) -> Unit) {
@@ -23,9 +26,9 @@ fun Context.showGenderSelectionSheet(callback: (String) -> Unit) {
     layout.viewClickHandler = object : ViewClickHandler {
         override fun onClick(v: View) {
             when (v.id) {
-                R.id.tvMale-> callback("Male")
-                R.id.tvFemale-> callback("Female")
-                R.id.tvOthers-> callback("Others")
+                R.id.tvMale -> callback("Male")
+                R.id.tvFemale -> callback("Female")
+                R.id.tvOthers -> callback("Others")
             }
             dialog.dismiss()
         }
@@ -52,6 +55,44 @@ fun Context.showImagePickerDialog(callBack: (Boolean) -> Unit) {
 
                 R.id.tvFromGallery -> {
                     callBack(false)
+                }
+            }
+            sheet.dismissWithAnimation = true
+            sheet.dismiss()
+        }
+    }
+
+    sheet.setContentView(layout.root)
+    sheet.setCommonSettings()
+    sheet.show()
+}
+
+fun Context.showEditFieldDialog(
+    message: String,
+    hint: String,
+    inputType: Int = InputType.TYPE_CLASS_TEXT,
+    callBack: (String, Boolean) -> Unit
+) {
+    val sheet = BottomSheetDialog(this, R.style.BottomSheetStyle)
+    val layout =
+        LayoutEditFieldSheetBinding.inflate(LayoutInflater.from(this), null, false)
+
+    with(layout) {
+        this.message = message
+        this.hint = hint
+        etField.inputType = inputType
+    }
+
+    layout.viewClickHandler = object : ViewClickHandler {
+        override fun onClick(v: View) {
+            when (v.id) {
+                R.id.tvCancel -> {
+                    callBack("", false)
+                }
+
+                R.id.tvOkay -> {
+                    val text = layout.etField.text.toString()
+                    callBack(text, true)
                 }
             }
             sheet.dismissWithAnimation = true

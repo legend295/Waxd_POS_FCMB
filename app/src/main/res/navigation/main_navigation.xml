@@ -67,6 +67,14 @@
         android:id="@+id/updateFarmerFingerprintFragment"
         android:name="com.waxd.pos.fcmb.ui.main.fragments.add.farmer_fingerprint.UpdateFarmerFingerprintFragment"
         android:label="UpdateFarmerFingerprintFragment" />
+    <fragment
+        android:id="@+id/loanApplicationsFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.loan.list.LoanApplicationsFragment"
+        android:label="LoanApplicationsFragment" />
+    <fragment
+        android:id="@+id/loanDetailFragment"
+        android:name="com.waxd.pos.fcmb.ui.main.fragments.loan.details.LoanDetailFragment"
+        android:label="LoanDetailFragment" />
 
 
 </navigation>

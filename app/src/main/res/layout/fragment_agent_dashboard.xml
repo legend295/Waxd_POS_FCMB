@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
         android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +109,8 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_15sdp"
-                        android:src="@drawable/ic_search_user"
+
+                        android:src="@drawable/ic_add_farmer"
                         app:layout_constraintEnd_toEndOf="@id/viewBgSearchUser"
                         app:layout_constraintStart_toStartOf="@id/viewBgSearchUser"
                         app:layout_constraintTop_toTopOf="@id/viewBgSearchUser" />
@@ -118,7 +119,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/bvn_registration"
+
+                        android:text="@string/add_farmer"
                         android:textColor="@color/forestGreen"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"
@@ -178,7 +180,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_15sdp"
-                        android:src="@drawable/ic_add_farmer"
+                        android:src="@drawable/ic_create_loan"
                         app:layout_constraintEnd_toEndOf="@id/viewBgAddFarmer"
                         app:layout_constraintStart_toStartOf="@id/viewBgAddFarmer"
                         app:layout_constraintTop_toTopOf="@id/viewBgAddFarmer" />
@@ -187,7 +189,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/add_farmer"
+
+                        android:text="@string/create_a_loan"
                         android:textColor="@color/forestGreen"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"
@@ -222,7 +225,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/create_a_loan"
+                        android:text="@string/loan_applications"
                         android:textColor="@color/forestGreen"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"

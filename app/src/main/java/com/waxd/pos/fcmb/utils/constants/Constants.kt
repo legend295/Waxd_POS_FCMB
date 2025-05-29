@@ -20,6 +20,7 @@ object Constants {
     }
 
     object IntentKeys {
+        const val LOAN_ID = "loan_id"
         const val FARMER_ID = "farmer_id"
         const val DATA = "data"
         const val CO_ORDINATES = "co_ordinates"

@@ -1,5 +1,6 @@
 package com.waxd.pos.fcmb.rest
 
+import com.google.firebase.firestore.PropertyName
 import com.google.gson.annotations.SerializedName
 import com.waxd.pos.fcmb.utils.Util.isValidEmail
 import com.waxd.pos.fcmb.utils.Util.isValidMobile
@@ -119,11 +120,17 @@ data class FarmerCreateRequest(
     @Throws(NotValidException::class)
     fun isValid() {
         when {
-            haveBvnNumber == true && bvnNumber?.trim().isNullOrEmpty() -> throw NotValidException("BVN number is required.")
-            haveBvnNumber == true && (bvnNumber?.length ?: 0) < 11 -> throw NotValidException("BVN number should be valid.")
+            haveBvnNumber == true && bvnNumber?.trim()
+                .isNullOrEmpty() -> throw NotValidException("BVN number is required.")
 
-            haveNinNumber == true && ninNumber?.trim().isNullOrEmpty() -> throw NotValidException("NIN number is required.")
-            haveNinNumber == true && (ninNumber?.length ?: 0) < 11 -> throw NotValidException("NIN number should be valid.")
+            haveBvnNumber == true && (bvnNumber?.length
+                ?: 0) < 11 -> throw NotValidException("BVN number should be valid.")
+
+            haveNinNumber == true && ninNumber?.trim()
+                .isNullOrEmpty() -> throw NotValidException("NIN number is required.")
+
+            haveNinNumber == true && (ninNumber?.length
+                ?: 0) < 11 -> throw NotValidException("NIN number should be valid.")
 
             haveBvnNumber == false && haveNinNumber == false -> throw NotValidException("Either BVN or NIN is required.")
 
@@ -212,4 +219,51 @@ data class UpdateAgentProfileRequest(
     }
 
 
+}
+
+data class CreateLoanApplicationRequest(
+    var bvnNumber: String? = null,
+    var farmerName: String? = null,
+    var loanType: String? = "Personal Loan",
+    var loanTerms: String? = "1 Year",
+    var loanAmount: String? = null,
+    var annualIncome: String? = null,
+    var dateCreated: String? = null,
+    var dateUpdated: String? = null,
+    var farmLocations: List<FarmCoordinates>? = null
+) {
+
+    val loanAmountDouble: Double
+        get() = loanAmount?.toDoubleOrNull() ?: 0.0
+
+    val annualIncomeDouble: Double
+        get() = annualIncome?.toDoubleOrNull() ?: 0.0
+
+    val loanApplicationNumber: String
+        get() = bvnNumber?.let { bvn ->
+            require(bvn.isNotEmpty()) { "BVN number cannot be empty" }
+            val midIndex = (bvn.length - 1) / 2
+            "FCMB${bvn.substring(midIndex)}"
+        } ?: "FCMB${System.currentTimeMillis()}"
+
+    @Throws(NotValidException::class)
+    fun isValid() {
+        when {
+            bvnNumber?.trim().isNullOrEmpty() -> throw NotValidException("BVN is required.")
+            (bvnNumber?.length ?: 0) < 11 -> throw NotValidException("BVN number should be valid.")
+            loanAmount?.trim()
+                .isNullOrEmpty() -> throw NotValidException("Loan amount is required.")
+
+            loanAmountDouble <= 0.0 -> throw NotValidException("Loan amount can not be 0.")
+
+            annualIncome?.trim()
+                ?.isEmpty() == true -> throw NotValidException("Annual income is required.")
+
+            annualIncomeDouble <= 0.0 -> throw NotValidException("Annual income can not be 0.")
+
+            loanAmountDouble >= annualIncomeDouble -> throw NotValidException("Loan amount can not be greater than annual income.")
+
+//            farmLocations.isNullOrEmpty() -> throw NotValidException("Farm co-ordinates are required.")
+        }
+    }
 }

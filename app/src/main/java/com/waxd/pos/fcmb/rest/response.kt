@@ -170,7 +170,7 @@ data class FarmerData(
     @SerializedName("farm_photos")
     val farmPhotos: ArrayList<*>? = null,
     @SerializedName("farm_locations")
-    val farmLocations: ArrayList<FarmCoordinates>? = null,
+    var farmLocations: ArrayList<FarmCoordinates>? = null,
 ) : Serializable
 
 data class FarmCoordinates(val lat: Double, val lng: Double) : Serializable
@@ -187,3 +187,42 @@ data class UserData(
     val fingerPrintCloudPath: ArrayList<String>? = null,
     val fingerPrintSyncedOnCloud: Boolean? = null
 ) : Serializable
+
+data class FarmerLoanApplicationResponse(
+    val loanData: FarmerLoanApplicationData? = null,
+    val document: DocumentSnapshot? = null
+)
+
+data class FarmerLoanApplicationData(
+    var id: String? = null,
+    @PropertyName("bvn_number")
+    var bvnNumber: String? = null,
+    @PropertyName("farmer_name")
+    var farmerName: String? = null,
+    @PropertyName("loan_application_number")
+    var loanApplicationNumber: String? = null,
+    @SerializedName("loan_type")
+    var loanType: String? = null,
+    @SerializedName("loan_amount")
+    var loanAmount: Double? = null,
+    @SerializedName("annual_income")
+    var annualIncome: Double? = null,
+    @PropertyName("date_created")
+    var dateCreated: String? = null,
+    @PropertyName("date_updated")
+    var dateUpdated: String? = null,
+    @PropertyName("registered_by")
+    var registeredBy: String? = null,
+    @SerializedName("farm_locations") var farmLocations: ArrayList<FarmCoordinates>? = null
+)
+
+data class LoanDetails(
+    @SerializedName("loan_type")
+    var loanType: String,
+    @SerializedName("loan_amount")
+    var loanAmount: Int,
+    @SerializedName("annual_income")
+    var annualIncome: Int
+)
+
+data class FarmDetails(@SerializedName("farm_locations") var farmLocations: ArrayList<FarmCoordinates>? = null)

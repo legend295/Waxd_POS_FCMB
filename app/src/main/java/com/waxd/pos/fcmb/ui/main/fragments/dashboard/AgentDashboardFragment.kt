@@ -40,7 +40,7 @@ class AgentDashboardFragment : BaseFragment<FragmentAgentDashboardBinding>() {
             val bundle = Bundle().apply {
                 putString(Constants.IntentKeys.FARMER_ID, it.farmerData?.id)
             }
-            this.view?.findNavController()?.navigate(R.id.farmerDetailsFragment, bundle)
+            this.view?.findNavController()?.navigate(R.id.farmerDetailsFragment, bundle,getNavOptions())
         }
         setObserver()
         if (context?.isInternetAvailable(showMessage = true) == true) {
@@ -48,23 +48,34 @@ class AgentDashboardFragment : BaseFragment<FragmentAgentDashboardBinding>() {
         }
 
         binding.viewBgAddFarmer.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.addFarmerFragment)
+            this.view?.findNavController()?.navigate(R.id.createLoanApplicationFragment,
+                Bundle(),
+                getNavOptions())
         }
 
         binding.viewBgCreateLoan.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.createLoanApplicationFragment)
+            this.view?.findNavController()?.navigate(R.id.loanApplicationsFragment,
+                Bundle(),
+                getNavOptions())
         }
 
         binding.viewBgListOfFarmers.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.farmersListFragment)
+            this.view?.findNavController()?.navigate(R.id.farmersListFragment,
+                Bundle(),
+                getNavOptions())
         }
 
         binding.viewBgSearchUser.setOnClickListener {
-            startActivity(Intent(requireContext(), BVNRegistrationActivity::class.java))
+            this.view?.findNavController()?.navigate(R.id.addFarmerFragment,
+                Bundle(),
+                getNavOptions())
+//            startActivity(Intent(requireContext(), BVNRegistrationActivity::class.java))
         }
 
         binding.tvRecentActivity.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.recentActivityFragment)
+            this.view?.findNavController()?.navigate(R.id.recentActivityFragment,
+                Bundle(),
+                getNavOptions())
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {

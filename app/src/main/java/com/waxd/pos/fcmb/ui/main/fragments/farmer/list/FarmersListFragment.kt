@@ -80,7 +80,8 @@ class FarmersListFragment : BaseFragment<FragmentFarmersListBinding>() {
                 val bundle = Bundle().apply {
                     putString(Constants.IntentKeys.FARMER_ID, it.farmerData?.id)
                 }
-                this.view?.findNavController()?.navigate(R.id.farmerDetailsFragment, bundle)
+                this.view?.findNavController()
+                    ?.navigate(R.id.farmerDetailsFragment, bundle, getNavOptions())
             }
 
             binding.rvFarmerList.addOnScrollListener(object :
