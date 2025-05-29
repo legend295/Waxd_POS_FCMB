@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.waxd.pos.fcmb.utils.KeyboardDismissLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/_10sdp"
@@ -365,7 +365,7 @@
                 app:layout_constraintStart_toEndOf="@id/tvCancel"
                 app:layout_constraintTop_toBottomOf="@id/tvUploadIdProof" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.waxd.pos.fcmb.utils.KeyboardDismissLayout>
     </androidx.core.widget.NestedScrollView>
 
 </layout>
