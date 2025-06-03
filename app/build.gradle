@@ -62,7 +62,7 @@ android {
 
 dependencies {
 
-//    implementation fileTree(dir: 'libs', includes: ['*.jar', '*.aar'])
+    implementation fileTree(dir: 'libs', includes: ['*.jar', '*.aar'])
     coreLibraryDesugaring libs.desugar.jdk.libs
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
@@ -77,6 +77,10 @@ dependencies {
     implementation libs.androidx.fragment.ktx
     implementation libs.firebase.common.ktx
     implementation libs.firebase.storage.ktx
+    //    implementation(libs.github.fingerprintscannersdk) {
+//        changing = true
+//    }
+
     implementation project(':bvn_ten_fingerprint')
 //    implementation project(':nibs')
     testImplementation libs.junit
@@ -86,9 +90,7 @@ dependencies {
     //sdp
     implementation libs.sdp.android
 
-    implementation(libs.github.fingerprintscannersdk) {
-        changing = true
-    }
+
 
     //Firebase
     implementation libs.firebase.auth.ktx // Use the latest version

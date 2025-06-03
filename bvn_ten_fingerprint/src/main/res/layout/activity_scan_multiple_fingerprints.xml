@@ -47,10 +47,29 @@
             android:id="@+id/rvFingerprints"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvContinue"
             app:layout_constraintTop_toBottomOf="@id/toolbarView"
             app:spanCount="2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvContinue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:alpha=".5"
+            android:background="@drawable/bg_edit_text"
+            android:backgroundTint="#CFD332"
+            android:enabled="false"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="Continue"
+            android:textColor="#24781F"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

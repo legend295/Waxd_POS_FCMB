@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
+import com.bumptech.glide.request.RequestOptions
 import com.scanner.activity.FingerprintScanner
 import com.scanner.utils.constants.ScannerConstants
 import com.scanner.utils.enums.ScanningType
@@ -49,6 +50,8 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
 
         val farmerData = arguments?.serializable<FarmerData>(Constants.IntentKeys.DATA)
 
+//        binding.ivScannerLeft.loadImage("/storage/emulated/0/DCIM/fpd/01748933618258.jpg", requestOptions = RequestOptions.fitCenterTransform())
+
         farmerData?.let {
             viewModel.farmerData.value = it
             binding.data = it
@@ -68,10 +71,10 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
                 DataResult.Loading -> {}
                 is DataResult.Success -> {
                     binding.tvCaptureFingerprint.visible(
-                        !(it.data.farmerData?.fingerPrintSyncedOnCloud ?: false)
+                        it.data.farmerData?.fingerPrintSyncedOnCloud != true
                     )
                     binding.tvUpdateFingerprint.visible(
-                        it.data.farmerData?.fingerPrintSyncedOnCloud ?: false
+                        it.data.farmerData?.fingerPrintSyncedOnCloud == true
                     )
                 }
             }
@@ -120,9 +123,9 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
                 val path = file.path.split(".")[0] + file.path.split(".")[1].replace("wsq", ".jpg")
                 Log.d("DEBUG", "Path: $path")
                 if (index == 0) {
-                    binding.ivScannerLeft.loadImage(path)
+                    binding.ivScannerLeft.loadImage(path,requestOptions = RequestOptions.fitCenterTransform())
                 } else if (index == 1) {
-                    binding.ivScannerRight.loadImage(path)
+                    binding.ivScannerRight.loadImage(path,requestOptions = RequestOptions.fitCenterTransform())
                 }
 //                viewModel.getUserById()
                 binding.tvCaptureFingerprint.visible(

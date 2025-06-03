@@ -14,156 +14,163 @@
             type="com.waxd.pos.fcmb.utils.handlers.ViewClickHandler" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".ui.initial.fragments.login.LoginFragment">
+        android:fillViewport="true">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivBg"
+        <com.waxd.pos.fcmb.utils.KeyboardDismissLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_195sdp"
-            android:scaleType="fitXY"
-            android:layout_marginTop="@dimen/_minus2sdp"
-            android:src="@drawable/ic_top_green_bg"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context=".ui.initial.fragments.login.LoginFragment">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_margin="@dimen/_10sdp"
-            android:src="@drawable/ic_waxd_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_195sdp"
+                android:layout_marginTop="@dimen/_minus2sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_top_green_bg"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/viewBg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_margin="@dimen/_20sdp"
-            android:background="@drawable/bg_white_round_10"
-            app:layout_constraintBottom_toBottomOf="@id/ivBg"
-            app:layout_constraintTop_toBottomOf="@id/ivBg" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:src="@drawable/ic_waxd_logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivUser"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/ic_user"
-            app:layout_constraintEnd_toEndOf="@id/viewBg"
-            app:layout_constraintStart_toStartOf="@id/viewBg"
-            app:layout_constraintTop_toTopOf="@id/viewBg" />
+            <View
+                android:id="@+id/viewBg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_margin="@dimen/_20sdp"
+                android:background="@drawable/bg_white_round_10"
+                app:layout_constraintBottom_toBottomOf="@id/ivBg"
+                app:layout_constraintTop_toBottomOf="@id/ivBg" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvAgentLoginMsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fcmb_agent_login"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/viewBg"
-            app:layout_constraintStart_toStartOf="@id/viewBg"
-            app:layout_constraintTop_toBottomOf="@id/ivUser" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivUser"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_user"
+                app:layout_constraintEnd_toEndOf="@id/viewBg"
+                app:layout_constraintStart_toStartOf="@id/viewBg"
+                app:layout_constraintTop_toTopOf="@id/viewBg" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:src="@drawable/ic_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAgentLoginMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fcmb_agent_login"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/viewBg"
+                app:layout_constraintStart_toStartOf="@id/viewBg"
+                app:layout_constraintTop_toBottomOf="@id/ivUser" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="@string/powered_by"
-            app:layout_constraintBottom_toBottomOf="@id/ivLogo"
-            app:layout_constraintEnd_toStartOf="@id/ivLogo"
-            app:layout_constraintTop_toTopOf="@id/ivLogo" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/ic_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etUsername"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@drawable/bg_grey_round_stroke"
-            android:drawableEnd="@drawable/ic_user_black"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:maxLength="50"
-            android:text="@={viewModel.request.email}"
-            android:maxLines="1"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintEnd_toEndOf="@id/viewBg"
-            app:layout_constraintStart_toStartOf="@id/viewBg"
-            app:layout_constraintTop_toBottomOf="@id/viewBg" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="@string/powered_by"
+                app:layout_constraintBottom_toBottomOf="@id/ivLogo"
+                app:layout_constraintEnd_toStartOf="@id/ivLogo"
+                app:layout_constraintTop_toTopOf="@id/ivLogo" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etPassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@drawable/bg_grey_round_stroke"
-            android:drawableEnd="@drawable/ic_lock"
-            android:hint="@string/password"
-            android:text="@={viewModel.request.password}"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintEnd_toEndOf="@id/viewBg"
-            app:layout_constraintStart_toStartOf="@id/viewBg"
-            app:layout_constraintTop_toBottomOf="@id/etUsername" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_grey_round_stroke"
+                android:drawableEnd="@drawable/ic_user_black"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:text="@={viewModel.request.email}"
+                app:layout_constraintEnd_toEndOf="@id/viewBg"
+                app:layout_constraintStart_toStartOf="@id/viewBg"
+                app:layout_constraintTop_toBottomOf="@id/viewBg" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_30sdp"
-            android:background="@drawable/bg_white_round_6"
-            android:backgroundTint="@color/teal"
-            android:onClick="@{viewClickHandler::onClick}"
-            android:text="@string/login"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@id/etPassword"
-            app:layout_constraintStart_toStartOf="@id/etPassword"
-            app:layout_constraintTop_toBottomOf="@id/etPassword" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_grey_round_stroke"
+                android:drawableEnd="@drawable/ic_lock"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:text="@={viewModel.request.password}"
+                app:layout_constraintEnd_toEndOf="@id/viewBg"
+                app:layout_constraintStart_toStartOf="@id/viewBg"
+                app:layout_constraintTop_toBottomOf="@id/etUsername" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:elevation="@dimen/_3sdp"
-            android:indeterminateTint="@color/white"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/btnLogin"
-            app:layout_constraintStart_toStartOf="@id/btnLogin"
-            app:layout_constraintTop_toTopOf="@id/btnLogin" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_30sdp"
+                android:background="@drawable/bg_white_round_6"
+                android:backgroundTint="@color/teal"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/etPassword"
+                app:layout_constraintStart_toStartOf="@id/etPassword"
+                app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:onClick="@{viewClickHandler::onClick}"
-            android:gravity="center"
-            android:id="@+id/tvRegister"
-            android:text="@string/don_t_have_an_account_yet_ncreate_an_account"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@id/btnLogin"
-            app:layout_constraintStart_toStartOf="@id/btnLogin"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:elevation="@dimen/_3sdp"
+                android:indeterminateTint="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/btnLogin"
+                app:layout_constraintStart_toStartOf="@id/btnLogin"
+                app:layout_constraintTop_toTopOf="@id/btnLogin" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                android:onClick="@{viewClickHandler::onClick}"
+                android:text="@string/don_t_have_an_account_yet_ncreate_an_account"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/btnLogin"
+                app:layout_constraintStart_toStartOf="@id/btnLogin"
+                app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+
+        </com.waxd.pos.fcmb.utils.KeyboardDismissLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

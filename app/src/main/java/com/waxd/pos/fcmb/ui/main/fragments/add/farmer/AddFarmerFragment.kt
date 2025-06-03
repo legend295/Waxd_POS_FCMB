@@ -27,6 +27,7 @@ import com.waxd.pos.fcmb.rest.NotValidException
 import com.waxd.pos.fcmb.ui.main.MainActivity
 import com.waxd.pos.fcmb.utils.Util.hideKeyboard
 import com.waxd.pos.fcmb.utils.Util.isInternetAvailable
+import com.waxd.pos.fcmb.utils.Util.updateButtonsUI
 import com.waxd.pos.fcmb.utils.constants.Constants
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
 import com.waxd.pos.fcmb.utils.serializable
@@ -288,7 +289,9 @@ class AddFarmerFragment : BaseFragment<FragmentAddFarmerBinding>(), ViewClickHan
                                     // register new farmer
                                     viewModel.registerFarmer()
                                 }
-                            }.setNegativeButton("Cancel", null).show()
+                            }.setNegativeButton("Cancel", null).show().apply {
+                                updateButtonsUI()
+                            }
 
                 } catch (e: NotValidException) {
                     e.message?.let { showToast(it) }

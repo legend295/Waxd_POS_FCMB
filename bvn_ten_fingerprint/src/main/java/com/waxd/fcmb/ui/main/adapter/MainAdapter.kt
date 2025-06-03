@@ -17,7 +17,7 @@ class MainAdapter(private val list: ArrayList<FingerprintData>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(fingerprintData: FingerprintData) {
             binding.tvTitle.text = fingerprintData.title
-            Glide.with(binding.ivFingerprint).load(fingerprintData.imageUri)
+            Glide.with(binding.ivFingerprint).load(fingerprintData.imagePath)
                 .placeholder(R.drawable.ic_fingerprint_placeholder)
                 .into(binding.ivFingerprint)
 

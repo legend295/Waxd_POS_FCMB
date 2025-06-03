@@ -176,7 +176,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:elevation="@dimen/_1sdp"
                     android:gravity="end"
                     android:text="@{data.bvnNumber}"

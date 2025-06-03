@@ -19,7 +19,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.waxd.pos.fcmb.utils.KeyboardDismissLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_top_round_white"
@@ -102,5 +102,5 @@
             app:layout_constraintTop_toBottomOf="@id/etField" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.waxd.pos.fcmb.utils.KeyboardDismissLayout>
 </layout>

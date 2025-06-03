@@ -32,6 +32,7 @@ import com.waxd.pos.fcmb.ui.main.MainActivity
 import com.waxd.pos.fcmb.utils.FileUtil
 import com.waxd.pos.fcmb.utils.FileUtil.getMimeType
 import com.waxd.pos.fcmb.utils.Util.loadImage
+import com.waxd.pos.fcmb.utils.Util.updateButtonsUI
 import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.constants.Constants
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
@@ -166,7 +167,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ViewClickHandler
                     .setMessage("Are you sure you want to logout")
                     .setPositiveButton("Yes") { _, _ ->
                         (activity as MainActivity?)?.logOut()
-                    }.setNegativeButton("No", null).show()
+                    }.setNegativeButton("Cancel", null).show().apply {
+                        updateButtonsUI()
+                    }
 
             }
 
@@ -175,9 +178,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ViewClickHandler
             }
 
             R.id.tvEditProfile -> {
-                this.view?.findNavController()?.navigate(R.id.updateProfileFragment,
+                this.view?.findNavController()?.navigate(
+                    R.id.updateProfileFragment,
                     Bundle(),
-                    getNavOptions())
+                    getNavOptions()
+                )
             }
         }
     }

@@ -2,6 +2,8 @@ package com.waxd.pos.fcmb.utils
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -16,6 +18,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -126,11 +129,16 @@ object Util {
         return result
     }
 
-    fun ImageView.loadImage(url: Any?, color: Int = R.color.northTexasGreen) {
+    fun ImageView.loadImage(
+        url: Any?,
+        color: Int = R.color.northTexasGreen,
+        requestOptions: RequestOptions = RequestOptions.centerCropTransform(),
+        placeholder: Int = R.drawable.placeholder
+    ) {
         try {
             if (url == null) {
                 Glide.with(this).applyDefaultRequestOptions(RequestOptions().fitCenter())
-                    .load(ContextCompat.getDrawable(this.context, R.drawable.placeholder))
+                    .load(ContextCompat.getDrawable(this.context, placeholder))
                     .apply(RequestOptions.centerCropTransform()).into(this)
                 return
             }
@@ -143,8 +151,8 @@ object Util {
                         )
                     )
                 ).error({
-                    ContextCompat.getDrawable(this@loadImage.context, R.drawable.placeholder)
-                }).apply(RequestOptions.centerCropTransform())
+                    ContextCompat.getDrawable(this@loadImage.context, placeholder)
+                }).apply(requestOptions)
                 .addListener(this@loadImage.listener())
                 .into(this@loadImage)
         } catch (e: Exception) {
@@ -365,12 +373,18 @@ object Util {
         return convTime
     }
 
-    fun formatCurrency(amount:Double?): String {
+    fun formatCurrency(amount: Double?): String {
         return if (amount != null) {
             val decimalFormatter = DecimalFormat(NUMBER_FORMAT)
             return "₦${decimalFormatter.format(amount)}"
         } else {
             "₦0.00"
+        }
+    }
+
+    fun AlertDialog.updateButtonsUI() {
+        getButton(AlertDialog.BUTTON_NEGATIVE)?.apply {
+            setTextColor(Color.RED)
         }
     }
 }

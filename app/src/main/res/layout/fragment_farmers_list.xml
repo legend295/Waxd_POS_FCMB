@@ -8,7 +8,7 @@
         android:id="@+id/swipeRefreshLayout"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.waxd.pos.fcmb.utils.KeyboardDismissLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.main.fragments.farmer.list.FarmersListFragment">
@@ -151,7 +151,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.waxd.pos.fcmb.utils.KeyboardDismissLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

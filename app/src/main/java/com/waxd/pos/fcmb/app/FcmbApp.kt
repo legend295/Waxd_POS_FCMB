@@ -2,6 +2,8 @@ package com.waxd.pos.fcmb.app
 
 import android.app.Application
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import com.google.firebase.FirebaseApp
 import com.scanner.utils.builder.ThemeOptions
 import com.waxd.pos.fcmb.R
@@ -27,12 +29,11 @@ class FcmbApp : Application() {
     }
 
 
-
     private var logOutHandler: ILogoutHandler? = null
 
     override fun onCreate() {
         super.onCreate()
-        FirebaseApp.initializeApp(this);
+        initializeFirebase()
         instance = this
     }
 
@@ -41,4 +42,16 @@ class FcmbApp : Application() {
     }
 
     fun logoutHandler() = logOutHandler
+
+    private fun initializeFirebase() {
+        try {
+            FirebaseApp.initializeApp(this)
+        } catch (e: java.lang.Exception) {
+            if (e.message!!.contains("Unknown calling package name")) {
+                // Retry after short delay
+                print("Unknown calling package name")
+                Handler(Looper.getMainLooper()).postDelayed(Runnable { initializeFirebase() }, 1000)
+            }
+        }
+    }
 }

@@ -70,43 +70,43 @@
 <!--                app:layout_constraintStart_toStartOf="@id/ivAddFarmer"-->
 <!--                app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />-->
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvFarmerBvnTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/does_the_farmer_have_bvn"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="@{isUpdating? View.GONE: View.VISIBLE}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:id="@+id/tvFarmerBvnTxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                android:text="@string/does_the_farmer_have_bvn"-->
+<!--                android:textSize="@dimen/_12sdp"-->
+<!--                android:visibility="@{isUpdating? View.GONE: View.VISIBLE}"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <RadioGroup
-                android:id="@+id/rgFarmerBvn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onCheckedChanged="@{viewModel.checkChangeListener}"
-                android:visibility="@{isUpdating? View.GONE: View.VISIBLE}"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
-                app:layout_constraintTop_toBottomOf="@id/tvFarmerBvnTxt"
-                app:layout_goneMarginStart="@dimen/_10sdp">
+<!--            <RadioGroup-->
+<!--                android:id="@+id/rgFarmerBvn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:onCheckedChanged="@{viewModel.checkChangeListener}"-->
+<!--                android:visibility="@{isUpdating? View.GONE: View.VISIBLE}"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tvFarmerBvnTxt"-->
+<!--                app:layout_goneMarginStart="@dimen/_10sdp">-->
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbYes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_25sdp"
-                    android:checked="@{viewModel.request.haveBvnNumber}"
-                    android:text="@string/yes"
-                    app:buttonTint="@color/radio_item_color" />
+<!--                <androidx.appcompat.widget.AppCompatRadioButton-->
+<!--                    android:id="@+id/rbYes"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:checked="@{viewModel.request.haveBvnNumber}"-->
+<!--                    android:text="@string/yes"-->
+<!--                    app:buttonTint="@color/radio_item_color" />-->
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_25sdp"
-                    android:checked="@{!viewModel.request.haveBvnNumber}"
-                    android:text="@string/no"
-                    app:buttonTint="@color/radio_item_color" />
-            </RadioGroup>
+<!--                <androidx.appcompat.widget.AppCompatRadioButton-->
+<!--                    android:id="@+id/rbNo"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:checked="@{!viewModel.request.haveBvnNumber}"-->
+<!--                    android:text="@string/no"-->
+<!--                    app:buttonTint="@color/radio_item_color" />-->
+<!--            </RadioGroup>-->
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvBvnNumber"
@@ -116,8 +116,9 @@
                 android:text="@string/bvn_number"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="@{viewModel.request.haveBvnNumber? View.VISIBLE : View.GONE, default=gone}"
-                app:layout_constraintStart_toStartOf="@id/rgFarmerBvn"
-                app:layout_constraintTop_toBottomOf="@id/rgFarmerBvn" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etEnterBvnNumber"
@@ -136,7 +137,8 @@
                 android:textSize="@dimen/_12sdp"
                 android:visibility="@{viewModel.request.haveBvnNumber? View.VISIBLE : View.GONE, default=gone}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                tools:visibility="visible"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/tvBvnNumber" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -204,7 +206,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:visibility="@{viewModel.request.haveNinNumber? View.VISIBLE : View.GONE, default=gone}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/tvNinNumber" />
 
 
@@ -215,7 +217,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:text="@string/personal_information"
                 android:textSize="@dimen/_12sdp"
-                app:layout_constraintStart_toStartOf="@id/rgFarmerBvn"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/etNinNumber" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -234,7 +236,7 @@
                 android:text="@={viewModel.request.firstName}"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/tvPersonalInformation" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -254,7 +256,7 @@
                 android:text="@={viewModel.request.lastName}"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/etFirstName" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -273,7 +275,7 @@
                 android:text="@={viewModel.request.phoneNumber}"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/etLastName" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -292,7 +294,7 @@
                 android:text="@={viewModel.request.email}"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/etPhoneNumber" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -308,7 +310,7 @@
                 android:text="@{viewModel.request.dob}"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/etEmailAddress" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -328,7 +330,7 @@
                 android:text="@={viewModel.request.address}"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/tvDob" />
 
 <!--            <androidx.appcompat.widget.AppCompatEditText-->
@@ -387,7 +389,7 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:prompt="@string/state"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvFarmerBvnTxt"
+                app:layout_constraintStart_toStartOf="@id/tvBvnNumber"
                 app:layout_constraintTop_toBottomOf="@id/etAddress" />
 
             <androidx.appcompat.widget.AppCompatImageView

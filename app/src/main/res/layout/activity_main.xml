@@ -105,7 +105,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            android:paddingBottom="@dimen/_5sdp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
             app:layout_constraintTop_toBottomOf="@id/toolbarView"

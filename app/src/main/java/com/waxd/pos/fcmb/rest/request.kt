@@ -103,7 +103,7 @@ data class FarmerCreateRequest(
     @SerializedName("first_name")
     var firstName: String? = null,
     @SerializedName("have_bvn_number")
-    var haveBvnNumber: Boolean? = false,
+    var haveBvnNumber: Boolean? = true,
     @SerializedName("have_nin_number")
     var haveNinNumber: Boolean? = false,
     @SerializedName("last_name")

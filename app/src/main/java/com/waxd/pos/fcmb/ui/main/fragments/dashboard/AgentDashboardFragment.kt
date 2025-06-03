@@ -13,6 +13,7 @@ import com.waxd.pos.fcmb.base.DataResult
 import com.waxd.pos.fcmb.databinding.FragmentAgentDashboardBinding
 import com.waxd.pos.fcmb.ui.main.fragments.dashboard.adapter.RecentFarmerActivityAdapter
 import com.waxd.pos.fcmb.utils.Util.isInternetAvailable
+import com.waxd.pos.fcmb.utils.Util.visible
 import com.waxd.pos.fcmb.utils.constants.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +41,8 @@ class AgentDashboardFragment : BaseFragment<FragmentAgentDashboardBinding>() {
             val bundle = Bundle().apply {
                 putString(Constants.IntentKeys.FARMER_ID, it.farmerData?.id)
             }
-            this.view?.findNavController()?.navigate(R.id.farmerDetailsFragment, bundle,getNavOptions())
+            this.view?.findNavController()
+                ?.navigate(R.id.farmerDetailsFragment, bundle, getNavOptions())
         }
         setObserver()
         if (context?.isInternetAvailable(showMessage = true) == true) {
@@ -48,34 +50,43 @@ class AgentDashboardFragment : BaseFragment<FragmentAgentDashboardBinding>() {
         }
 
         binding.viewBgAddFarmer.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.createLoanApplicationFragment,
+            this.view?.findNavController()?.navigate(
+                R.id.createLoanApplicationFragment,
                 Bundle(),
-                getNavOptions())
+                getNavOptions()
+            )
         }
 
         binding.viewBgCreateLoan.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.loanApplicationsFragment,
+            this.view?.findNavController()?.navigate(
+                R.id.loanApplicationsFragment,
                 Bundle(),
-                getNavOptions())
+                getNavOptions()
+            )
         }
 
         binding.viewBgListOfFarmers.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.farmersListFragment,
+            this.view?.findNavController()?.navigate(
+                R.id.farmersListFragment,
                 Bundle(),
-                getNavOptions())
+                getNavOptions()
+            )
         }
 
         binding.viewBgSearchUser.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.addFarmerFragment,
+            this.view?.findNavController()?.navigate(
+                R.id.addFarmerFragment,
                 Bundle(),
-                getNavOptions())
-//            startActivity(Intent(requireContext(), BVNRegistrationActivity::class.java))
+                getNavOptions()
+            )
         }
 
         binding.tvRecentActivity.setOnClickListener {
-            this.view?.findNavController()?.navigate(R.id.recentActivityFragment,
+            this.view?.findNavController()?.navigate(
+                R.id.recentActivityFragment,
                 Bundle(),
-                getNavOptions())
+                getNavOptions()
+            )
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -88,6 +99,7 @@ class AgentDashboardFragment : BaseFragment<FragmentAgentDashboardBinding>() {
     private fun setObserver() {
         viewModel.response.observe(viewLifecycleOwner) {
             binding.swipeRefreshLayout.isRefreshing = false
+            binding.progressBarRecentActivity.visible(it is DataResult.Loading)
             when (it) {
                 is DataResult.Failure -> {}
                 DataResult.Loading -> {}

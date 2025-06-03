@@ -28,13 +28,13 @@ class AddFarmerViewModel @Inject constructor(
     val farmerUpdateResponse: MutableLiveData<DataResult<FarmerData>> = MutableLiveData()
     val farmerData: MutableLiveData<FarmerData> = MutableLiveData()
 
-    val checkChangeListener = RadioGroup.OnCheckedChangeListener { group, checkedId ->
-        when (checkedId) {
-            R.id.rbYes -> request.value?.haveBvnNumber = true
-            R.id.rbNo -> request.value?.haveBvnNumber = false
-        }
-        request.value = request.value
-    }
+//    val checkChangeListener = RadioGroup.OnCheckedChangeListener { group, checkedId ->
+//        when (checkedId) {
+//            R.id.rbYes -> request.value?.haveBvnNumber = true
+//            R.id.rbNo -> request.value?.haveBvnNumber = false
+//        }
+//        request.value = request.value
+//    }
 
     val ninCheckChangeListener = RadioGroup.OnCheckedChangeListener { group, checkedId ->
         when (checkedId) {

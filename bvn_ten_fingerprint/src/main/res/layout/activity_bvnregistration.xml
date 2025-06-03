@@ -12,7 +12,7 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.waxd.fcmb.utils.KeyboardDismissLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -489,7 +489,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/bg_edit_text"
                     android:hint="Location Of Collection"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
                     android:maxLength="50"
                     android:maxLines="1"
@@ -574,7 +574,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.waxd.fcmb.utils.KeyboardDismissLayout>
 
 
 </layout>

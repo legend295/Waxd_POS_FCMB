@@ -72,7 +72,8 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
 
         val farmerData = arguments?.serializable<FarmerData>(Constants.IntentKeys.DATA)
         farmerData?.let {
-            viewModel.farmerData.value = it
+            if (viewModel.farmerData.value == null)
+                viewModel.farmerData.value = it
         }
 
         // Initialize Google Maps
@@ -116,7 +117,7 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
                 adapter.add(
                     FarmImagesData(
                         images,
-                        if (images is String) images else "",
+                        images as? String ?: "",
                         isUploading = false
                     )
                 )
@@ -137,7 +138,8 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
                             "Farmer Location Updated successfully."
                         )
                     }
-                    this.view?.findNavController()?.navigate(R.id.successFragment, bundle,getNavOptions())
+                    this.view?.findNavController()
+                        ?.navigate(R.id.successFragment, bundle, getNavOptions())
                 }
             }
 
@@ -317,9 +319,11 @@ class UpdateFarmDetailsFragment : BaseFragment<FragmentUpdateFarmDetailsBinding>
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tvCaptureFarmLocation -> {
-                this.view?.findNavController()?.navigate(R.id.captureLocationFragment,
+                this.view?.findNavController()?.navigate(
+                    R.id.captureLocationFragment,
                     Bundle(),
-                    getNavOptions())
+                    getNavOptions()
+                )
             }
 
             R.id.tvUpdateFarmLocation -> {

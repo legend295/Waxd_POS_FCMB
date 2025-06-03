@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.scanner.activity.FingerprintScanner
@@ -57,6 +60,15 @@ class ScanMultipleFingerprints : AppCompatActivity() {
         binding?.ivBack?.setOnClickListener {
             finish()
         }
+
+        binding?.tvContinue?.setOnClickListener {
+            AlertDialog.Builder(it.context).setMessage("BVN Registration Completed")
+                .setPositiveButton("OK") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
+        }
     }
 
     private fun openGallery() {
@@ -96,7 +108,7 @@ class ScanMultipleFingerprints : AppCompatActivity() {
             .storagePath("biometrics/")
             .setThemeOptions(themeOptions)
             .setCustomData(JSONObject())
-//            .newRelicToken(BuildConfig.NEW_RELIC_TOKEN)
+//            .newRelicToken("AA8225aa19532b95f2ef0006820193d3b69f45ec47-NRMA")
             .skipLocation(skipLocation = true)
             .start(this, scanningLauncher)
     }
@@ -116,10 +128,13 @@ class ScanMultipleFingerprints : AppCompatActivity() {
         try {
             list?.forEachIndexed { index, file ->
                 val path = file.path.split(".")[0] + file.path.split(".")[1].replace("wsq", ".jpg")
-                Log.d("DEBUG", "Image Path: $path")
+                Log.d(
+                    "DEBUG",
+                    "Image Path: $path At index Path $index with Finger print type ${fingerPrintType?.name ?: "null"}"
+                )
                 when (fingerPrintType) {
                     FingerPrints.THUMB_LEFT, FingerPrints.THUMB_RIGHT -> {
-                        viewModel.list[index].imageUri = Uri.fromFile(file)
+                        viewModel.list[index].imagePath = path
                     }
 
                     FingerPrints.INDEX_LEFT, FingerPrints.INDEX_RIGHT -> {
@@ -144,14 +159,27 @@ class ScanMultipleFingerprints : AppCompatActivity() {
 
                     null -> {}
                 }
+                adapter.notifyDataSetChanged()
+                handleContinueButtonUI()
+
             }
 //            templateList?.forEachIndexed { index, file ->
 ////                val path = file.path.split(".")[0] + file.path.split(".")[1].replace("wsq", ".jpg")
 //                viewModel.list[index].title = file.path
 //            }
-            adapter.notifyDataSetChanged()
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun handleContinueButtonUI() {
+        val isAllCaptured = checkIfAllFingerprintsCaptured()
+        binding?.tvContinue?.isEnabled = isAllCaptured
+        binding?.tvContinue?.alpha = if (isAllCaptured) 1f else 0.5f
+    }
+
+    fun checkIfAllFingerprintsCaptured(): Boolean {
+        return viewModel.list.all { !it.imagePath.isNullOrEmpty() }
     }
 }
