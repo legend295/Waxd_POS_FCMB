@@ -8,7 +8,7 @@ import com.waxd.pos.fcmb.utils.Util.isValidMobile
 class NotValidException(msg: String) : Exception(msg)
 
 data class LoginRequest(
-    var email: String? = "harry@gmail.com", var password: String? = "securePass123"
+    var email: String? = "", var password: String? = ""
 ) {
     @Throws(NotValidException::class)
     fun isValid() {

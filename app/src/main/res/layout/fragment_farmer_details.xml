@@ -128,7 +128,6 @@
                     android:text="@string/personal_information"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:visibility="@{data.haveBvnNumber? View.VISIBLE : View.GONE,default=gone}"
                     app:fontFamily="@font/poppins_medium"
                     app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
                     app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +167,6 @@
                     app:layout_constraintEnd_toStartOf="@id/tvBvnNumberValue"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvBvnNumberValue"
-
                     tools:visibility="visible" />
 
                 <androidx.appcompat.widget.AppCompatTextView
