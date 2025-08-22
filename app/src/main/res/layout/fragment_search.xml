@@ -8,23 +8,264 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.fragments.search.SearchFragment">
 
+        <View
+            android:id="@+id/viewBgSearchUser"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toStartOf="@id/viewBgListOfFarmers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvBvnRegistration"
+            android:id="@+id/ivSearchUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="Total Count"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/viewBgSearchUser"
+            app:layout_constraintStart_toStartOf="@id/viewBgSearchUser"
+            app:layout_constraintTop_toTopOf="@id/viewBgSearchUser" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotalCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivSearchUser"
+            app:layout_constraintStart_toStartOf="@id/ivSearchUser"
+            app:layout_constraintTop_toBottomOf="@id/ivSearchUser" />
+
+        <View
+            android:id="@+id/viewBgListOfFarmers"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewBgSearchUser"
+            app:layout_constraintTop_toTopOf="@id/viewBgSearchUser" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ivListOfFarmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_list_of_farmer"
+            android:text="Pending Count"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/viewBgListOfFarmers"
+            app:layout_constraintStart_toStartOf="@id/viewBgListOfFarmers"
+            app:layout_constraintTop_toTopOf="@id/viewBgListOfFarmers" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPendingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivListOfFarmer"
+            app:layout_constraintStart_toStartOf="@id/ivListOfFarmer"
+            app:layout_constraintTop_toBottomOf="@id/ivListOfFarmer" />
+
+        <View
+            android:id="@+id/viewBgAddFarmer"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toStartOf="@id/viewBgCreateLoan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewBgSearchUser" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ivAddFarmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_create_loan"
+            android:text="Failed Count"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/viewBgAddFarmer"
+            app:layout_constraintStart_toStartOf="@id/viewBgAddFarmer"
+            app:layout_constraintTop_toTopOf="@id/viewBgAddFarmer" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFailedCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivAddFarmer"
+            app:layout_constraintStart_toStartOf="@id/ivAddFarmer"
+            app:layout_constraintTop_toBottomOf="@id/ivAddFarmer" />
+
+
+        <View
+            android:id="@+id/viewBgCreateLoan"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewBgAddFarmer"
+            app:layout_constraintTop_toTopOf="@id/viewBgAddFarmer" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ivCreateLoan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_create_loan"
+            android:text="Success Count"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/viewBgCreateLoan"
+            app:layout_constraintStart_toStartOf="@id/viewBgCreateLoan"
+            app:layout_constraintTop_toTopOf="@id/viewBgCreateLoan" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSuccessCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivCreateLoan"
+            app:layout_constraintStart_toStartOf="@id/ivCreateLoan"
+            app:layout_constraintTop_toBottomOf="@id/ivCreateLoan" />
+
+        <View
+            android:id="@+id/viewBgInProgress"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            app:layout_constraintEnd_toStartOf="@id/viewBgCreateLoan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewBgAddFarmer" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ivInProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:src="@drawable/ic_create_loan"
+            android:text="In Progress Count"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/viewBgInProgress"
+            app:layout_constraintStart_toStartOf="@id/viewBgInProgress"
+            app:layout_constraintTop_toTopOf="@id/viewBgInProgress" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvInProgressCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivInProgress"
+            app:layout_constraintStart_toStartOf="@id/ivInProgress"
+            app:layout_constraintTop_toBottomOf="@id/ivInProgress" />
+
+        <Button
+            android:id="@+id/btnSyncNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Sync Now"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewBgInProgress" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="*Single folder has 2 fingerprint files"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/tvAddOne"
+            app:layout_constraintStart_toStartOf="@id/tvAddOne" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddOne"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/bg_white_round_10"
             android:backgroundTint="@color/pear"
             android:gravity="center"
             android:padding="@dimen/_10sdp"
-            android:visibility="gone"
-            android:text="BVN Registration"
+            android:text="Add Single Folder"
             android:textColor="@color/forestGreen"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvAddTen"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddTen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_white_round_10"
+            android:backgroundTint="@color/pear"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="Add 10 Folder"
+            android:textColor="@color/forestGreen"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/tvAddOne" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

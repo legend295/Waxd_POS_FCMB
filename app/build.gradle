@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
     id 'com.google.gms.google-services'
+    id("com.google.devtools.ksp")
     alias(libs.plugins.dagger.hilt)
 }
 
@@ -105,6 +106,11 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
+    // WorkManager + Hilt Work
+    implementation libs.androidx.work.runtime.ktx
+    implementation libs.androidx.hilt.work
+    kapt libs.androidx.hilt.compiler
+
     // DataStore
     implementation(libs.androidx.datastore.preferences)
 
@@ -120,4 +126,12 @@ dependencies {
     implementation(libs.compressor)
 
 
+    // Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+    // AWS SDK (TransferUtility)
+    implementation "com.amazonaws:aws-android-sdk-core:2.73.0"
+    implementation "com.amazonaws:aws-android-sdk-s3:2.73.0"
 }

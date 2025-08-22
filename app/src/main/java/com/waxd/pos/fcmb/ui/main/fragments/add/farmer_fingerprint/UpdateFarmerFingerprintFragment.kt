@@ -112,9 +112,22 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val list: ArrayList<File>? = it.data?.serializable(ScannerConstants.DATA)
+                val templateFileList: ArrayList<File>? = it.data?.serializable(ScannerConstants.TEMPLATE_DATA)
                 handleResponse(list)
+                uploadTemplateFile(templateFileList)
             }
         }
+
+    private fun uploadTemplateFile(templateFileList: ArrayList<File>?) {
+        templateFileList?.let { files ->
+            if (files.isNotEmpty()) {
+                files.forEach { file ->
+                    viewModel.enqueue(file, "application/octet-stream")
+                }
+                viewModel.dispatchNow()
+            }
+        }
+    }
 
     private fun handleResponse(list: ArrayList<File>?) {
         Log.d("DEBUG", "List: $list")
@@ -123,9 +136,9 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
                 val path = file.path.split(".")[0] + file.path.split(".")[1].replace("wsq", ".jpg")
                 Log.d("DEBUG", "Path: $path")
                 if (index == 0) {
-                    binding.ivScannerLeft.loadImage(path,requestOptions = RequestOptions.fitCenterTransform())
+                    binding.ivScannerLeft.loadImage(path, requestOptions = RequestOptions.fitCenterTransform())
                 } else if (index == 1) {
-                    binding.ivScannerRight.loadImage(path,requestOptions = RequestOptions.fitCenterTransform())
+                    binding.ivScannerRight.loadImage(path, requestOptions = RequestOptions.fitCenterTransform())
                 }
 //                viewModel.getUserById()
                 binding.tvCaptureFingerprint.visible(

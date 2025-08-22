@@ -1,6 +1,5 @@
 package com.waxd.pos.fcmb.rest
 
-import com.google.firebase.firestore.PropertyName
 import com.google.gson.annotations.SerializedName
 import com.waxd.pos.fcmb.utils.Util.isValidEmail
 import com.waxd.pos.fcmb.utils.Util.isValidMobile
@@ -8,7 +7,7 @@ import com.waxd.pos.fcmb.utils.Util.isValidMobile
 class NotValidException(msg: String) : Exception(msg)
 
 data class LoginRequest(
-    var email: String? = "", var password: String? = ""
+    var email: String? = "harry@gmail.com", var password: String? = "securePass123"
 ) {
     @Throws(NotValidException::class)
     fun isValid() {

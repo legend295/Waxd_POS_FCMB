@@ -9,6 +9,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.util.Base64
 import android.util.Base64OutputStream
 import android.util.Log
@@ -45,7 +46,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileNotFoundException
+import java.security.MessageDigest
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -387,4 +390,27 @@ object Util {
             setTextColor(Color.RED)
         }
     }
+
+    fun File.calculateSha256(): String {
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+        val digest = MessageDigest.getInstance("SHA-256")
+        FileInputStream(this).use { fis ->
+            var read: Int
+            while (fis.read(buffer).also { read = it } != -1) digest.update(buffer, 0, read)
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
+    }
+
+    fun buildS3Key(file: File, folderName: String, deviceId: String, capturedAtIso: String): String {
+        val sha = file.calculateSha256()
+        val ext = file.extension.ifEmpty { "bin" }
+        return "fingerprints/$deviceId/$folderName/$capturedAtIso/$sha.$ext"
+    }
+
+    fun deviceId(ctx: Context): String =
+        Settings.Secure.getString(ctx.contentResolver, Settings.Secure.ANDROID_ID)
+
+    fun nowIsoStamp(): String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+
+    fun File.folderName(): String = this.parentFile?.name ?: this.name
 }
