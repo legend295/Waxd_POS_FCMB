@@ -7,6 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import com.waxd.pos.fcmb.R
 import com.waxd.pos.fcmb.base.BaseFragment
 import com.waxd.pos.fcmb.databinding.FragmentSearchBinding
+import com.waxd.pos.fcmb.utils.Util.visible
+import com.waxd.pos.fcmb.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
@@ -69,6 +71,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 binding.tvFailedCount.text = counts.failedCount.toString()
                 binding.tvSuccessCount.text = counts.successCount.toString()
                 binding.tvInProgressCount.text = counts.inProgressCount.toString()
+
+                binding.btnSyncNow.animateVisibility(isVisible = counts.failedCount > 0)
             }
         }
     }

@@ -31,10 +31,11 @@ class UploadRepository @Inject constructor(
     @ApplicationContext private val ctx: Context,
     private val dao: UploadDao
 ) {
-    suspend fun enqueueFile(file: File, mimeType: String): Long {
+    suspend fun enqueueFile(uniqueId: String, file: File, mimeType: String): Long {
         val folderName = file.folderName()
         val key = buildS3Key(file, folderName, deviceId(ctx), nowIsoStamp())
         val entity = UploadEntity(
+            uniqueId = uniqueId,
             folderId = file.folderName(),
             filePath = file.absolutePath,
             s3Key = key,
@@ -67,4 +68,5 @@ class UploadRepository @Inject constructor(
     }
 
     fun getPendingUploadsCount(): Flow<StatusCounts> = dao.getStatusCounts()
+    fun getByUniqueId(uniqueId: String): Flow<List<UploadEntity>> = dao.getByUniqueId(uniqueId)
 }

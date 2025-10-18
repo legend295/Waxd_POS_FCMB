@@ -21,6 +21,9 @@ interface UploadDao {
     @Query("SELECT * FROM uploads WHERE status IN ('PENDING','FAILED') ORDER BY createdAt ASC LIMIT :limit")
     suspend fun pickPending(limit: Int = 20): List<UploadEntity>
 
+    @Query("SELECT * FROM uploads WHERE isSyncedOverFirebase = :flag AND status IN ('SUCCESS') ORDER BY createdAt ASC LIMIT :limit")
+    suspend fun pickFirebasePending(flag: Boolean = false, limit: Int = 20): List<UploadEntity>
+
     @Query("SELECT * FROM uploads WHERE folderId = :folderId")
     suspend fun getFilesInFolder(folderId: String): List<UploadEntity>
 
@@ -51,4 +54,7 @@ interface UploadDao {
             """
     )
     fun getStatusCounts(): Flow<StatusCounts>
+
+    @Query("SELECT * FROM uploads WHERE uniqueId = :uniqueId")
+    fun getByUniqueId(uniqueId: String): Flow<List<UploadEntity>>
 }

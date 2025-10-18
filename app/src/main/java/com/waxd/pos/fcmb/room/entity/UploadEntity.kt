@@ -8,6 +8,7 @@ import com.waxd.pos.fcmb.room.UploadStatus
 @Entity(tableName = "uploads", indices = [Index("s3Key", unique = true)])
 data class UploadEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val uniqueId: String,
     val folderId: String,
     val filePath: String,
     val s3Key: String,                 // deterministic idempotent key (e.g., sha256 + ext)
@@ -19,6 +20,7 @@ data class UploadEntity(
     val nextAttemptAt: Long? = null,
     val status: UploadStatus = UploadStatus.PENDING,
     val retryCount: Int = 0,
+    val isSyncedOverFirebase: Boolean = false,
     // Multipart resume fields
     val isMultipart: Boolean = false,
     val multipartUploadId: String? = null,

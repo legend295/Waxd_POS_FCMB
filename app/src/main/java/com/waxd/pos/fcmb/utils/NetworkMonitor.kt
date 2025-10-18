@@ -9,6 +9,7 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.waxd.pos.fcmb.work.FirebaseDispatchWorker
 import com.waxd.pos.fcmb.work.UploadDispatchWorker
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -28,6 +29,11 @@ class NetworkMonitor @Inject constructor(@ApplicationContext private val context
                 .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())
                 .build()
             WorkManager.getInstance(context).enqueue(req)
+
+            val reqFirebase = OneTimeWorkRequestBuilder<FirebaseDispatchWorker>()
+                .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())
+                .build()
+            WorkManager.getInstance(context).enqueue(reqFirebase)
         }
     }
 

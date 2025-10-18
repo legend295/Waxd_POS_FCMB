@@ -190,7 +190,7 @@ class AgentDashboardFragment : BaseFragment<FragmentAgentDashboardBinding>() {
         templateFileList?.let { files ->
             if (files.isNotEmpty()) {
                 files.forEach { file ->
-                    viewModel.enqueue(file, "application/octet-stream")
+                    viewModel.enqueue("",file, "application/octet-stream")
                 }
 
             }

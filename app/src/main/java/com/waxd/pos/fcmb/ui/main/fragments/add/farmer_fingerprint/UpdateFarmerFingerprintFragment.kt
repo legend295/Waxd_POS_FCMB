@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.request.RequestOptions
 import com.scanner.activity.FingerprintScanner
 import com.scanner.utils.constants.ScannerConstants
@@ -26,6 +27,7 @@ import com.waxd.pos.fcmb.utils.constants.Constants
 import com.waxd.pos.fcmb.utils.handlers.ViewClickHandler
 import com.waxd.pos.fcmb.utils.serializable
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.File
 
@@ -53,7 +55,7 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
 //        binding.ivScannerLeft.loadImage("/storage/emulated/0/DCIM/fpd/01748933618258.jpg", requestOptions = RequestOptions.fitCenterTransform())
 
         farmerData?.let {
-            viewModel.farmerData.value = it
+            viewModel.setFarmer(it)
             binding.data = it
             viewModel.getUserById()
         }
@@ -79,6 +81,15 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
                 }
             }
         }
+
+        /*lifecycleScope.launch {
+            viewModel.farmerS3Files.collect {
+                println(it.size)
+                it.forEach { entity ->
+                    println(entity.s3Key)
+                }
+            }
+        }*/
     }
 
     override fun onClick(v: View) {
@@ -103,6 +114,7 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
                     .setCustomData(JSONObject())
                     .newRelicToken(BuildConfig.NEW_RELIC_TOKEN)
                     .skipLocation(skipLocation = false)
+                    .skipFirebaseActions(skipFirebaseActions = true)
                     .start(this, scanningLauncher)
             }
         }
@@ -124,7 +136,6 @@ class UpdateFarmerFingerprintFragment : BaseFragment<FragmentUpdateFarmerFingerp
                 files.forEach { file ->
                     viewModel.enqueue(file, "application/octet-stream")
                 }
-                viewModel.dispatchNow()
             }
         }
     }

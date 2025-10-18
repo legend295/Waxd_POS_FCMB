@@ -87,4 +87,5 @@
     <string name="withdraw_loan_amount">Withdraw Loan Amount</string>
     <string name="transfer_loan_amount">Transfer Loan Amount</string>
     <string name="farmer_name">Farmer Name</string>
+    <string name="sync_now">Sync Now</string>
 </resources>

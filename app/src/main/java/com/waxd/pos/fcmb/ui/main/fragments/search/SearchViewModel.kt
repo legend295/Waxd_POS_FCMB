@@ -25,7 +25,7 @@ class SearchViewModel @Inject constructor(private val repo: UploadRepository) : 
 
     fun enqueue(file: File, mime: String) {
         viewModelScope.launch {
-            repo.enqueueFile(file, mime)
+            repo.enqueueFile("", file, mime)
         }
     }
 }

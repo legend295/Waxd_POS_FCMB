@@ -28,9 +28,9 @@ class AgentDashboardViewModel @Inject constructor(
         }
     }
 
-    fun enqueue(file: File, mime: String) {
+    fun enqueue(uniqueId: String, file: File, mime: String) {
         viewModelScope.launch {
-            repo.enqueueFile(file, mime)
+            repo.enqueueFile(uniqueId,file, mime)
         }
     }
 
